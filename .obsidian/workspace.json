@@ -176,11 +176,20 @@
       "bases:Create new base": false
     }
   },
-  "active": "cb394d705ae921b1",
+  "active": "55b4d234e94a195f",
   "lastOpenFiles": [
+    "memory/feedback-repo-edits-need-nwt-worktree.md",
+    "memory/feedback-claude-os-owns-nothing-work-related.md",
+    "os/config/mcp-servers.md",
+    "wiki/thrive-telemetry-phi.md",
+    "wiki/thrive-medplum-fhir.md",
+    "wiki/thrive-deployments.md",
+    "wiki/thrive-patient-architecture.md",
+    "wiki/thrive-ehr-architecture.md",
+    "wiki/thrive-repo-map.md",
+    "os/workflows/session-close.md",
     "memory/feedback-fresh-start-means-fresh.md",
     "memory/feedback-dont-repave-deliberate-wiring.md",
-    "os/config/mcp-servers.md",
     "os/skills.md",
     "memory/feedback-skill-placement-by-coupling.md",
     "os/config/claude-os.md",

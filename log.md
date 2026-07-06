@@ -77,3 +77,25 @@ repo: ~/dev/thrive (read-only survey) + this vault
 - Repo self-documents well (AGENTS.md tree, docs/runbooks, docs/plans, docs/agents);
   wiki pages point there rather than duplicate. `CONTEXT-MAP.md`/`docs/adr/` referenced
   by docs/agents/domain.md but intentionally absent (lazy creation via /domain-modeling).
+
+## 2026-07-06 — Grafana MCP migration to new instances; claude-os guard fix; worktree correction
+repo: this vault + claude-os + Bionic-Health/thrive (PR #771)
+
+- Grafana MCP moved to the new instances (grafana-new.bionichealth.com / .dev), verified
+  end-to-end on both (initialize + list_datasources + Loki queries). Config relocated from
+  `~/.claude/` into this vault's `.claude/mcp-grafana.json` after correction: the MCP is
+  machine/context wiring, not claude-os. Tokens moved out of the config into 1Password
+  (`op://Agents/Grafana/prod-token|dev-token`, resolved via `op run` at spawn). Session
+  invocation restored as the `claude-grafana` zsh alias.
+- Root cause of two agents wrongly routing through claude-os: the claude-dir-guard hook
+  claimed every `~/.claude` path was claude-os-installed. Fixed in claude-os (`bb9e2e9`):
+  managed paths keep the drift message; unmanaged paths are pointed at the vault's `.claude/`.
+- thrive `grafana-log-debugging` skill rewritten against the live new instance (UID
+  `loki-new`, `app` label → `service_name`, quirks re-verified) — draft PR
+  Bionic-Health/thrive#771, built in a `nwt` worktree after correction: repo edits never go
+  directly into `~/dev` checkouts.
+- Wiki/os pages touched: [[mcp-servers]] (`os/config/mcp-servers.md`)
+- Learnings: instance migration invalidates Grafana service-account tokens and changed the
+  Loki label schema (`os/config/mcp-servers.md`); claude-os owns only the OS loop — MCP/work
+  config is vault-scoped (auto-memory `feedback-claude-os-owns-nothing-work-related`); repo
+  edits require `nwt` worktrees (auto-memory `feedback-repo-edits-need-nwt-worktree`).
