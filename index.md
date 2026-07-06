@@ -10,7 +10,14 @@ Map over `wiki/` and `os/`. Updated whenever a page is added or a category chang
 
 ## Wiki
 
-_(no pages yet)_
+### Thrive codebase
+
+- `wiki/thrive-repo-map.md` — monorepo shape, packages matrix, doc locations, structural facts
+- `wiki/thrive-ehr-architecture.md` — EHR app: Entra auth, Bionic/Medplum proxying, enforced patterns
+- `wiki/thrive-patient-architecture.md` — patient app: auth migration, provider stack, intake, OTA, gotchas
+- `wiki/thrive-deployments.md` — EHR ArgoCD/AKS pipeline; patient EAS builds + OTA channels + SWA web
+- `wiki/thrive-medplum-fhir.md` — Medplum access paths, medplum-tanstack layer, document/presigned-URL rules
+- `wiki/thrive-telemetry-phi.md` — PostHog-only telemetry, BAA/PHI policy, error-triage routing
 
 ## OS
 

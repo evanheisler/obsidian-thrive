@@ -58,3 +58,22 @@ repo: this vault + claude-os + ~/.claude machine state
   `os/config/mcp-servers.md`); fresh start means fresh — no bulk migration of archived data
   (memory: `feedback-fresh-start-means-fresh`); machine facts in `os/config/claude-os.md`
   (memory symlinks, setup.sh no-prune, dangling-link semantics).
+
+## 2026-07-06 — Wiki bootstrap: thrive codebase mapped into six pages
+repo: ~/dev/thrive (read-only survey) + this vault
+
+- First wiki content in this vault. Four parallel explore agents mapped apps/ehr,
+  apps/patient, packages/, and CI/CD; distilled with direct reads of docs/agents/,
+  docs/medplum-documents.md, and package manifests.
+- Pages created: `wiki/thrive-repo-map.md`, `wiki/thrive-ehr-architecture.md`,
+  `wiki/thrive-patient-architecture.md`, `wiki/thrive-deployments.md`,
+  `wiki/thrive-medplum-fhir.md`, `wiki/thrive-telemetry-phi.md`; `index.md` updated.
+- Load-bearing facts captured: packages ship raw TS (no build step) with pnpm-catalog
+  version pinning; Medplum only reachable through the Bionic API (no Medplum-native auth);
+  EHR ships via ArgoCD GitOps (dev auto on merge, prod = GitHub Release) while patient
+  ships via EAS fingerprint builds + nightly OTA (prod OTA = manual staging republish);
+  PostHog is the sole telemetry/error stack under BAA with policy centralized in
+  `@repo/utils/posthog`; patient auth is mid-migration Rownd→SuperTokens behind `useAuth()`.
+- Repo self-documents well (AGENTS.md tree, docs/runbooks, docs/plans, docs/agents);
+  wiki pages point there rather than duplicate. `CONTEXT-MAP.md`/`docs/adr/` referenced
+  by docs/agents/domain.md but intentionally absent (lazy creation via /domain-modeling).
