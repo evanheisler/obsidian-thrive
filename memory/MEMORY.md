@@ -7,3 +7,5 @@
 - [claude-os owns nothing work-related](feedback-claude-os-owns-nothing-work-related.md) — never involve claude-os for MCP/work config; Grafana MCP lives in the thrive vault's .claude/, invoked via the `claude-grafana` zsh alias
 - [Repo edits need nwt worktree](feedback-repo-edits-need-nwt-worktree.md) — never edit repos under ~/dev directly; `nwt <branch>` first, work in ~/worktrees/<repo>/<branch>
 - [Shared docs stay machine-agnostic](feedback-shared-docs-stay-machine-agnostic.md) — never write my vault/alias/1Password wiring into shared-repo docs; teammates have none of it
+- [PR descriptions stay short](feedback-pr-descriptions-short.md) — verbosity is my drafting, not the skill; body carries only what the diff can't say
+- [No abbreviated decision prompts](feedback-no-abbreviated-decision-prompts.md) — expand acronyms, state the full proposal; closing questions must stand alone

@@ -11,7 +11,11 @@ When deciding where a skill/hook/config lives, place it by the **scope of what i
 to**, not how generic the task feels — and absence of config strings does not make a skill
 generic. Coupled to this context or serving the work at all (Linear, Bionic repos, Evan's
 PR/review queues, `os/config/`) → vault `.claude/skills/`. claude-os is only the OS loop
-itself — behavior Evan wants identical in every context. Meta-skills are not automatically
+itself — behavior Evan wants identical in every context. Placement scope ≠ availability
+scope: project `.claude/skills/` only loads inside that project, so vault-homed skills must
+still be usable everywhere — claude-os `setup.sh` publishes them user-wide by symlinking
+`<vault>/.claude/skills/*` into `~/.claude/skills/` (added 2026-07-06 after the migration
+homed 8 work skills in the vault and broke `/work-project` from work repos). Meta-skills are not automatically
 OS-level (corrected 2026-07-06 after I classed three review skills as generic). Upstream (in `~/.agents/.skill-lock.json`) → stays skills-CLI-managed; claude-os
 adopts via symlink + `setup.sh` patch list. Never vendor or edit upstream skills.
 

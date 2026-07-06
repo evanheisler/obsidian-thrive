@@ -6,8 +6,9 @@ last_updated: 2026-07-06
 
 # Skill Registry
 
-Scope: **claude-os** = user-level, installed everywhere by `setup.sh`; **vault** = this repo's
-`.claude/skills/`; **upstream** = skills-CLI-managed in `~/.agents/skills/`; **built-in** /
+Scope: **claude-os** = user-level, installed everywhere by `setup.sh` (local install facts:
+[[claude-os]]); **vault** = this repo's `.claude/skills/`, published user-wide by `setup.sh`
+symlinks; **upstream** = skills-CLI-managed in `~/.agents/skills/`; **built-in** /
 **plugin** = ships with Claude Code or the plugin marketplace.
 
 **Placement rule — a skill's home is the scope of its *coupling*, not its task type — and

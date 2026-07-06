@@ -9,7 +9,7 @@ last_updated: 2026-07-06
 | Server | Transport | Purpose | Scope |
 |---|---|---|---|
 | grafana / grafana-dev | stdio — `docker run grafana/mcp-grafana` | Bionic observability, prod + dev (Loki, Mimir, Tempo, Azure Monitor) | **opt-in only**: `claude-grafana` alias (~/.zshrc) |
-| posthog | HTTP | Product analytics — org Thrive, project Patient | user |
+| posthog | HTTP | Product analytics — org Thrive, project Patient ([[thrive-telemetry-phi]]) | user |
 | postman | HTTP | API workspaces | user |
 | context7 | HTTP + API key | Current library docs (docs-first rule) | user |
 | expo-mcp | (project) | Expo tooling for the thrive app repo | `~/dev/thrive` |

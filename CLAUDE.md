@@ -28,8 +28,10 @@ case) or `source: YYYY-MM-DD-slug` (external material). Claims with neither are 
 failures. Never invent knowledge without backing.
 
 Citations are **inline code, never wikilinks** — a `[[log: ...]]` link has no target page and
-mints a permanent ghost node in Obsidian's graph. Exclude `log.md` and `memory/` from the
-Obsidian viewport via `.obsidian/app.json` `userIgnoreFilters`.
+mints a permanent ghost node in Obsidian's graph. This rule covers citations only: `index.md`
+entries and page references ARE wikilinks, so the index hubs the graph. Exclude plumbing
+(`log.md`, `memory/`, `README.md`, `CLAUDE.md`) from the Obsidian viewport via
+`.obsidian/app.json` `userIgnoreFilters`.
 
 When a date holds multiple log entries, disambiguate with the entry title:
 `log: YYYY-MM-DD — <entry title>`.

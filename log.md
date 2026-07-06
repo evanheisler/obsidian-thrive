@@ -108,3 +108,26 @@ repo: Bionic-Health/thrive (PR #771)
   setup doc (own token, local standalone config, per-session opt-in); PR body updated.
 - Learnings: shared-repo docs must work on a teammate's fresh laptop — personal wiring stays
   in the vault (auto-memory `feedback-shared-docs-stay-machine-agnostic`).
+
+## 2026-07-06 — Vault skills published user-wide; graph linking conventions
+repo: this vault + evanheisler/claude-os
+
+- Morning migration broke the 8 work skills: homing them in `<vault>/.claude/skills/` made
+  them invisible outside the vault — project-scoped skills only load when the session runs
+  inside that project. Fixed durably in claude-os `setup.sh` (`4fe3368`): every install
+  symlinks `<vault>/.claude/skills/*` into `~/.claude/skills/` (claude-os names win on
+  collision) and `--check` flags a missing link as drift. Verified: full install republishes
+  all 8, `--check` clean. Neither vault ever had this wiring — old machine worked by accident.
+- Corrected a stale claim in [[claude-os]]: `setup.sh` wipes-and-replaces `~/.claude/skills/`
+  (since claude-os `ba9efbc`, 2026-07-04), not additive — hand-placed files there don't survive.
+- Graph hygiene (Evan flagged loose nodes): [[index]] entries converted to wikilinks — the
+  inline-code citation rule covers only `log:`/`source:` citations, not page references;
+  `README.md` + `CLAUDE.md` added to `userIgnoreFilters`; cross-links added from os/ pages.
+  Kernel (CLAUDE.md) amended with both conventions.
+- Committed two memories from an unclosed prior session (pr-descriptions-short,
+  no-abbreviated-decision-prompts) — content self-contained, that session's log entry is lost.
+- Wiki/os pages touched: [[index]], [[skills]], [[claude-os]], [[mcp-servers]], [[session-close]]
+- Learnings: skill placement scope ≠ availability scope — vault-homed skills need user-wide
+  publishing, now owned by `setup.sh` ([[claude-os]], [[skills]], auto-memory
+  `feedback-skill-placement-by-coupling`); index/page references are wikilinks, citations are
+  not, plumbing files stay out of the graph (kernel CLAUDE.md).
