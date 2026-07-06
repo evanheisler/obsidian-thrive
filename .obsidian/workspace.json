@@ -176,8 +176,13 @@
       "bases:Create new base": false
     }
   },
-  "active": "55b4d234e94a195f",
+  "active": "cb394d705ae921b1",
   "lastOpenFiles": [
+    "memory/feedback-fresh-start-means-fresh.md",
+    "memory/feedback-dont-repave-deliberate-wiring.md",
+    "os/config/mcp-servers.md",
+    "os/skills.md",
+    "memory/feedback-skill-placement-by-coupling.md",
     "os/config/claude-os.md",
     "memory/MEMORY.md",
     "memory/bionic-health-context.md"

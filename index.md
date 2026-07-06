@@ -18,3 +18,4 @@ _(no pages yet)_
 - `os/workflows/` — deterministic procedures
 - `os/config/` — context facts (repos, boards, MCPs, credentials pattern)
 - `os/config/claude-os.md` — local install facts (repo path, drift check, memory symlink)
+- `os/config/mcp-servers.md` — MCP registrations, scopes, grafana token status
