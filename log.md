@@ -49,6 +49,9 @@ repo: this vault + claude-os + ~/.claude machine state
   `os/config/mcp-servers.md`.
 - Wiki/os pages touched: `os/skills.md`, `os/config/claude-os.md`, `os/config/mcp-servers.md`
   (new), `index.md`
+- Post-close housekeeping: `/vault-smoke-test` canary + registry row removed (pipeline
+  verified); `.obsidian/graph.json` gitignored + untracked — it churns on every graph-UI
+  adjustment.
 - Learnings: placement-by-coupling extended to ALL claude-os content (memory:
   `feedback-skill-placement-by-coupling`); existing wiring or its absence is the design —
   verify, don't re-architect (memory: `feedback-dont-repave-deliberate-wiring`, and

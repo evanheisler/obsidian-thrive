@@ -26,8 +26,6 @@ tried first (`log: 2026-07-06`; personal vault `log: 2026-07-05`). When unsure, 
 | `/session-close` | claude-os | Ending any session — log, distill, commit, push |
 | `/capture` | claude-os | Ingesting external material into `sources/` + wiki |
 | `/lint` | claude-os | Weekly vault + OS health check |
-| `/vault-smoke-test` | this vault | First-startup pipeline check — delete after verified |
-
 ## Plan → build → ship loop (Linear)
 
 | Skill | Scope | Use when |
@@ -48,4 +46,4 @@ tried first (`log: 2026-07-06`; personal vault `log: 2026-07-05`). When unsure, 
 
 Add context-specific skills (this vault's `.claude/skills/`) below as they're created.
 New context-specific skills go through `superpowers:writing-skills` (TDD baseline before
-deploy); the smoke-test canary is exempt as a pure pipeline check.
+deploy).
