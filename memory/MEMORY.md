@@ -6,3 +6,4 @@
 - [Fresh start means fresh](feedback-fresh-start-means-fresh.md) — legacy memories stay archived; never propose bulk-migrating them into OS or vault
 - [claude-os owns nothing work-related](feedback-claude-os-owns-nothing-work-related.md) — never involve claude-os for MCP/work config; Grafana MCP lives in the thrive vault's .claude/, invoked via the `claude-grafana` zsh alias
 - [Repo edits need nwt worktree](feedback-repo-edits-need-nwt-worktree.md) — never edit repos under ~/dev directly; `nwt <branch>` first, work in ~/worktrees/<repo>/<branch>
+- [Shared docs stay machine-agnostic](feedback-shared-docs-stay-machine-agnostic.md) — never write my vault/alias/1Password wiring into shared-repo docs; teammates have none of it

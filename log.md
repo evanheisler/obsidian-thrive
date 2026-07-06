@@ -99,3 +99,12 @@ repo: this vault + claude-os + Bionic-Health/thrive (PR #771)
   Loki label schema (`os/config/mcp-servers.md`); claude-os owns only the OS loop — MCP/work
   config is vault-scoped (auto-memory `feedback-claude-os-owns-nothing-work-related`); repo
   edits require `nwt` worktrees (auto-memory `feedback-repo-edits-need-nwt-worktree`).
+
+## 2026-07-06 — Post-close correction: shared docs stay machine-agnostic
+repo: Bionic-Health/thrive (PR #771)
+
+- PR #771's setup.md had been rewritten around this machine's wiring (vault config,
+  `claude-grafana` alias, 1Password) — teammates have none of it. Restored a team-generic
+  setup doc (own token, local standalone config, per-session opt-in); PR body updated.
+- Learnings: shared-repo docs must work on a teammate's fresh laptop — personal wiring stays
+  in the vault (auto-memory `feedback-shared-docs-stay-machine-agnostic`).
