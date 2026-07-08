@@ -36,6 +36,14 @@ Per brand × env: `members[.dev].thrivebetter.com`, `members[.dev].getkyzatrex.c
 
 Labels `claude-review` (runs `/review-pr` via claude-code-action, Opus) and `codex-review` (4 reviewer subagents) trigger AI reviews; Bicep what-if comments on `infra/**` changes; coverage table posted to every PR.
 
+## Planned — releases as deploy artifacts
+
+Target model (Linear project *Releases as deploy artifacts*, BH-3217–3220): a **GitHub Release per surface is that surface's prod-deploy artifact and its record**. Publishing a surface's Release IS the deploy; the tag prefix ties it to one surface; the Releases page becomes the deploy ledger (latest Release per surface = what's live, notes = what changed). Surfaces stay independent — no forced cross-surface commit parity; goal is per-deploy traceability, not sync.
+
+- Tags: `ehr/prod/vX.Y.Z`, `app/vX.Y.0` (native build+submit), `ota/prod/...`, `ota/staging/...` (pre-release), `web/prod/vX.Y.Z` (all tenants) / `web/prod/<tenant>/vX.Y.Z`.
+- EHR already works this way; the project generalizes it and retires the manual `workflow_dispatch` triggers. **Gate `release.yaml` to `ehr/prod/*` first** (BH-3217) or every new surface Release fires an EHR prod deploy.
+- Web defaults to all tenants; per-tenant retained via tag. OTA is not a version (references the native version it targets); web mints no version.
+
 ## Related
 
 [[thrive-repo-map]] · [[thrive-ehr-architecture]] · [[thrive-patient-architecture]]

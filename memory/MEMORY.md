@@ -1,11 +1,25 @@
 # Memory index
 
 - [Bionic Health context](bionic-health-context.md) — this vault is the context brain for Evan's Bionic Health (Thrive) work
+- [Vault retention wiring](vault-retention-wiring.md) — auto-memory dir IS the vault (symlink); SessionEnd hook auto-commits+pushes; /session-close distills manually; setup.sh can't run from a worktree
 - [Skill placement by coupling](feedback-skill-placement-by-coupling.md) — skill home = coupling scope; never vendor upstream; check personal vault history before redesigning claude-os mechanics
 - [Don't repave deliberate wiring](feedback-dont-repave-deliberate-wiring.md) — existing config wiring (or its absence) is the design; verify, don't re-architect; no user-scope docker MCPs
 - [Fresh start means fresh](feedback-fresh-start-means-fresh.md) — legacy memories stay archived; never propose bulk-migrating them into OS or vault
 - [claude-os owns nothing work-related](feedback-claude-os-owns-nothing-work-related.md) — never involve claude-os for MCP/work config; Grafana MCP lives in the thrive vault's .claude/, invoked via the `claude-grafana` zsh alias
 - [Repo edits need nwt worktree](feedback-repo-edits-need-nwt-worktree.md) — never edit repos under ~/dev directly; `nwt <branch>` first, work in ~/worktrees/<repo>/<branch>
 - [Shared docs stay machine-agnostic](feedback-shared-docs-stay-machine-agnostic.md) — never write my vault/alias/1Password wiring into shared-repo docs; teammates have none of it
-- [PR descriptions stay short](feedback-pr-descriptions-short.md) — verbosity is my drafting, not the skill; body carries only what the diff can't say
+- [PR descriptions stay short](feedback-pr-descriptions-short.md) — commit messages AND PR bodies: default one-line subject; body only for why the diff can't show, one sentence
 - [No abbreviated decision prompts](feedback-no-abbreviated-decision-prompts.md) — expand acronyms, state the full proposal; closing questions must stand alone
+- [Theme v2: deprecate non-Figma tokens](theme-v2-deprecate-non-figma-tokens.md) — dropped tokens are deleted + consumers migrated, never aliased to v2 values
+- [EHR color system never backported](ehr-color-system-never-backported.md) — EHR uses legacy brand.css vars, not the TS theme layer; token work there is isolated from EHR, not aligned with it
+- [Correction is not a go signal](feedback-correction-is-not-a-go-signal.md) — after a user correction/interruption, only re-derive and report; dispatch needs an explicit go
+- [Don't reframe asks as my choices](feedback-dont-reframe-asks-as-my-choices.md) — report fixes as "you asked X; I did it via Y", never as if Y were requested
+- [Cross-check measurements](feedback-cross-check-measurements.md) — validate a pixel measurement's scale reference against a platform constant before asserting it
+- [Kyzatrex logo fixed colors, web-only](kyzatrex-logo-fixed-colors-web-only.md) — brand logo fills are immutable; Kyzatrex has no iOS app
+- [Refetch before asserting state](feedback-refetch-before-asserting-state.md) — PR/CI/file state must be re-read this turn before claiming "still/hasn't/none"
+- [Metro stale bundle via watchman](metro-stale-bundle-watchman.md) — empty watchman roots freeze Metro's bundle; edits look inert; verify by grepping the served bundle, fix by restarting Metro
+- [Figma access is Evan's](feedback-figma-access-is-evans.md) — Figma MCP runs as Evan's account; Thrive UI file `ryPqmQAK11eXVh2rhTJuwG`; never route file reads through the designer
+- [Ingest matches raw artifact](feedback-ingest-matches-raw-artifact.md) — accept the exporter's raw filenames drop-in; infra ships with a README or it isn't done
+- [Docs are task-first for humans](feedback-docs-task-first-for-humans.md) — READMEs = recipes + error→meaning→fix tables + worked examples; never spec restatements or rewrite-rule notation
+- [Extract mechanism, not whole model](feedback-extract-mechanism-not-whole-model.md) — a cited reference repo is a parts bin, not a blueprint; borrow only the piece that serves the stated goal, drop constraints not asked for
+- [Mirror the user's model verbatim](feedback-mirror-users-model-verbatim.md) — once Evan names the model, echo his exact words and build on them; never re-abstract or silently reopen decided points

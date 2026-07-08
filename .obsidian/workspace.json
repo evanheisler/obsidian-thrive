@@ -178,6 +178,10 @@
   },
   "active": "55b4d234e94a195f",
   "lastOpenFiles": [
+    "memory/feedback-correction-is-not-a-go-signal.md",
+    "memory/ehr-color-system-never-backported.md",
+    "memory/feedback-designer-docs-speak-design.md",
+    "memory/theme-v2-deprecate-non-figma-tokens.md",
     "memory/feedback-no-abbreviated-decision-prompts.md",
     "memory/feedback-pr-descriptions-short.md",
     "memory/feedback-shared-docs-stay-machine-agnostic.md",

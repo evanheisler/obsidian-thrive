@@ -131,3 +131,30 @@ repo: this vault + evanheisler/claude-os
   publishing, now owned by `setup.sh` ([[claude-os]], [[skills]], auto-memory
   `feedback-skill-placement-by-coupling`); index/page references are wikilinks, citations are
   not, plumbing files stay out of the graph (kernel CLAUDE.md).
+
+## 2026-07-08 — Release traceability: releases-as-deploy-artifacts (Linear project)
+repo: Bionic-Health/thrive (Linear) + this vault
+
+- Task: research Thrive's manual multi-surface release setup (EHR prod, patient web
+  prod, native store builds, OTA staging/prod) and fix "drift" — which Evan defined as
+  *no durable record of what commit shipped to each surface*, NOT cross-surface divergence.
+- Model landed: **a GitHub Release per surface IS that surface's prod-deploy artifact and
+  its record.** Publishing a surface's Release is the deploy; the tag prefix ties a Release
+  to one surface; the Releases page becomes the deploy ledger (latest per surface = live,
+  notes = what changed). Surfaces stay independent — no forced commit parity. EHR already
+  works this way; project generalizes it and retires the manual `workflow_dispatch` triggers.
+  Tags: `ehr/prod/vX.Y.Z`, `app/vX.Y.0`, `ota/prod/...`, `ota/staging/...` (pre-release),
+  `web/prod/vX.Y.Z` (all tenants) / `web/prod/<tenant>/vX.Y.Z`.
+- Delivered: Linear project *Releases as deploy artifacts* (BH, slug
+  `releases-as-deploy-artifacts-9c9d8ed13432`), PRD in the project overview, 4 ready-for-agent
+  issues — BH-3217 (EHR Release-trigger gate; must land first, blocks the rest), BH-3218
+  (web tenant-aware), BH-3219 (native build+submit), BH-3220 (OTA staging+prod). Blocked-by
+  links wired 3218/3219/3220 → 3217.
+- Wiki/os pages touched: [[thrive-deployments]] (added "Planned — releases as deploy artifacts").
+- Learnings: two corrections, both cost most of a painful, circular session. (1) A cited
+  reference repo (bionic-health-app's tag strategy) is a parts bin, not a blueprint — I
+  imported its whole "one version drives every channel / forced parity" model when Evan's goal
+  was narrow traceability (auto-memory `feedback-extract-mechanism-not-whole-model`). (2) Once
+  Evan named the model ("a Release is the artifact, tied to a surface") I kept re-abstracting
+  it and reopened already-settled decisions (tenant deploys, ready-for-agent) — echo his exact
+  terms and hold decided points (auto-memory `feedback-mirror-users-model-verbatim`).
