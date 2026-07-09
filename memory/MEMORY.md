@@ -25,3 +25,4 @@
 - [Mirror the user's model verbatim](feedback-mirror-users-model-verbatim.md) — once Evan names the model, echo his exact words and build on them; never re-abstract or silently reopen decided points
 - [Map tokens by color not role](token-map-by-color-not-role.md) — hardcoded primitive → same-color existing token (blue-500→system-blue-500), never assumed role; never add tokens; some primitive use is fine
 - [Codex review = github-actions comment](codex-review-posts-as-github-actions-comment.md) — Codex posts one top-level `## Codex Review` github-actions comment, not inline threads; check there or miss findings
+- [Theme-v2 integration branch](theme-v2-integration-branch.md) — Configurable Theme mode project bases PRs on the theme-v2 branch, not main; generated tokens live only there
