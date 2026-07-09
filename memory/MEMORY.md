@@ -26,3 +26,4 @@
 - [Map tokens by color not role](token-map-by-color-not-role.md) — hardcoded primitive → same-color existing token (blue-500→system-blue-500), never assumed role; never add tokens; some primitive use is fine
 - [Codex review = github-actions comment](codex-review-posts-as-github-actions-comment.md) — Codex posts one top-level `## Codex Review` github-actions comment, not inline threads; check there or miss findings
 - [Theme-v2 integration branch](theme-v2-integration-branch.md) — Configurable Theme mode project bases PRs on the theme-v2 branch, not main; generated tokens live only there
+- [Worktree base must be fresh origin](feedback-worktree-base-must-be-fresh-origin.md) — fetch + branch off origin/<base>, never stale local; verify "X doesn't exist" against origin HEAD before parking
