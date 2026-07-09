@@ -23,3 +23,5 @@
 - [Docs are task-first for humans](feedback-docs-task-first-for-humans.md) — READMEs = recipes + error→meaning→fix tables + worked examples; never spec restatements or rewrite-rule notation
 - [Extract mechanism, not whole model](feedback-extract-mechanism-not-whole-model.md) — a cited reference repo is a parts bin, not a blueprint; borrow only the piece that serves the stated goal, drop constraints not asked for
 - [Mirror the user's model verbatim](feedback-mirror-users-model-verbatim.md) — once Evan names the model, echo his exact words and build on them; never re-abstract or silently reopen decided points
+- [Map tokens by color not role](token-map-by-color-not-role.md) — hardcoded primitive → same-color existing token (blue-500→system-blue-500), never assumed role; never add tokens; some primitive use is fine
+- [Codex review = github-actions comment](codex-review-posts-as-github-actions-comment.md) — Codex posts one top-level `## Codex Review` github-actions comment, not inline threads; check there or miss findings
