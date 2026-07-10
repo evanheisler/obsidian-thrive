@@ -158,3 +158,27 @@ repo: Bionic-Health/thrive (Linear) + this vault
   Evan named the model ("a Release is the artifact, tied to a surface") I kept re-abstracting
   it and reopened already-settled decisions (tenant deploys, ready-for-agent) — echo his exact
   terms and hold decided points (auto-memory `feedback-mirror-users-model-verbatim`).
+
+## 2026-07-10 — PR #794 modern-header titles: review-feedback pass
+repo: Bionic-Health/thrive (worktree bh-3221-modern-header-titles)
+
+- Handled the two open inline threads on PR #794 (both leonelgalan, AI-assisted 🤖) via
+  approval-gated-code-review. Verified each claim against the code before acting.
+- Thread 1 (test-coverage): dropping `headerTitle: ''` from `buildSubRouteScreenOptions`
+  moved sub-route titling entirely onto each `Stack.Screen` `title`; an omitted title would
+  silently render the raw route name (`[code]`). Builder tests asserted the blank was gone but
+  nothing locked a real sub-route title — a gap vs BH-3221 acceptance. Added co-located layout
+  render tests for both biomarker layouts (home + my-health) asserting `[code]` resolves to its
+  "Biomarker" copy token. Used the repo's `getByTestIdOfType` helper (RNTL `getByTestId` doesn't
+  resolve under patient's react-native-web + jsdom setup).
+- Thread 2 (naming, marked Optional): renamed the branded slot pair to match the profile pair —
+  `brandedHeaderSlotOptions`→`brandedHeaderItemOptions`, `brandedHeaderSlots`→`brandedHeaderLeftOptions`
+  (`Item` = iOS items API, `Left` = `headerLeft`).
+- Commits: 5932aebc (fixes) → 265835ed (CI lint fixup: named the `Stack.Screen` mock to satisfy
+  react/display-name). Both replies posted, both threads resolved. PR already APPROVED.
+- Wiki/os pages touched: none.
+- Learnings: one correction. I stopped for approval on a mechanical CI lint fix to my own
+  already-approved change — Evan: "this is a syntax change why do I need to approve it." The
+  approval gate covers publication of review responses (the response commit + GitHub replies),
+  not follow-up CI fixups on an approved diff. Captured as auto-memory
+  `feedback-gate-covers-publication-not-ci-fixups`.
