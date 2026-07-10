@@ -1,16 +1,14 @@
 ---
 name: theme-v2-integration-branch
-description: "The Configurable Theme mode Linear project integrates on the theme-v2 feature branch, not main — base PRs there"
+description: "theme-v2 merged to main via PR #796 (2026-07-10) — theme work now bases on main; generated tokens are on main"
 metadata: 
   node_type: memory
   type: project
   originSessionId: ef8efea5-1e2c-4f40-86fd-db7e645971f7
 ---
 
-The **Configurable Theme mode** Linear project (patient app) integrates onto the long-lived `theme-v2` git branch in `thrive`, **not** `main`. Every project PR bases off and merges into `theme-v2` (BH-3211 #789, BH-3210 #786, BH-3202, BH-3200, BH-3172, BH-3145, BH-3129 all merged to `theme-v2`).
+The **Configurable Theme mode** project's long-lived `theme-v2` integration branch **merged to `main` on 2026-07-10** via PR #796 ("Configurable theme mode: generated design-system tokens (theme v2)"). The generated design-system tokens (e.g. the `system-blue` scale) now exist on `main`.
 
-**Why:** The generated design-system tokens (e.g. the `system-blue` scale) exist only on the `theme-v2` line. An issue based off `main` won't find them and will misdiagnose the tokens as absent.
+**How to apply:** Theme-mode work now bases worktrees and PRs on `main` like everything else. Any branch created before 2026-07-10 that predates #796 must rebase onto fresh `origin/main` before opening a PR (it's a large diff — check for token interactions in preflight). The historical pattern (PRs #789, #786, etc. based on `theme-v2`) no longer applies.
 
-**How to apply:** When shipping any issue in this project, base the worktree and PR on `theme-v2` (`nwt <slug> theme-v2`, `gh pr create --base theme-v2`). The public launch (BH-3130, human-led) is the eventual `theme-v2` → `main` gate. Don't assume `main` for theme work — verify the project's integration branch first.
-
-Related: [[theme-v2-deprecate-non-figma-tokens]], [[token-map-by-color-not-role]], [[ehr-color-system-never-backported]].
+Related: [[theme-v2-deprecate-non-figma-tokens]], [[token-map-by-color-not-role]], [[ehr-color-system-never-backported]], [[feedback-worktree-base-must-be-fresh-origin]].

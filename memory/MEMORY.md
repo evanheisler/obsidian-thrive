@@ -27,6 +27,10 @@
 - [Resolve framing, don't confirm it](feedback-resolve-framing-dont-confirm-it.md) — never ask Evan to validate my mental model; settle technical framing myself, reserve questions for genuine forks
 - [Map tokens by color not role](token-map-by-color-not-role.md) — hardcoded primitive → same-color existing token (blue-500→system-blue-500), never assumed role; never add tokens; some primitive use is fine
 - [Codex review = github-actions comment](codex-review-posts-as-github-actions-comment.md) — Codex posts one top-level `## Codex Review` github-actions comment, not inline threads; check there or miss findings
-- [Theme-v2 integration branch](theme-v2-integration-branch.md) — Configurable Theme mode project bases PRs on the theme-v2 branch, not main; generated tokens live only there
+- [Theme-v2 integration branch](theme-v2-integration-branch.md) — theme-v2 merged to main via #796 (2026-07-10); theme work now bases on main, pre-merge branches must rebase
 - [Worktree base must be fresh origin](feedback-worktree-base-must-be-fresh-origin.md) — fetch + branch off origin/<base>, never stale local; verify "X doesn't exist" against origin HEAD before parking
 - [Spec invariants, not just deltas](feedback-spec-invariants-not-just-deltas.md) — when specing a change to one part of a bundled component for an executor, state what MUST NOT change; decouple coupled siblings, don't let them get removed with the target
+- [Proposals cover the named surface only](feedback-proposals-cover-named-surface-only.md) — adjacent "improvements" (header, content width) are scope invention; put them in a must-not-change list
+- [work-project: verify bot reviews yourself](work-project-verify-bot-reviews-yourself.md) — executor "waiting for bots" = stalled; orchestrator polls the PR and re-dispatches; re-fetch before accepting "bot never reviewed"
+- [Shared primitives need approval](feedback-shared-primitives-need-approval.md) — a new prop/variant on a `components/ui/` primitive is a design decision; park or ask, never ship inside a feature PR
+- [Visual changes need a design](feedback-visual-changes-need-a-design.md) — "more prominent"-style prose is not direction; clarify or park `needs-info` for a Figma design before ANY styling work
