@@ -28,3 +28,4 @@
 - [Codex review = github-actions comment](codex-review-posts-as-github-actions-comment.md) — Codex posts one top-level `## Codex Review` github-actions comment, not inline threads; check there or miss findings
 - [Theme-v2 integration branch](theme-v2-integration-branch.md) — Configurable Theme mode project bases PRs on the theme-v2 branch, not main; generated tokens live only there
 - [Worktree base must be fresh origin](feedback-worktree-base-must-be-fresh-origin.md) — fetch + branch off origin/<base>, never stale local; verify "X doesn't exist" against origin HEAD before parking
+- [Spec invariants, not just deltas](feedback-spec-invariants-not-just-deltas.md) — when specing a change to one part of a bundled component for an executor, state what MUST NOT change; decouple coupled siblings, don't let them get removed with the target
