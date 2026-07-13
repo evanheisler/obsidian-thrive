@@ -1,18 +1,19 @@
 ---
 name: home-revamp-toggle-user-opt-in
-description: "Home revamp toggle model — server flag (eligibility) + temporary persisted user opt-in (activation), opt-in deprecated at feature-complete"
-metadata: 
+description: "Home revamp toggle model (corrected 2026-07-13) — access-control gates development, FTS gates release; dev opt-in = existing dev-overrides framework, never bespoke"
+metadata:
   node_type: memory
   type: project
   originSessionId: 24d9c6b2-054c-40c1-8eac-5cab37204383
 ---
 
-Patient-app home revamp (planned 2026-07-10). Toggle model Evan locked:
+Patient-app home revamp toggle model, corrected by Evan at PR #820 review (2026-07-13) after my issue spec (BH-3251) got it wrong:
 
-- `home_revamp` flag in feature-toggle-service from day 1 → `Feature.HomeRevamp` in access-control. Flag = **eligibility only** (who can opt in; email groups enable prod/TestFlight early access).
-- Rendering = access `full` AND a **persisted client-side opt-in** toggle in the patient app dev tools, visible only to flag-eligible users, functional in production builds. Not all eligible users see the new home — they enable it themselves.
-- The opt-in toggle is **temporary**: deprecated when the revamp is feature-complete in dev; the flag alone drives rendering afterward.
-- Existing development-overrides-context is unsuitable for the opt-in (non-prod only, no persistence).
-- One flag covers both home and tasks surfaces, consumed via per-surface wrapper hooks so a later flag split is a one-line change.
+- **Legacy home renders by default in ALL environments.** `Feature.HomeRevamp` mirrors `Feature.ModernHeader`: registry rule `() => 'hidden'`, no flag wired day 1.
+- **Development opt-in = the existing development-overrides framework** (`setAccessOverride(Feature.HomeRevamp, 'full')`, a Switch row in the More-tab dev-tools section, non-prod only, no persistence — framework behavior is the spec). Never bespoke storage, never a prod-functional client opt-in.
+- **FTS's ONLY job is server-side release gating, later:** prod early access = wire `home_revamp` flag into the registry rule + FTS allowlist; prod default = enable env in FTS; dev default = remove the access-control hidden rule. FTS is NOT a prerequisite for testing during development.
+- Wrapper hooks (`useHomeRevampHome`/`useHomeRevampTasks`) stay as the only consumption path, but are just `useAccess(...).level === 'full'` — no isReady/blank-screen guard; loading resolves `hidden` → legacy.
+
+**My original error (do not repeat):** I turned "user groups in prod can early access" into a persisted client-side opt-in shipping in prod and declared the dev-overrides context "unsuitable" — specing bespoke plumbing (`use-home-revamp-opt-in.ts`, Gate-wrapped prod card) that repaved an existing framework. Prod early access belongs to FTS. Related: [[feedback-dont-repave-deliberate-wiring]], [[feedback-no-single-use-abstractions]].
 
 See [[thrive-patient-architecture]].
