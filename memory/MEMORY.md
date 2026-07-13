@@ -34,3 +34,6 @@
 - [work-project: verify bot reviews yourself](work-project-verify-bot-reviews-yourself.md) — executor "waiting for bots" = stalled; orchestrator polls the PR and re-dispatches; re-fetch before accepting "bot never reviewed"
 - [Shared primitives need approval](feedback-shared-primitives-need-approval.md) — a new prop/variant on a `components/ui/` primitive is a design decision; park or ask, never ship inside a feature PR
 - [Visual changes need a design](feedback-visual-changes-need-a-design.md) — "more prominent"-style prose is not direction; clarify or park `needs-info` for a Figma design before ANY styling work
+- [Mock must show chrome relationships](feedback-mock-must-show-chrome-relationships.md) — a layout mock positions ALL adjacent chrome (even must-not-change parts); specs name theme tokens; UI executors verify visually in the running app before pushing
+- [Home revamp toggle = user opt-in](home-revamp-toggle-user-opt-in.md) — server flag day 1 = eligibility only; rendering needs persisted dev-tools opt-in (temporary, dies at feature-complete); dev-overrides context unsuitable
+- [Layout files are wiring only](feedback-layout-files-are-wiring-only.md) — _layout = navigator/trigger structure; visual UI extracted to components/ (props-only) + co-located story; check executor output for this
