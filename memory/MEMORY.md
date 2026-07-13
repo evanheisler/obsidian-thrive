@@ -41,3 +41,9 @@
 - [Layout files are wiring only](feedback-layout-files-are-wiring-only.md) — _layout = navigator/trigger structure; visual UI extracted to components/ (props-only) + co-located story; check executor output for this
 - [Copy names feature, not plumbing](feedback-copy-names-feature-not-plumbing.md) — strings never describe implementation state (stub/legacy) or toggle mechanics; must survive the feature lifecycle
 - [Locate the referent first](feedback-locate-the-referent-first.md) — Evan's feedback critiques a concrete artifact (code comment, screen, string); find it before interpreting, never mint a rule he didn't state
+- [Verifiable source is a Figma export](feedback-verifiable-source-is-figma-export.md) — implementation-generated baselines are circular; Figma-lockstep layers need a raw Figma export artifact checked in, tests diff against it
+- [Rework existing story, single docs story](feedback-rework-existing-story-single-docs.md) — never add a parallel .stories file; variant catalogs = one docs story, not per-variant exports
+- [Patient storybook conventions](feedback-patient-storybook-conventions.md) — `Patient/` title namespace is legacy, use `Components/`; docs view is the deliverable, no named story a control toggle can express
+- [Theme identity = brand/accent](theme-identity-is-brand-accent.md) — theme-representative colors come from brand-*/accent-* scales; system-* status tokens never represent the theme
+- [Reference means spirit, not spec](feedback-critiqued-decoration-gets-deleted.md) — a mock fixes the spirit; element critique = fix the element's failure, never pendulum between literal copy and deletion
+- [Design iteration: edit, then approval](feedback-design-iteration-edit-then-approval.md) — iterate designs as uncommitted working-tree edits only; no commits, dev servers, tests, or pushes until Evan approves
