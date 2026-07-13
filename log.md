@@ -182,3 +182,29 @@ repo: Bionic-Health/thrive (worktree bh-3221-modern-header-titles)
   approval gate covers publication of review responses (the response commit + GitHub replies),
   not follow-up CI fixups on an approved diff. Captured as auto-memory
   `feedback-gate-covers-publication-not-ci-fixups`.
+
+## 2026-07-13 — Home Revamp Groundwork: plan-project + work-project end-to-end
+repo: Bionic-Health/thrive (+ Linear project "Home Revamp Groundwork")
+
+- Planned (2026-07-10) and executed the full groundwork project: PRD in the Linear project,
+  9 issues shipped via parallel executors. Merged: #815 task-detail container, #816 home
+  decomposition, #817 convention docs/skill/glossary, #819 Task naming, #820 revamp toggle,
+  #821 task container splits. Open at close: #818 home hygiene (rebased 3×, mergeable),
+  #822 Button↔Figma alignment (BH-3264, reworked through review). FTS #194 left open, unneeded.
+- Stack maintenance ran as designed: recorded fork points + `git rebase --onto main <tip>`
+  after each squash-merge; conflicts were mechanical import-move collisions, resolved by
+  composing main's content with the branch's path renames.
+- Toggle model corrected in review (my spec error, not the executor's): access-control gates
+  development (hidden rule + dev-overrides opt-in, ModernHeader pattern); feature-toggle-service
+  gates release only, later. BH-3251 spec + PR #820 reworked; wiki updated.
+- Wiki/os pages touched: [[thrive-patient-architecture]] (feature-gating model, brandThemeColors
+  module-load pitfall, no-executor-dev-servers).
+- Learnings: five corrections, all captured as auto-memories at the moment they landed:
+  (1) toggle model above (`home-revamp-toggle-user-opt-in` rewritten); (2) copy names the
+  feature, never implementation state or toggle mechanics (`feedback-copy-names-feature-not-plumbing`);
+  (3) locate the exact artifact a correction references before interpreting — I minted a false
+  "never min-height" rule from a comment critique, and twice mis-scoped what "nothing renders"
+  meant (`feedback-locate-the-referent-first`); (4) executors never run dev servers — ports
+  collide with Evan's session (appended to `feedback-mock-must-show-chrome-relationships`);
+  (5) no agent-process narration in PR bodies (same file). Also: no provenance/justification
+  comments in code — the 44px and scrim comments were both stripped on review.

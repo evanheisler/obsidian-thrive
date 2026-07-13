@@ -1,7 +1,7 @@
 ---
 title: Thrive Patient App Architecture
 summary: apps/patient — Expo SDK 55 member app; auth migration, provider stack, intake, OTA, gotchas
-last_updated: 2026-07-06
+last_updated: 2026-07-13
 ---
 
 # Thrive Patient App Architecture
@@ -33,6 +33,13 @@ Pluggable behind `providers/auth/auth-context.ts` + `useAuth()`. **Rownd is the 
 
 `runtimeVersion.policy: 'fingerprint'`. Update flow in `hooks/use-app-updates.ts` (foreground checks, auto-reload when pending, `safeReloadAsync` with GC delay to dodge a Hermes SIGSEGV). Channels/promotion in [[thrive-deployments]]. Never edit `ios/`/`android/` — prebuild-generated; native config only via `app.config.ts` + plugins (`plugins/`).
 
+## Feature gating (home revamp model, `log: 2026-07-13`)
+
+Two gates with distinct jobs — never conflate:
+- **Development**: `@repo/access-control` alone. Feature registered with `rule: () => 'hidden'` (no flag) so it's hidden everywhere; devs opt in per-session via the development-overrides context (`setAccessOverride(feature, 'full')`, a Switch row in More-tab dev tools, non-prod only, no persistence). `ModernHeader` and `HomeRevamp` both follow this.
+- **Release**: feature-toggle-service, later — wire a flag into the registry rule (prod early access = FTS allowlist; prod default = enable env in FTS; dev default = drop the hidden rule).
+Consumers go through per-surface wrapper hooks (`useHomeRevampHome`/`useHomeRevampTasks` = `useAccess(...).level === 'full'`), never `useAccess` directly, so a flag split stays a one-line change. Component-organization convention (route → container → components, no single-use abstractions, domain = concern) lives in the repo: `apps/patient/.claude/skills/component-organization/SKILL.md` + `apps/patient/AGENTS.md`.
+
 ## Gotchas
 
 - NativeTabs is `expo-router/unstable-native-tabs` (beta): single icon per trigger (variant races crash RNScreens), Android tab drawable hardcoded to Thrive (`with-thrive-tab-drawable.js` — not brand-aware), tab color scheme needs a `react-native-screens` patch (patch-package).
@@ -40,6 +47,9 @@ Pluggable behind `providers/auth/auth-context.ts` + `useAuth()`. **Rownd is the 
 - Screenshots blocked by default (FLAG_SECURE); `EXPO_PUBLIC_ALLOW_SCREENSHOTS` for dev/QA — matters for the screenshot skills.
 - Android blocks `READ_MEDIA_IMAGES/VIDEO` perms that a plugin pulls in unused (Google Play rejection).
 - Cross-platform parity is a stated requirement; use `.ios/.android/.web` extensions.
+
+- `theme/brand-theme-colors.ts` `brandThemeColors` is resolved ONCE at module load, pinned dark — passing it into rendered UI (e.g. tinting icons) diverges from the live CSS-var path Tailwind classes use. It exists for third-party SDK APIs only; in components, color label and icon through one token path (Button bug, `log: 2026-07-13`).
+- Executors/agents must never start Metro/Expo servers — every checkout defaults to ports 10000/10001 and collides with Evan's running session (`log: 2026-07-13`).
 
 ## Load-bearing files
 

@@ -40,4 +40,4 @@
 - [Domain = concern, not screen](feedback-domain-by-concern-not-screen.md) — components/{domain}/ groups by subject (notifications), never by rendering screen (home); render location is an implementation detail
 - [Layout files are wiring only](feedback-layout-files-are-wiring-only.md) — _layout = navigator/trigger structure; visual UI extracted to components/ (props-only) + co-located story; check executor output for this
 - [Copy names feature, not plumbing](feedback-copy-names-feature-not-plumbing.md) — strings never describe implementation state (stub/legacy) or toggle mechanics; must survive the feature lifecycle
-- [Locate the referent first](feedback-spec-dimensions-are-fixed.md) — Evan's feedback critiques a concrete artifact (code comment, screen, string); find it before interpreting, never mint a rule he didn't state
+- [Locate the referent first](feedback-locate-the-referent-first.md) — Evan's feedback critiques a concrete artifact (code comment, screen, string); find it before interpreting, never mint a rule he didn't state
