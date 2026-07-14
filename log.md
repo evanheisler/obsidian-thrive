@@ -234,3 +234,17 @@ repo: Bionic-Health/thrive
   (draft/ready/open/closed/merged) unless `gh pr view` was run THIS turn; if not fetched, omit
   the status — banned specifically in end-of-turn "your move" signoffs, where all three failures
   occurred.
+
+### Correction (same day, post-close) — BH-3269 style-object deferral was wrong
+- The "deferred to BH-2370, no user impact" bullet above is FALSE. BH-2370 (dev toggle) and
+  BH-2378 (dynamic theme) both landed ~18 days ago; `resolveBrandThemeColors(mode)`/`useThemeMode`
+  already exist. So the light-mode contrast regression at the ~12 style-object `brandThemeColors`
+  text sites is live in dev, not blocked. I misread the Linear list's last-updated column
+  ("Done 7 min ago" — bumped by my own comment) as a completion date.
+- Corrected: filed **BH-3278** (per-site plan; flags that inline styles are sometimes
+  load-bearing where classNames don't carry through — markdown especially — so it needs careful
+  per-site handling + visual checks in both modes, not a blanket className swap); posted a
+  correction on PR #829; repointed the misplaced BH-2370 comment to BH-3278.
+- Learning: 4th fact-assertion failure this session — extended `feedback-refetch-before-asserting-state`
+  to cover misreading any state/timestamp field (Linear updated-at, CI conclusion), not just PR
+  lifecycle. Never infer "just completed / not blocked" from a list column.
