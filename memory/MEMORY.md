@@ -1,6 +1,7 @@
 # Memory index
 
 - [Bionic Health context](bionic-health-context.md) — this vault is the context brain for Evan's Bionic Health (Thrive) work
+- [Mechanical sequencing is not a fork](feedback-mechanical-sequencing-is-not-a-fork.md) — resolve producer→consumer / cross-repo ordering yourself; don't escalate obvious sequencing as a question
 - [Vault retention wiring](vault-retention-wiring.md) — auto-memory dir IS the vault (symlink); SessionEnd hook auto-commits+pushes; /session-close distills manually; setup.sh can't run from a worktree
 - [Skill placement by coupling](feedback-skill-placement-by-coupling.md) — skill home = coupling scope; never vendor upstream; check personal vault history before redesigning claude-os mechanics
 - [Don't repave deliberate wiring](feedback-dont-repave-deliberate-wiring.md) — existing config wiring (or its absence) is the design; verify, don't re-architect; no user-scope docker MCPs
@@ -52,3 +53,4 @@
 
 - [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — add claude-review/codex-review labels at PR creation, verify runs dispatched, re-fire immediately if not
 - [Theme Tailwind axes, not custom utilities](feedback-theme-tailwind-axes-not-custom-utilities.md) — design values go into Tailwind's native theme scales; variants = baskets of real Tailwind classes; plugin(addUtilities) for an existing axis is a red flag
+- ["Codebase patterns" = whole repo](feedback-patterns-mean-whole-codebase.md) — grep all apps/ + packages/ for the pattern, never generalize from the feature path; errors report to PostHog via captureError, a bare catch is a bug
