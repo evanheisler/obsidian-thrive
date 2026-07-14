@@ -47,3 +47,5 @@
 - [Theme identity = brand/accent](theme-identity-is-brand-accent.md) — theme-representative colors come from brand-*/accent-* scales; system-* status tokens never represent the theme
 - [Reference means spirit, not spec](feedback-critiqued-decoration-gets-deleted.md) — a mock fixes the spirit; element critique = fix the element's failure, never pendulum between literal copy and deletion
 - [Design iteration: edit, then approval](feedback-design-iteration-edit-then-approval.md) — iterate designs as uncommitted working-tree edits only; no commits, dev servers, tests, or pushes until Evan approves
+
+- [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — add claude-review/codex-review labels at PR creation, verify runs dispatched, re-fire immediately if not
