@@ -1,12 +1,23 @@
 ---
 title: Thrive Telemetry & PHI Policy
-summary: PostHog is the only telemetry/error pipeline (BAA in place); policy lives in @repo/utils/posthog; where errors go per surface
-last_updated: 2026-07-06
+summary: PostHog is the only telemetry/error pipeline (BAA in place); policy lives in @repo/utils/posthog; captureError util (patient) vs console.error (EHR); where errors go per surface
+last_updated: 2026-07-14
 ---
 
 # Thrive Telemetry & PHI Policy
 
-**PostHog is the telemetry AND error-tracking stack for all three surfaces (EHR, patient web, patient native). There is no Sentry.** This is a healthcare app under a BAA with PostHog — the comment "PHI risk accepted — BAA in place" lives in code, and PHI-safety decisions are deliberate, not accidental. Consult the `analytics` skill before touching instrumentation.
+**PostHog is the telemetry AND error-tracking stack for all three surfaces (EHR, patient web, patient native). There is no Sentry.** This is a healthcare app under a BAA with PostHog — the comment "PHI risk accepted — BAA in place" lives in code, and PHI-safety decisions are deliberate, not accidental. Consult the `analytics` skill before touching instrumentation; consult the `reporting-errors` skill (patient) before writing a `catch`/failure path.
+
+## How code reports a failure (patient) — `apps/patient/utils/error-tracking.ts`
+
+The patient app has an explicit reporting util; EHR does not (EHR reports by `console.error`, logging `error.name` only). Get `posthog` from `usePostHog()` (app-wide provider; may be null — the util no-ops safely). Two functions, two destinations:
+
+- `captureError(posthog, error, { feature, context })` → a `$exception` event (PostHog **Error Tracking**) — for a caught **thrown** error. Reference impl: `components/scheduling/hooks/use-add-to-calendar.ts`.
+- `captureCustomError(posthog, 'snake_type', message, ctx)` → a `custom_error` event (**Insights**) — for a failure that never threw (a handled 4xx/5xx, validation/business-rule rejection). `captureErrorWithSeverity` exists but has zero prod callers.
+
+Reporting is ~50/50 user-action vs system/background across ~30 sites, wherever the operation is owned (container/hook/context/presentational). **Showing a toast/alert is user feedback, not reporting** — a caught real failure needs both. Skip reporting for expected/handled noise: user cancellation, best-effort side-ops, fail-closed checks, and what `before_send` already drops. `log: 2026-07-14`.
+
+**Console-capture reality (a docstring lied about this until PR #834):** only `console.error` is auto-captured as `$exception` (native `autocapture.console: ['error']`; web `capture_console_errors`), asserted by `packages/utils/src/posthog/index.test.ts`. `console.warn`/`log`/`info` are **NOT** captured — invisible in production. Prefer the `captureError` util over raw `console.error` (untagged + PHI-risky).
 
 ## Single source of truth: `packages/utils/src/posthog/`
 

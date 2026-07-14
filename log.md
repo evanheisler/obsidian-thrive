@@ -248,3 +248,34 @@ repo: Bionic-Health/thrive
 - Learning: 4th fact-assertion failure this session — extended `feedback-refetch-before-asserting-state`
   to cover misreading any state/timestamp field (Linear updated-at, CI conclusion), not just PR
   lifecycle. Never infer "just completed / not blocked" from a list column.
+
+## 2026-07-14 — PR #721 review→merge; built reporting-errors skill after mis-analyzing telemetry
+repo: Bionic-Health/thrive
+
+- **#721 (appointment confirmation + gated add-to-calendar):** addressed 10 Codex findings —
+  fixed 8 (storybook `MockAccessControlProvider` crash fix, dropped ICS `METHOD:PUBLISH`, RFC 5545
+  line-folding + trailing CRLF, blob-body test assertion, native alert `(title, body)`, tightened
+  brittle `not.toContain('with')`); won't-fix 2 with grounds. Plus a native/web `captureError`
+  failure-capture commit. Posted replies, resolved 10 threads. **Merged** (`81125d10`).
+- **Big miss → correction → durable fix.** Reviewing the swallowed `catch {}`, I asserted PostHog
+  is funnel-only / empty-catch is house style / telemetry is out-of-scope — all false, generalized
+  from the scheduling funnel file. Evan corrected repeatedly ("read the fucking code, draw your own
+  conclusions"). Whole-repo research: `apps/patient/utils/error-tracking.ts` = `captureError`
+  (→`$exception`, Error Tracking) + `captureCustomError` (→`custom_error`, Insights), ~30 sites,
+  ~50/50 user vs system-triggered; only `console.error` is autocaptured (not warn/log/info — the
+  docstring lied).
+- **Shipped `reporting-errors` patient skill (PR #834)** via superpowers:writing-skills TDD — after
+  Evan flagged my first RED baseline was rigged (prompts that instruct correctness rather than tempt
+  the failure). Neutral feature-authoring reproduces the swallow (copies the `account-edit-form`
+  straggler); skill flips it to a proper `captureError`. Also fixed the console.warn doc-drift +
+  cross-ref from `component-organization`.
+- Also this session: filed BH-3279 (`_layout.test.tsx` corrupts typed-route generation) + BH-3275
+  (release add-to-calendar / remove flag).
+- Wiki/os pages touched: [[thrive-telemetry-phi]]
+- Learnings: (1) grep the WHOLE repo before asserting a convention — never generalize from the
+  feature path in front of you (`feedback-patterns-mean-whole-codebase`). (2) A shipped +
+  un-enforced + inconsistently-taught failure needs in-repo guidance (skill/lint), not a personal
+  memory; and a RED/baseline test must *tempt the failure*, not instruct correctness
+  (`feedback-systemic-failure-needs-repo-guidance`). (3) Access-control toggle add/remove is
+  agent work, not ready-for-human; standalone bug → current cycle, no project
+  (`feedback-access-control-is-agent-work`, `feedback-dont-guess-issue-project`).
