@@ -208,3 +208,29 @@ repo: Bionic-Health/thrive (+ Linear project "Home Revamp Groundwork")
   collide with Evan's session (appended to `feedback-mock-must-show-chrome-relationships`);
   (5) no agent-process narration in PR bodies (same file). Also: no provenance/justification
   comments in code — the 44px and scrim comments were both stripped on review.
+
+## 2026-07-14 — BH-3269 muted→subtle text-token sweep (plan → ship → review)
+repo: Bionic-Health/thrive
+
+- Planned + wrote BH-3269 (Configurable Theme mode project): audit patient app's over-use of
+  `foreground-muted` for secondary text, swap to `foreground-subtle` (design-system: muted =
+  disabled/placeholder/AA-Large-only; subtle = secondary text/AA). Shipped via ship-issue in a
+  worktree → PR #829: 125-file sweep (className + style-object text sites), Eyebrow +
+  ProductCard.Tag tone API renamed muted→subtle, tests/JSDocs updated. Preflight green.
+- Two approval-gated review rounds. Bots (Claude/Codex) + humans (jellis18, leonelgalan).
+  Fixes: stale Eyebrow/story labels, notProvided→subtle, decorative badge glyph reverted to
+  muted to match its ring, wearables Dismiss icon→subtle to match its label, segmented-control
+  test rename + added text-class assertion, two stale JSDocs.
+- leonelgalan flagged the ~13 style-object `brandThemeColors[...]` sites don't track live theme
+  (pinned dark at module load) — already documented in [[thrive-patient-architecture]] line 51
+  (`log: 2026-07-13`). Deferred to BH-2370 with the full site list posted to that issue; no user
+  impact today (toggle hidden, default dark).
+- Wiki/os pages touched: none (brandThemeColors gotcha already captured; site list delivered to
+  BH-2370, not the wiki).
+- Learnings: ONE, and it's a THIRD-time repeat — asserted "PR is still a draft / your move is
+  un-draft + merge" twice on PR #829 from stale session memory; Evan had un-drafted it and was
+  furious (this exact failure also hit #823 same day). Strengthened
+  `feedback-refetch-before-asserting-state` with a hard rule: never write a PR lifecycle word
+  (draft/ready/open/closed/merged) unless `gh pr view` was run THIS turn; if not fetched, omit
+  the status — banned specifically in end-of-turn "your move" signoffs, where all three failures
+  occurred.

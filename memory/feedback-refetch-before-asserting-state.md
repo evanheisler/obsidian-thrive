@@ -14,3 +14,7 @@ I told Evan the PR's Screenshots section was "still empty" based on the draft I 
 **How to apply:** Before any sentence of the form "X is still…", "X hasn't…", "there is no…", about a PR, issue, CI run, or file I didn't modify this turn — fetch it first. If fetching isn't worth it, phrase it as unverified ("as of my last look"). Related: [[cross-check-measurements]].
 
 **Repeat violation (2026-07-14):** told Evan PR #823 was "still a draft" from session memory; he had marked it ready and then closed it. Lifecycle fields (draft/open/closed/merged) are the most volatile state on a PR — they change precisely when Evan is reviewing, i.e. exactly when I'm most likely to speak about them. No exception for "I created it this session."
+
+**THIRD violation, same day (2026-07-14):** ended two consecutive PR #829 turns with "PR remains a draft… your move is un-draft + merge" — carried from when I opened it as a draft, never re-checked. Evan had un-drafted it. He was furious; this rule keeps breaking on the *closing summary*, where I reflexively restate lifecycle from memory as a tidy signoff.
+
+**HARD RULE — no exceptions:** I may not write a PR lifecycle word (draft/ready/open/closed/merged) in ANY sentence unless I ran `gh pr view <n> --json isDraft,state` *this turn*. If I didn't fetch it, I don't mention it — omit the status entirely rather than guess. This applies doubly to end-of-turn "your move / next step" summaries, which is where all three violations happened. "un-draft + merge" as a closing flourish is banned unless freshly verified as draft.
