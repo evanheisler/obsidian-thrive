@@ -279,3 +279,32 @@ repo: Bionic-Health/thrive
   (`feedback-systemic-failure-needs-repo-guidance`). (3) Access-control toggle add/remove is
   agent work, not ready-for-human; standalone bug → current cycle, no project
   (`feedback-access-control-is-agent-work`, `feedback-dont-guess-issue-project`).
+
+## 2026-07-15 — Claude Code 2.1.210 voided the Write() permission rules; claude-os now owns permissions
+repo: evanheisler/claude-os
+
+- **Startup warnings diagnosed.** Claude Code auto-updated 2.1.209 → 2.1.210 (2026-07-14 17:09
+  local); 2.1.210 stopped matching `Write(path)` rules, so the 7 `Write(...)` rules in
+  `~/.claude/settings.json` warned on every startup. Confirmed against the binaries, not memory:
+  the warning string exists in 2.1.210 and not 2.1.209, and the validator maps
+  Write/MultiEdit/NotebookEdit → `Edit`, Glob → `Read`, only for rules carrying a path pattern.
+- **The warnings were cosmetic; the state they pointed at was not.** The 4 deny rules
+  (`.env`, `.env.*`, `production.*`, `secrets/**`) had gone inert, while `allow` had bare `Edit`
+  and no bare `Write` — so under the new semantics file creation had silently become
+  unrestricted, including over the paths those denies were meant to protect.
+- **Fix (claude-os `303a2e3`, pushed):** new `global/settings-permissions.json` (same list,
+  4 denies renamed to `Edit(...)`, 3 dead `Write(...)` allows dropped); `setup.sh` overwrites
+  the `permissions` key wholesale + `--check` drift check; README rows. Verified: no drift,
+  no `Write(` left installed, headless startup emits no warnings.
+- **Ownership question resolved by Evan:** settings.json was half-managed — the guard listed it
+  in `MANAGED_TOPLEVEL` and told agents "fix it in claude-os", but only `hooks` was actually in
+  the repo. Evan: "claude-os is meant to be the source of truth for configuration across
+  machines." Now true for `permissions` too.
+- Wiki/os pages touched: [[claude-os]]
+- Learnings: (1) The safety classifier blocks me from writing my own permission fragment —
+  Evan places that one file by hand; don't route around it with `cp`
+  (`os/config/claude-os.md`). (2) Second hit of the same communication failure, so I widened
+  the existing memory rather than duplicating it: "gibberish" — I explained the warning in
+  permission-rule semantics and binary-grep evidence instead of leading with "your .env deny
+  rules stopped working." Expertise is per-domain; harness/config plumbing is my domain, not
+  his (`feedback-no-abbreviated-decision-prompts`).

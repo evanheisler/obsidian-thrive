@@ -11,7 +11,7 @@ I told Evan the PR's Screenshots section was "still empty" based on the draft I 
 
 **Why:** Evan works in parallel (labels, PR edits, simulator runs). Anything I didn't just read is a hypothesis, not a fact, and stating hypotheses as facts costs trust far more than one extra `gh` call costs time.
 
-**How to apply:** Before any sentence of the form "X is still…", "X hasn't…", "there is no…", about a PR, issue, CI run, or file I didn't modify this turn — fetch it first. If fetching isn't worth it, phrase it as unverified ("as of my last look"). Related: [[cross-check-measurements]].
+**How to apply:** Before any sentence of the form "X is still…", "X hasn't…", "there is no…", about a PR, issue, CI run, or file I didn't modify this turn — fetch it first. If fetching isn't worth it, phrase it as unverified ("as of my last look"). Related: [[feedback-cross-check-measurements]].
 
 **Repeat violation (2026-07-14):** told Evan PR #823 was "still a draft" from session memory; he had marked it ready and then closed it. Lifecycle fields (draft/open/closed/merged) are the most volatile state on a PR — they change precisely when Evan is reviewing, i.e. exactly when I'm most likely to speak about them. No exception for "I created it this session."
 

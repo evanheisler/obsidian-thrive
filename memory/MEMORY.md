@@ -11,7 +11,7 @@
 - [Repo edits need nwt worktree](feedback-repo-edits-need-nwt-worktree.md) — never edit repos under ~/dev directly; `nwt <branch>` first, work in ~/worktrees/<repo>/<branch>
 - [Shared docs stay machine-agnostic](feedback-shared-docs-stay-machine-agnostic.md) — never write my vault/alias/1Password wiring into shared-repo docs; teammates have none of it
 - [PR descriptions stay short](feedback-pr-descriptions-short.md) — commit messages AND PR bodies: default one-line subject; body only for why the diff can't show, one sentence
-- [No abbreviated decision prompts](feedback-no-abbreviated-decision-prompts.md) — expand acronyms, state the full proposal; closing questions must stand alone
+- [No abbreviated decision prompts](feedback-no-abbreviated-decision-prompts.md) — expand acronyms, state the full proposal; plain terms across the whole reply, not just the question; harness/config internals are my domain, not Evan's
 - [Theme v2: deprecate non-Figma tokens](theme-v2-deprecate-non-figma-tokens.md) — dropped tokens are deleted + consumers migrated, never aliased to v2 values
 - [EHR color system never backported](ehr-color-system-never-backported.md) — EHR uses legacy brand.css vars, not the TS theme layer; token work there is isolated from EHR, not aligned with it
 - [Correction is not a go signal](feedback-correction-is-not-a-go-signal.md) — after a user correction/interruption, only re-derive and report; dispatch needs an explicit go
