@@ -28,3 +28,5 @@ the validator's error messages own the current shape. Worked examples with today
 are fine as illustration, not as shape contracts. Related:
 [[feedback-ingest-matches-raw-artifact]], [[feedback-pr-descriptions-short]],
 [[feedback-shared-docs-stay-machine-agnostic]].
+
+**Re-fired (BH-3270 type-tokens README, 2026-07-14):** an executor wrote per-brand data facts into the README ("Thrive display/h1/h2 share IvyPresto; Kyzatrex resolves the same keys to different DM Sans weights", a per-brand gap table with slot names/values). Evan: "That information has no business in a README." The values live in `index.ts` + the Figma pull; the README must describe the mechanism/how-to and POINT to the source, never duplicate the data (it drifts). When speccing or reviewing executor docs, treat any per-brand family/size/tracking fact in prose as a defect — collapse it to a pointer to the code + Figma artifact.
