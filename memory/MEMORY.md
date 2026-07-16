@@ -52,6 +52,7 @@
 - [Reference means spirit, not spec](feedback-critiqued-decoration-gets-deleted.md) — a mock fixes the spirit; element critique = fix the element's failure, never pendulum between literal copy and deletion
 - [Design iteration: edit, then approval](feedback-design-iteration-edit-then-approval.md) — iterate designs as uncommitted working-tree edits only; no commits, dev servers, tests, or pushes until Evan approves
 - [Answer covers the question asked](feedback-answer-covers-question-asked.md) — a reply approves the full unit my question named; never execute half and re-ask the remainder
+- [No arbitrary backoff](feedback-no-arbitrary-backoff.md) — idempotent subagent resumes retry immediately; invented wait timers are pure dead time
 
 - [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — add claude-review/codex-review labels at PR creation, verify runs dispatched, re-fire immediately if not
 - [Theme Tailwind axes, not custom utilities](feedback-theme-tailwind-axes-not-custom-utilities.md) — design values go into Tailwind's native theme scales; variants = baskets of real Tailwind classes; plugin(addUtilities) for an existing axis is a red flag
@@ -64,6 +65,7 @@
 - [Emulator Play images self-fill disk](android-emulator-play-store-disk-fill.md) — Play Store AVDs auto-update Google apps until installs fail; recover via adb uninstall of updates, prevent with Google APIs images; no sdkmanager CLI on this machine
 - [Instrument, don't use Evan as sensor](feedback-instrument-dont-use-evan-as-sensor.md) — evidence I can collect myself (logcat, temp logs, .expo state, processes) is never his job; questions to Evan are a last resort, not a verification step
 - [Dev-client stale URL → not-found](dev-client-stale-url-not-found.md) — persisted launcher URL re-fires each launch and routes to +not-found; pm clear + encoded patient:// reopen; sandboxed shell can't probe TCP; FLAG_SECURE blocks app screencaps
+- [Validate the instrument first](feedback-validate-the-instrument-first.md) — adb input-tap is flaky on SurfaceView/FLAG_SECURE screens (~1 in 10 lands); test the harness against a known-good control before calling product behavior broken
 - [Typography lockstep = zero legacy](typography-lockstep-end-state-zero-legacy.md) — project outcome is NO legacy typography styles/overrides/aliases anywhere; never add support code for a legacy utility, delete + migrate instead; briefs that preserve legacy are mis-scoped — surface, don't execute
 - [Orchestrator delegates execution](feedback-orchestrator-delegates-execution.md) — in a work-project loop, never edit files inline; dispatch review-feedback fixes to a subagent that stops before the approval gates
 - [Agent PRs need team approval](feedback-agent-prs-need-team-approval.md) — PRs authored under Evan's account need a teammate's approving review; never tell Evan to review/merge his own agent-authored PR — frame as "ready for team review"
