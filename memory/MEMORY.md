@@ -54,6 +54,8 @@
 - [Answer covers the question asked](feedback-answer-covers-question-asked.md) — a reply approves the full unit my question named; never execute half and re-ask the remainder
 - [No arbitrary backoff](feedback-no-arbitrary-backoff.md) — idempotent subagent resumes retry immediately; invented wait timers are pure dead time
 - [Confirmations are one word](feedback-confirmations-are-one-word.md) — "Correct?" gets "Correct." plus at most one load-bearing qualifier; cut everything Evan already knows
+- [Role-first before design-gap](feedback-role-first-before-design-gap.md) — element role names the slot; snap with visible change intended; only role-less sites are design calls
+- [Report outcomes, not plumbing](feedback-report-outcomes-not-plumbing.md) — status = progress against the goal; ticket homes and orchestration wiring are mine, never narrated
 
 - [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — add claude-review/codex-review labels at PR creation, verify runs dispatched, re-fire immediately if not
 - [Theme Tailwind axes, not custom utilities](feedback-theme-tailwind-axes-not-custom-utilities.md) — design values go into Tailwind's native theme scales; variants = baskets of real Tailwind classes; plugin(addUtilities) for an existing axis is a red flag
