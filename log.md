@@ -347,3 +347,22 @@ repo: Bionic-Health/thrive (worktree bh-3273-fold-display-eyebrow)
   question. (3) A mutation test that never applied is worse than none — my first run "passed"
   under a stale shell cwd, so the file was never mutated; verify the mutation landed
   (`grep` the mutated line) before trusting the result.
+
+## 2026-07-16 — ship-issue/work-project executor gaps: worktree hydration + reserved app runs
+
+- Evan reported two recurring executor failures via `superpowers:writing-skills`: (1) executors
+  `nwt` + `pnpm install` but never `pnpm setup:all`, then thrash on the broken env; (2) when
+  they boot the app they invent magic-link emails that can't exist.
+- **`ship-issue` SKILL.md**: hydration is now part of worktree creation — `cd "$WT" && pnpm
+  install && pnpm setup:all` required before any build/lint/test (thrive; bionic-health-app is
+  npm-only, verified against both package.jsons). New step-3 rule: **running the app is
+  debugging-only** — Evan spot-checks every edit after it lands; an agent visual check never
+  substitutes. Debugging sign-in = `evan.heisler+202602@bionichealth.com` via
+  `apps/patient/scripts/magic-link.sh`. Red flags updated to match.
+- **`work-project` executor-prompt.md**: same two rules added to the hard-rules block.
+- GREEN-verified per writing-skills: three fresh-context subagents against tempting scenarios —
+  all three retrieved the hydration sequence, declined the pre-PR visual boot, and named the
+  real account. RED baseline = Evan's production observation.
+- Memory updated: `feedback-mock-must-show-chrome-relationships` hardened (app runs reserved,
+  bot visual check never sufficient) — its old "executors verify visually before pushing" claim
+  was stale since the 07-13 no-metro constraint.

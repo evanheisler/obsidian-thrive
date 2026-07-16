@@ -26,13 +26,19 @@ worktree. Invoke the **`ship-issue`** skill and follow it exactly.
 - **All changes happen in a worktree.** Create the `nwt` worktree and capture its
   path (`nwt bh-XXXX-<slug> {BASE_BRANCH} && pwd` → `$WT`) as your first action; run
   every command inside it (`cd "$WT" && …` — the shell resets cwd between calls).
-  **Never** run `git checkout -b`, a commit, or an edit in the root checkout. The
+  Then hydrate before anything else — in thrive that is `cd "$WT" && pnpm install
+  && pnpm setup:all` (both commands; skipping `setup:all` leaves a broken env and
+  mystery failures). **Never** run `git checkout -b`, a commit, or an edit in the root checkout. The
   orchestrator already claimed the issue (In Progress + assigned via `linear issue
   update`) — don't re-claim, and never use `linear issue start` (its git
   integration would hijack the root checkout).
 - Open a **draft** PR, add the `claude-review` + `codex-review` labels to trigger
   bot review, run the bounded review loop, push fixes, **assign the human** as PR
   assignee, do the Linear writeback.
+- **Running the app is debugging-only.** The human spot-checks every edit after it
+  lands — never boot the app to "verify" your change visually. If a debugging run
+  needs sign-in, the magic-link user is `evan.heisler+202602@bionichealth.com`
+  (the only real dev account; any other email will never receive a link).
 - **Reply to every bot thread you act on** — `Addressed in <sha> — <what changed>`
   when fixed, or the technical reason when not. No silent fixes. Post without
   asking (bots only). **Never resolve threads** — the human does at merge.

@@ -38,6 +38,19 @@ calls — that `cd` does not persist.** Capture `$WT` from `pwd` and prefix **ev
 later command with `cd "$WT" &&` (git, pnpm, edits). No change ever lands in the
 root checkout.
 
+**Then hydrate — part of worktree creation, not an optional extra.** A fresh
+worktree is a bare checkout; in **thrive**, `pnpm install` alone leaves it broken
+(environment files missing) and every later failure looks like a mystery. The
+required sequence before any build/lint/typecheck/test:
+
+```
+cd "$WT" && pnpm install && pnpm setup:all
+```
+
+`pnpm setup:all` hydrates the environment (runs `setup:environment`). If commands
+in a worktree fail in ways `main` doesn't, check hydration before debugging
+anything else. (**bionic-health-app** has no setup script — `npm install` only.)
+
 ### 2. Claim — move to In Progress + assign (skip if the orchestrator already did)
 
 ```
@@ -57,6 +70,17 @@ Read the issue's Contract / Done-when (binding) + any locked-in upstream facts
 passed in. Verify dependency claims against the worktree (`git log` / grep) — a
 "locked-in" fact is a higher-trust trap, not gospel. Then build, using `tdd` /
 `systematic-debugging` as needed. Behavior-level tests, co-located.
+
+**Running the app is debugging-only.** Visual verification is not your job: the
+human spot-checks every edit after it lands, and an agent visual check never
+substitutes for that. Boot the app only when `systematic-debugging` needs runtime
+evidence that code and tests cannot give. If that run needs sign-in, the
+magic-link user is **`evan.heisler+202602@bionichealth.com`** — the only member of
+the dev environment (mint the link with `apps/patient/scripts/magic-link.sh
+<email> <port>`; the script's built-in default email is not a real user). Any
+other address is not a real user and its magic link will never arrive; failed auth
+on another email means the account doesn't exist, not that the environment is
+broken.
 
 ### 4. Stage-1 internal review (hard pre-PR gate)
 
@@ -172,7 +196,12 @@ edits, excluding generated / lockfiles / snapshots / `argocd` / fixtures.
 - About to resolve a review thread → leave it for the human.
 - About to ask approval before replying to a **bot** → don't; that gate is for
   humans.
-- About to take a screenshot / boot the app for a visual → don't; describe in words.
+- About to boot the app to verify or screenshot your change → don't. App runs are
+  debugging-only; the human spot-checks every edit. Describe visuals in words.
+- About to type an email into a magic-link screen that isn't
+  `evan.heisler+202602@bionichealth.com` → stop; invented accounts don't exist.
+- Worktree commands failing weirdly → check hydration (`pnpm install && pnpm
+  setup:all`) before debugging anything else.
 - About to push through a migration / access-control / new-pattern decision → park.
 - About to run `git checkout -b`, a commit, or an edit in the **root checkout** →
   STOP. `nwt` worktree FIRST, then everything inside `$WT`. (Claim with `linear
