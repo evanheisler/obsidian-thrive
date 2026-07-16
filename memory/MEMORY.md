@@ -53,6 +53,7 @@
 - [Design iteration: edit, then approval](feedback-design-iteration-edit-then-approval.md) — iterate designs as uncommitted working-tree edits only; no commits, dev servers, tests, or pushes until Evan approves
 - [Answer covers the question asked](feedback-answer-covers-question-asked.md) — a reply approves the full unit my question named; never execute half and re-ask the remainder
 - [No arbitrary backoff](feedback-no-arbitrary-backoff.md) — idempotent subagent resumes retry immediately; invented wait timers are pure dead time
+- [Confirmations are one word](feedback-confirmations-are-one-word.md) — "Correct?" gets "Correct." plus at most one load-bearing qualifier; cut everything Evan already knows
 
 - [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — add claude-review/codex-review labels at PR creation, verify runs dispatched, re-fire immediately if not
 - [Theme Tailwind axes, not custom utilities](feedback-theme-tailwind-axes-not-custom-utilities.md) — design values go into Tailwind's native theme scales; variants = baskets of real Tailwind classes; plugin(addUtilities) for an existing axis is a red flag
