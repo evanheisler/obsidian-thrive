@@ -1,5 +1,9 @@
 ---
 name: feedback-no-fabricated-evidence
+# 2026-07-16: second instance class — invented RATIONALE, not just evidence.
+# Told Evan a PR "ships draft because it's a deliberate visual change" when drafts
+# are simply the workflow's mandate. Never attach a causal explanation to a
+# mechanical fact unless the causation is documented; state the rule, not a story.
 description: "Never invent empirical claims (user behavior, frequencies, timelines) to support a position; a disproven idea stays disproven"
 metadata: 
   node_type: memory
