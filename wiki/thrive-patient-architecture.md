@@ -1,7 +1,7 @@
 ---
 title: Thrive Patient App Architecture
 summary: apps/patient — Expo SDK 55 member app; auth migration, provider stack, intake, OTA, gotchas
-last_updated: 2026-07-13
+last_updated: 2026-07-16
 ---
 
 # Thrive Patient App Architecture
@@ -25,7 +25,9 @@ Pluggable behind `providers/auth/auth-context.ts` + `useAuth()`. **Rownd is the 
 ## State, styling, copy
 
 - TanStack Query is the cache; everything else React Context. `components/providers.container.tsx` is a deep, **order-sensitive** provider stack (holds render until startup prefs load; single shared PortalHost — nesting another breaks bottom sheets).
-- NativeWind v4 + Tailwind v3; semantic tokens are CSS vars injected at runtime from `@repo/tokens`. Two theming worlds: className (live CSS vars) vs resolved color strings passed to SDKs (Stream, NativeTabs) — the latter don't re-theme live.
+- NativeWind v4 + Tailwind v3; semantic tokens are CSS vars injected at runtime from `@repo/tokens`. Two theming worlds: className (live CSS vars) vs resolved values passed to SDKs (Stream, NativeTabs) — the latter don't re-theme live.
+- **The `theme/brand-*.ts` bridges are axis-parallel — one per token axis, same shape** (`log: 2026-07-16`). Each resolves tokens to plain values for style-object sinks that expose no `className`: Victory labels, markdown style maps, Stripe appearance, nav options. `brand-theme-colors.ts` (color) → `brand-font-names.ts` (family, docstring: "Mirrors brand-theme-colors.ts — same pattern, different token type") → `brand-type-styles.ts` (`typeStyle(slot): TextStyle`, added by BH-3318). **Before concluding a sink "can't" take a token, look for its axis's sibling** — the data is already there (`BRAND_TYPE` exposes size/lineHeight/letterSpacing/uppercase as plain values; `typography.stories.tsx` reads them). Assuming that bridge didn't exist is what stalled BH-3272 into a cancel. See [[feedback-no-unverified-capability-gaps]].
+- Typography: `<Text variant>` (`components/ui/text.tsx`) baskets the 14 Figma slots; it owns **no color** — call sites name it. `<Heading level={1..4}>` (`components/ui/heading.tsx`) is semantics-only, delegating all type to `<Text variant>`: `h1`–`h4` are legitimate slots for non-heading text, so the scale can't imply `accessibilityRole="header"`. It `Omit`s `variant`/`aria-level`/`accessibilityRole` and spreads `rest` first, so a call site can't drop or override the contract (`log: 2026-07-16`).
 - Copy via `@repo/copy`; lint forbids literal JSX strings; **never call `getCopy()` at module scope in route files** (routes resolve before CopyProvider mounts → crash).
 - Gating via `@repo/access-control` (`Feature`, `Gate`, `RouteGate`) — repo skill `access-control` covers it.
 
@@ -50,6 +52,8 @@ Consumers go through per-surface wrapper hooks (`useHomeRevampHome`/`useHomeReva
 
 - `theme/brand-theme-colors.ts` `brandThemeColors` is resolved ONCE at module load, pinned dark — passing it into rendered UI (e.g. tinting icons) diverges from the live CSS-var path Tailwind classes use. It exists for third-party SDK APIs only; in components, color label and icon through one token path (Button bug, `log: 2026-07-13`).
 - Executors/agents must never start Metro/Expo servers — every checkout defaults to ports 10000/10001 and collides with Evan's running session (`log: 2026-07-13`).
+- **react-native-css-interop resolves px-suffixed CSS vars with `parseInt`**, so fractional values floor to 0 on native (web unaffected). This is why `typeVariables()` in `@repo/tokens/type` deliberately emits **no** tracking var — Thrive's sub-px letter-spacing would silently become 0. Style-object consumers (`typeStyle()`) take a real number and keep it, so the bridge path is *more* faithful than className here (`log: 2026-07-16`).
+- **`theme/retired-tokens.guard.test.ts` scans built artifacts.** Build storybook locally (`pnpm --filter storybook-patient build`) and `pnpm test` then fails with a bogus offender like `storybook-static/assets/iframe-*.js: border-muted`. Not a regression — delete `apps/storybook-patient/storybook-static` (`git clean -xfd <path>`) and re-run (`log: 2026-07-16`).
 
 ## Load-bearing files
 

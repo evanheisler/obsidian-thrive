@@ -1,7 +1,7 @@
 ---
 title: Thrive Repo Map
 summary: Monorepo shape, packages, doc locations, and structural facts for github.com/Bionic-Health/thrive
-last_updated: 2026-07-06
+last_updated: 2026-07-16
 ---
 
 # Thrive Repo Map
@@ -35,6 +35,7 @@ Local checkout: `~/dev/thrive`. pnpm workspaces + Turborepo. Two deployable apps
 - **pnpm catalog** in `pnpm-workspace.yaml` pins ~130 shared dep versions (`"catalog:"` refs). Never `pnpm update --recursive` — it expands catalog refs.
 - **Tailwind skew:** EHR is Tailwind v4; patient is Tailwind v3 + NativeWind v4.
 - Gotcha: `packages/tsconfig/base.json` declares stale `paths` (`@repo/tokens` → nonexistent `src/`); real resolution is workspace symlinks + exports maps.
+- **Top-level PR comments are blocked by a hook** — `gh pr comment` is rejected; findings must be inline review comments anchored to a code line (`gh api repos/OWNER/REPO/pulls/N/comments -f commit_id=SHA -f path=PATH -F line=LINE -f side=RIGHT`). Replying to an existing thread (`.../comments/<id>/replies`) is unaffected. So a reviewer's *review body* findings (PR-description corrections, epic hygiene) have no anchor and no direct reply channel — answer them by fixing the body itself (`log: 2026-07-16`).
 
 ## Where the repo documents itself
 

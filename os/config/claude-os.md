@@ -1,7 +1,7 @@
 ---
 title: Claude OS on this machine
 summary: Local claude-os install facts — repo path, drift check, memory symlink, vault remote, permission rules
-last_updated: 2026-07-15
+last_updated: 2026-07-16
 ---
 
 # Claude OS — machine facts
@@ -43,6 +43,10 @@ last_updated: 2026-07-15
   self-modification regardless of whether the rules are new. Evan must place that file by hand
   (`cp` from a draft); routing around the block with Bash would defeat it. The rest of the
   change (`setup.sh`, README, install, commit) is unblocked. `log: 2026-07-15`
+- **`rm -rf` is denied**, including on gitignored build output. Use `git clean -xfd <path>`
+  (dry-run `-xfdn` first) to drop artifacts inside a repo. Compound commands are denied as a
+  unit — a single denied clause blocks the whole invocation, so keep destructive steps in their
+  own call rather than chaining them behind `&&`. `log: 2026-07-16`
 - All Thrive work project dirs share the vault memory: `~/.claude/projects/<slug>/memory` →
   `<vault>/memory` for dev, dev-thrive, dev-bionic-health-app, dev-feature-toggle-service,
   dev-langgraph-assistants (plus the vault itself, which setup.sh owns). New work repos get

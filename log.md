@@ -308,3 +308,42 @@ repo: evanheisler/claude-os
   permission-rule semantics and binary-grep evidence instead of leading with "your .env deny
   rules stopped working." Expertise is per-domain; harness/config plumbing is my domain, not
   his (`feedback-no-abbreviated-decision-prompts`).
+
+## 2026-07-16 — PR #838 review pass: Display/Eyebrow fold gains a <Heading> primitive
+repo: Bionic-Health/thrive (worktree bh-3273-fold-display-eyebrow)
+
+- **Review disposition (BH-3273 / PR #838).** jellis18 raised the load-bearing one: the fold
+  traded a 22-use `Display` for 22 hand-copied `accessibilityRole="header"` + `aria-level`
+  blocks. His AGENTS.md read was right — the "never extract a single-use component" rule
+  licenses inlining one-off wrappers, not deleting a 22-use one — and the body never weighed
+  the third option: drop the *styling* wrapper, keep a *semantics* one. Evan chose it.
+- **`components/ui/heading.tsx` (`ad1d6228`).** Semantics-only, delegates all type to
+  `<Text variant>`. `Omit`s `variant`/`aria-level`/`accessibilityRole` and spreads `rest`
+  **first**, so a call site can neither drop nor override the contract; both properties
+  mutation-tested (drop the role → 3 fails; spread `rest` last → override test fails). After
+  migration `aria-level` appears in exactly one file app-wide; the `ThemedText` alias collapsed
+  20 files → 3; net −115 lines.
+- **Evan overruled my `level` 1–2 cap.** I'd scoped to what `Display` supported and called
+  1–4 YAGNI. Wrong twice: the axis already exists (`Text` ships `h1`–`h4`), and a partial
+  primitive invites the bypass — an h3 heading with no `Heading` to reach for gets hand-rolled
+  as `<Text variant="h3" accessibilityRole="header" aria-level={3}>`, the exact hazard the
+  component exists to remove. Bound is what the scale renders, not the legacy surface.
+- **BH-3318 filed**, superseding canceled BH-3272 (whose premise — every spot takes
+  `<Text variant>` — was simply false for style-object sinks). Adds `theme/brand-type-styles.ts`
+  `typeStyle(slot)` as the third axis bridge, then splits the 139 spots by surface.
+- Wiki/os pages touched: [[thrive-patient-architecture]], [[thrive-repo-map]], [[claude-os]]
+- Learnings: (1) **The correction of the session** — I twice asserted the style-object sinks
+  "need a mechanism that doesn't exist yet" and scoped two tickets around the gap, without
+  grepping. Evan: "there are plenty of utilities that already handle the className gap and this
+  keeps getting rehashed without any real investigation work or suggested solutions." The repo
+  already solved it twice (`brand-theme-colors.ts`, `brand-font-names.ts` — whose docstring
+  literally says "Mirrors brand-theme-colors.ts — same pattern, different token type"). A
+  capability gap is an empirical claim; the bridges are axis-parallel, so one axis having one
+  makes the others' a template, not an open question. Captured mid-session as
+  `feedback-no-unverified-capability-gaps`. (2) Also told to stop the prose — "Be clear and
+  succinct on what you are asking. Stop with the fucking prose." A decision prompt is the ask
+  plus a recommendation, not a briefing; this is
+  `feedback-no-abbreviated-decision-prompts`' inverse failure and the same root: burying the
+  question. (3) A mutation test that never applied is worse than none — my first run "passed"
+  under a stale shell cwd, so the file was never mutated; verify the mutation landed
+  (`grep` the mutated line) before trusting the result.

@@ -56,3 +56,4 @@
 - [Theme Tailwind axes, not custom utilities](feedback-theme-tailwind-axes-not-custom-utilities.md) — design values go into Tailwind's native theme scales; variants = baskets of real Tailwind classes; plugin(addUtilities) for an existing axis is a red flag
 - ["Codebase patterns" = whole repo](feedback-patterns-mean-whole-codebase.md) — grep all apps/ + packages/ for the pattern, never generalize from the feature path; errors report to PostHog via captureError, a bare catch is a bug
 - [Systemic failure needs repo guidance](feedback-systemic-failure-needs-repo-guidance.md) — shipped + un-enforced failure needs a skill/lint in-repo, not a personal memory; RED tests must tempt the failure, not instruct correctness
+- [No unverified capability gaps](feedback-no-unverified-capability-gaps.md) — "not solvable today" needs proof; grep for the sibling utility (theme bridges are axis-parallel) before scoping around a gap
