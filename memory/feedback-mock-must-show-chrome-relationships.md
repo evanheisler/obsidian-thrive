@@ -1,6 +1,6 @@
 ---
 name: feedback-mock-must-show-chrome-relationships
-description: "A layout mock must show how ALL app chrome (header, nav, content) relate — an omitted element gets built wrong; executors need visual verification before pushing UI"
+description: "A layout mock must show how ALL app chrome (header, nav, content) relate — an omitted element gets built wrong; executors verify statically, app runs are debugging-only"
 metadata: 
   node_type: memory
   type: feedback
@@ -14,3 +14,5 @@ BH-2739: my approved mock omitted the real header's relationship to the new side
 **How to apply:** Layout mocks always show every piece of adjacent chrome in correct spatial relationship, even chrome that must not change — mark it "unchanged, shown for position". Specs for UI work name the surface's theme tokens explicitly. UI executor dispatches require a run-the-app visual verification (patient-screenshot skill) against the mock before pushing. Related: [[feedback-spec-invariants-not-just-deltas]], [[feedback-proposals-cover-named-surface-only]].
 
 **Constraint added 2026-07-13 (PR #822, Evan: "Why the fuck are you running dev servers"):** executor visual verification must NEVER mean the executor starting its own dev/Metro server — the patient app's port scheme defaults every checkout to 10000/10001, so an executor server collides with/shadows Evan's own session. work-project explicitly designs executors as no-metro. Until a safe method exists (e.g. patient-screenshot skill on a non-default port, confirmed with Evan), executors verify statically (rendered classes in tests, resolved style paths) and report the method in their return to the orchestrator ONLY — never in the PR. Evan (same day): agent-process narration ("verified in tests, did not visually verify") has no business in a PR description; PR bodies describe the change, nothing about how the agent worked.
+
+**Constraint hardened 2026-07-16:** Evan: executors running the app is a **reserved method — debugging only**; "there should be no reason to do it" for verification, because he must be able to spot-check every edit after it lands anyway, and "a bot trying to do a visual check is never sufficient." If a debugging run needs sign-in, the account is [[patient-dev-test-account]] (`evan.heisler+202602@bionichealth.com`) — executors were inventing emails. Encoded in `ship-issue` SKILL.md + `work-project` executor-prompt (thrive vault), alongside the other standing gap: fresh worktrees need `pnpm install && pnpm setup:all` (thrive) or the env is broken.
