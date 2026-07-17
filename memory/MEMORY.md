@@ -60,6 +60,7 @@
 - [Cap is agents, not open PRs](feedback-cap-is-agents-not-open-prs.md) — open draft PRs are the output buffer; count only running executors against the pool cap, never halt dispatch on review-queue depth
 - [Pillars not member-visible](pillars-not-member-visible.md) — pillar surfaces never reach the sign-off bar; check feature visibility before flagging a surface as sign-off risk
 - [Resolve addressed threads](feedback-resolve-addressed-threads.md) — fixed+replied threads get resolved too; only untouched/informational threads stay open
+- [HubSpot BAA intake telemetry stance](hubspot-baa-intake-telemetry-stance.md) — forbidden-props guards were agent-authored, not compliance; surface conflicts to Evan, don't park; one issue spans both repos
 
 - [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — add claude-review/codex-review labels at PR creation, verify runs dispatched, re-fire immediately if not
 - [Theme Tailwind axes, not custom utilities](feedback-theme-tailwind-axes-not-custom-utilities.md) — design values go into Tailwind's native theme scales; variants = baskets of real Tailwind classes; plugin(addUtilities) for an existing axis is a red flag
@@ -80,3 +81,4 @@
 - [Sign-off bar = real risk only](feedback-signoff-bar-real-risk-only.md) — Evan's checklist gets only flagged risks, prominence inversions, layout breaks, brand-visible changes; pixel snaps are "verified, below the bar", one line
 - [Updates written for stakeholders](feedback-updates-written-for-stakeholders.md) — project updates answer success/timeline/health for Evan's manager; never an issue-state dump, never mention canceled work
 - [Mid-turn question headlines the reply](feedback-midturn-question-headlines-reply.md) — a question arriving mid-turn gets answered first in the final visible message; pause publication steps until it lands
+- [Action items are an explicit list](feedback-action-items-explicit-list.md) — status = numbered items by owner; unresolved decisions get re-asked, never buried as passing mentions
