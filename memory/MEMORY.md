@@ -58,6 +58,7 @@
 - [Report outcomes, not plumbing](feedback-report-outcomes-not-plumbing.md) — status = progress against the goal; ticket homes and orchestration wiring are mine, never narrated
 - [Figma node outranks blanket ruling](feedback-figma-node-outranks-blanket-ruling.md) — a node spec in hand IS the answer; never ask Evan to arbitrate it against his earlier info-poor ruling
 - [Cap is agents, not open PRs](feedback-cap-is-agents-not-open-prs.md) — open draft PRs are the output buffer; count only running executors against the pool cap, never halt dispatch on review-queue depth
+- [Pillars not member-visible](pillars-not-member-visible.md) — pillar surfaces never reach the sign-off bar; check feature visibility before flagging a surface as sign-off risk
 
 - [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — add claude-review/codex-review labels at PR creation, verify runs dispatched, re-fire immediately if not
 - [Theme Tailwind axes, not custom utilities](feedback-theme-tailwind-axes-not-custom-utilities.md) — design values go into Tailwind's native theme scales; variants = baskets of real Tailwind classes; plugin(addUtilities) for an existing axis is a red flag
