@@ -56,6 +56,8 @@
 - [Confirmations are one word](feedback-confirmations-are-one-word.md) — "Correct?" gets "Correct." plus at most one load-bearing qualifier; cut everything Evan already knows
 - [Role-first before design-gap](feedback-role-first-before-design-gap.md) — element role names the slot; snap with visible change intended; only role-less sites are design calls
 - [Report outcomes, not plumbing](feedback-report-outcomes-not-plumbing.md) — status = progress against the goal; ticket homes and orchestration wiring are mine, never narrated
+- [Figma node outranks blanket ruling](feedback-figma-node-outranks-blanket-ruling.md) — a node spec in hand IS the answer; never ask Evan to arbitrate it against his earlier info-poor ruling
+- [Cap is agents, not open PRs](feedback-cap-is-agents-not-open-prs.md) — open draft PRs are the output buffer; count only running executors against the pool cap, never halt dispatch on review-queue depth
 
 - [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — add claude-review/codex-review labels at PR creation, verify runs dispatched, re-fire immediately if not
 - [Theme Tailwind axes, not custom utilities](feedback-theme-tailwind-axes-not-custom-utilities.md) — design values go into Tailwind's native theme scales; variants = baskets of real Tailwind classes; plugin(addUtilities) for an existing axis is a red flag
@@ -74,3 +76,4 @@
 - [Agent PRs need team approval](feedback-agent-prs-need-team-approval.md) — PRs authored under Evan's account need a teammate's approving review; never tell Evan to review/merge his own agent-authored PR — frame as "ready for team review"
 - [Surface visual deltas directly](feedback-surface-visual-deltas-directly.md) — reviewer-flagged visual risks go TO Evan with screen/route + before→after + what wrong looks like (screenshots when possible); "it's on the test plan" is burial
 - [Sign-off bar = real risk only](feedback-signoff-bar-real-risk-only.md) — Evan's checklist gets only flagged risks, prominence inversions, layout breaks, brand-visible changes; pixel snaps are "verified, below the bar", one line
+- [Updates written for stakeholders](feedback-updates-written-for-stakeholders.md) — project updates answer success/timeline/health for Evan's manager; never an issue-state dump, never mention canceled work
