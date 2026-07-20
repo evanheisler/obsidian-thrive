@@ -366,3 +366,37 @@ repo: Bionic-Health/thrive (worktree bh-3273-fold-display-eyebrow)
 - Memory updated: `feedback-mock-must-show-chrome-relationships` hardened (app runs reserved,
   bot visual check never sufficient) — its old "executors verify visually before pushing" claim
   was stale since the 07-13 no-metro constraint.
+
+## 2026-07-20 — BH-3182 MWL intake HubSpot tracking: bot-review rounds + cross-repo merges
+
+repo: Bionic-Health/bionic-health-app (#2211, merged) + Bionic-Health/thrive (#867, open)
+
+- Shipped both halves of the BH-3182 intake-telemetry reconfiguration through multiple bot-review
+  rounds via `/approval-gated-code-review`. #2211 (relay + server-side HubSpot lead forms) merged;
+  #867 (client emission) green, conflict-free, waiting on teammate review approval. Resolved two
+  successive merge-with-main conflicts on #867 (`loading-results.container.tsx`) — second one was
+  main's new `resolveBrandThemeColors(useThemeMode())` theme API colliding with our lead-capture
+  effect; kept both.
+- Backend review fixes (leonelgalan/jellis18): `stage` Literal→`str|None` (unknown value falls
+  back to a neutral legacy config, no milestone stamped — don't 422 the lead away); strict `dob`
+  parsing (pydantic v1 `date` coerces numeric strings via epoch fallback — guard with
+  `date.fromisoformat` behind a 10-char check); `\Z` not `$` for slug gates (Python `$` allows a
+  trailing newline); scoped missing-field warnings off a per-config set; explicit `{token:value}`
+  map instead of `getattr` (CLAUDE.md discourages getattr, and it returns `Any`).
+- Client review fixes: submit-dedup redesign (persist marker only on non-retryable outcome +
+  in-flight ref, moved out of `MwlAnswers` into typed engine state); funnel dedup keys
+  (`captureOnce` per product; fold `price_lookup_key` into the `checkout_started` key); removed
+  dead `flow_variant`; updated `protocol.md`.
+- Wiki/os pages touched: [[thrive-telemetry-phi]] (new intake→HubSpot pipeline section).
+- Learnings: (1) **Verify PR/CI/merge state before every status report** — twice asserted stale
+  state (said #2211 "will merge shortly" after it had merged; reported #867 green without
+  re-checking after main moved and re-conflicted). Evan: "ACTUAL STATUS BEFORE REPORTING or don't
+  say anything at all." Reinforces `feedback-refetch-before-asserting-state`. (2) **Sign-off items
+  must be reversible decisions I made, stated bug-vs-expected against the ticket** — a list mixing
+  one real decision (SetupIntent id in `stripe_session_id`) with expected-behavior notes and
+  speculative follow-ups drew "why does this matter / issue or assumption?". Hardened
+  `feedback-signoff-bar-real-risk-only`. (3) **HubSpot intake PHI is owning-team-approved** — stop
+  treating the in-code forbidden-props guards as policy; reply-no-change + resolve when reviewers
+  re-raise it. Hardened `hubspot-baa-intake-telemetry-stance`. (4) **Resolve threads I addressed**
+  overrides the ship-issue/approval-gated skills' "never resolve" line; hardened
+  `feedback-resolve-addressed-threads`.
