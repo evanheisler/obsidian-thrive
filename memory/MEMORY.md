@@ -62,6 +62,7 @@
 - [Resolve addressed threads](feedback-resolve-addressed-threads.md) — fixed+replied threads get resolved too; only untouched/informational threads stay open
 - [HubSpot BAA intake telemetry stance](hubspot-baa-intake-telemetry-stance.md) — forbidden-props guards were agent-authored, not compliance; surface conflicts to Evan, don't park; one issue spans both repos
 - [foreground-muted is placeholder-tier](foreground-muted-is-placeholder-tier.md) — muted = placeholder text only; never a fill/surface or interactive control; known AA failure on light surfaces
+- [Disabled skill = hand off the /command](feedback-disabled-skill-hand-off-command.md) — a disable-model-invocation skill (work-project) gets handed to Evan as the /command, never worked around with raw dispatches
 
 - [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — add claude-review/codex-review labels at PR creation, verify runs dispatched, re-fire immediately if not
 - [Theme Tailwind axes, not custom utilities](feedback-theme-tailwind-axes-not-custom-utilities.md) — design values go into Tailwind's native theme scales; variants = baskets of real Tailwind classes; plugin(addUtilities) for an existing axis is a red flag
