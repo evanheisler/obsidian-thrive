@@ -63,6 +63,7 @@
 - [HubSpot BAA intake telemetry stance](hubspot-baa-intake-telemetry-stance.md) — forbidden-props guards were agent-authored, not compliance; surface conflicts to Evan, don't park; one issue spans both repos
 - [foreground-muted is placeholder-tier](foreground-muted-is-placeholder-tier.md) — muted = placeholder text only; never a fill/surface or interactive control; known AA failure on light surfaces
 - [Disabled skill = hand off the /command](feedback-disabled-skill-hand-off-command.md) — a disable-model-invocation skill (work-project) gets handed to Evan as the /command, never worked around with raw dispatches
+- [No dead code for test churn](feedback-no-dead-code-for-test-churn.md) — code a change orphans gets deleted in that same PR; test-file churn is not a reason to leave it, and I must vet executor scope-cuts, not relay them
 
 - [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — add claude-review/codex-review labels at PR creation, verify runs dispatched, re-fire immediately if not
 - [Theme Tailwind axes, not custom utilities](feedback-theme-tailwind-axes-not-custom-utilities.md) — design values go into Tailwind's native theme scales; variants = baskets of real Tailwind classes; plugin(addUtilities) for an existing axis is a red flag
