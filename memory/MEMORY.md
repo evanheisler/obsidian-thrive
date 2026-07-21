@@ -65,6 +65,7 @@
 - [Disabled skill = hand off the /command](feedback-disabled-skill-hand-off-command.md) — a disable-model-invocation skill (work-project) gets handed to Evan as the /command, never worked around with raw dispatches
 - [No dead code for test churn](feedback-no-dead-code-for-test-churn.md) — code a change orphans gets deleted in that same PR; test-file churn is not a reason to leave it, and I must vet executor scope-cuts, not relay them
 - [Pushback owns the decision](feedback-pushback-owns-the-decision.md) — declining review feedback = own it ("following spec"/"leaving as-is"), never punt to "product's call"
+- [Review current head, not the bot's comment](feedback-review-current-head-not-bot-comment.md) — pin review to the head SHA; a repo bot's prior review can be stale and is never ground truth
 
 - [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — add claude-review/codex-review labels at PR creation, verify runs dispatched, re-fire immediately if not
 - [Theme Tailwind axes, not custom utilities](feedback-theme-tailwind-axes-not-custom-utilities.md) — design values go into Tailwind's native theme scales; variants = baskets of real Tailwind classes; plugin(addUtilities) for an existing axis is a red flag
