@@ -85,3 +85,4 @@
 - [Updates written for stakeholders](feedback-updates-written-for-stakeholders.md) — project updates answer success/timeline/health for Evan's manager; never an issue-state dump, never mention canceled work
 - [Mid-turn question headlines the reply](feedback-midturn-question-headlines-reply.md) — a question arriving mid-turn gets answered first in the final visible message; pause publication steps until it lands
 - [Action items are an explicit list](feedback-action-items-explicit-list.md) — status = numbered items by owner; unresolved decisions get re-asked, never buried as passing mentions
+- [End-state tracks the server contract](feedback-endstate-tracks-server-contract.md) — before a client-side design, verify WHERE a responsibility is enforced (server/auth vs client) and if the current shape is transitional; Bionic patient-scoping is moving server-side (FHIR), path-id is a shim
