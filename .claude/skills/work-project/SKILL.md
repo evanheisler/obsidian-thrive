@@ -165,13 +165,38 @@ resolution is a human judgment call.
 
 ### 7. Halt + report
 
+> **🚫 STATUS-REPORT GATE — re-fetch before you type a single status word.**
+>
+> The in-session ledger (step 5) is a **cache to invalidate, never a source to
+> quote.** The human merges, un-drafts, and reviews **async while this loop runs**,
+> so every lifecycle field you carried from an earlier turn is a hypothesis, not a
+> fact. This is the #1 recurring failure of this loop — reporting a stale "sits at
+> the human gate / ready for review" table built from memory. It is not a memory
+> problem; it is this gate. Honor it mechanically.
+>
+> **Before ANY status summary, table, or "your move" sentence — no exceptions,
+> including the final halt report and every mid-loop check-in — you MUST, THIS
+> TURN, run and show the output of:**
+> - `gh pr view <n> --json number,state,isDraft,mergedAt,reviewDecision` for
+>   **every** PR you are about to mention (both repos — use `--repo` for thrive).
+> - `linear issue list --project "<name>" --team BH --all-states --all-assignees
+>   --sort manual` for the project.
+>
+> **The status you report must be transcribed from *that* output, run this turn —
+> not from your ledger, not from what an executor returned, not from what you said
+> last turn.** If you have not run these calls this turn, you may not write the
+> words draft / ready / open / merged / closed / in-review / "human gate" at all.
+> The freshly-fetched values ARE the report; the ledger only tells you which PRs to
+> re-fetch.
+
 **Park-and-continue:** the loop halts when **no ready issue remains** AND **no open
 stack still needs watching**. While stacked PRs are open with unmerged parents, stay
 in a low-frequency maintenance watch (step 6) — the human merges async, so catch
 each merge and rebase the descendants. The loop is safe to kill and re-invoke;
 re-derivation (step 1) detects any rebase missed while it was down. Report a
-summary: shipped PRs (assignee = human), parked issues + blockers, stacks awaiting
-merge, and any rebases done or parked-on-conflict.
+summary — **built from the step-7 re-fetch, not the ledger** — of: shipped/merged
+PRs, parked issues + blockers, stacks awaiting merge, and any rebases done or
+parked-on-conflict.
 
 ## Concurrency notes
 
@@ -190,6 +215,9 @@ merge, and any rebases done or parked-on-conflict.
 - About to retry a parked issue automatically → parks are human business; move on.
 - About to merge, or push to `main`, or un-draft a PR → that's the human gate.
 - About to author or re-scope issues → that's the planning gate, not this loop.
+- About to write a status word (draft/ready/open/merged/closed/in-review/"human
+  gate") without having run `gh pr view` + `linear issue list` **this turn** → STOP,
+  fetch first (step-7 gate). The ledger is stale the instant the human acts.
 - About to `git rebase main` (plain) on a stacked child after its parent merged →
   use `git rebase --onto main <old-base> <child>`; a plain rebase re-applies the
   squashed parent's commits and conflicts.
