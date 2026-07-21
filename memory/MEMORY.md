@@ -65,6 +65,8 @@
 - [Disabled skill = hand off the /command](feedback-disabled-skill-hand-off-command.md) — a disable-model-invocation skill (work-project) gets handed to Evan as the /command, never worked around with raw dispatches
 - [No dead code for test churn](feedback-no-dead-code-for-test-churn.md) — code a change orphans gets deleted in that same PR; test-file churn is not a reason to leave it, and I must vet executor scope-cuts, not relay them
 - [Pushback owns the decision](feedback-pushback-owns-the-decision.md) — declining review feedback = own it ("following spec"/"leaving as-is"), never punt to "product's call"
+- [gh api body file gotcha](feedback-gh-api-body-file.md) — `-f body=@file` posts literal text; use `-F body=@file` or inline; verify the body landed after posting
+- [Verify branch protection before blocker](feedback-verify-branch-protection-before-blocker.md) — read required_status_checks before claiming a merge blocker; can't-read ≠ is-a-blocker; never invent an admin action
 - [Review current head, not the bot's comment](feedback-review-current-head-not-bot-comment.md) — pin review to the head SHA; a repo bot's prior review can be stale and is never ground truth
 
 - [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — add claude-review/codex-review labels at PR creation, verify runs dispatched, re-fire immediately if not
