@@ -137,10 +137,13 @@ evaluates each finding, fixes what needs fixing in the worktree, re-runs preflig
 pushes, replies in-thread (`Addressed in <sha>`) or pushes back with a technical
 reason, resolves the addressed threads, and returns a **one-paragraph** summary.
 
-Re-firing the bots (label toggle) and re-polling stay with you; the *handling* does
-not. You read the summary, update the ledger, and relay — you do **not** ingest the
-individual findings. The only human gate is still **merge** (the loop never un-drafts
-or merges).
+Re-polling (reading PR state) stays with you; the *handling* does not. You read the
+summary, update the ledger, and relay — you do **not** ingest the individual findings.
+**NEVER re-fire the bots — never toggle the `claude-review`/`codex-review` labels
+after a PR's initial review. Bots review a PR ONCE; addressing a finding is push +
+reply in-thread, and CI re-runs on push on its own. Re-firing on each push burns
+tokens + CI minutes (one PR hit 8 bot runs this way).** The only human gate is still
+**merge** (the loop never un-drafts or merges).
 
 **Active, never batched.** The trigger to dispatch the handler is *feedback exists on
 an open loop PR* — not *the bot round finished*. The moment your polling (step 1 /

@@ -101,6 +101,14 @@ out. This is the DRY miss that repeatedly slips through: `date-mask` duplicating
 MWL's `validateDobDigit`, copied phone/height-weight helpers, a `LocationList` that
 was only an `OptionCard`.
 
+**Scope the audit to functional identity — never UI similarity.** The target is
+pure logic that's identical regardless of surface (parsers, converters, validators,
+formatters, constant lists) plus *reusing* existing generic `ui/` primitives. Two
+forms or screens that merely *look* alike are NOT a dedup target: share the pure
+helpers they both call and **inline the markup** in each. Never extract a new
+prop-driven mini-component that needs per-consumer field-key/label injection to span
+two forms — that leaky parameterization is over-abstraction, not DRY.
+
 ### 5. Full preflight (always-on)
 
 All must be green, and you must **see** them green (`verification-before-completion`
@@ -132,13 +140,19 @@ Open a **draft** PR via `write-pr`, body trimmed to standing conventions:
 
 ### 7. External review loop (bots)
 
-- Trigger the bot reviews by **adding two labels** to the draft PR:
+- Trigger the bot reviews **once** by adding two labels to the draft PR:
   `claude-review` and `codex-review` (`gh pr edit <pr> --add-label claude-review
-  --add-label codex-review`). The labels are what kick off each bot.
-- **One substantive round, hard cap at two.** Wait for the first complete pass
-  from both bots (timeout ~10 min for a no-show) → run `receiving-code-review` →
-  address the comments → push the fixes. If you pushed fixes, allow **at most
-  one** re-poll; never a third. The human adjudicates at merge.
+  --add-label codex-review`). The labels kick off each bot **one time only**.
+- **Bots review a PR exactly ONCE — NEVER re-toggle the review labels afterward.**
+  Wait for the first complete pass from both bots (timeout ~10 min for a no-show) →
+  run `receiving-code-review` → address the comments → **push the fix + reply
+  in-thread** (thread policy below). That is the entire cycle. Do **not**
+  remove-and-re-add the labels to re-run the bots to "confirm" a fix — the reviewer
+  sees the change from the diff and your reply. Re-firing on each push multiplies
+  full Claude+Codex reviews and burns tokens + CI minutes (one PR accrued **8 bot
+  runs** this way). CI checks (tests/lint) re-run on push automatically and
+  unavoidably; the **bot review** must never be re-triggered. The human adjudicates
+  at merge.
 
 **Thread policy (bots on a draft PR) — three rules:**
 
