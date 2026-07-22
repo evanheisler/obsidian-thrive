@@ -19,6 +19,10 @@ Map over `wiki/` and `os/`. Updated whenever a page is added or a category chang
 - [[thrive-medplum-fhir]] — Medplum access paths, medplum-tanstack layer, document/presigned-URL rules
 - [[thrive-telemetry-phi]] — PostHog-only telemetry, BAA/PHI policy, error-triage routing
 
+### Process retrospectives
+
+- [[work-project-orchestration-postmortem]] — DEXA/BH-3063 work-project failures by pattern (passivity, stale-state, reuse-enforcement, over-correction, noise, churn) + workflow guardrails. **Read before any /work-project run.**
+
 ## OS
 
 - [[skills]] — skill registry
