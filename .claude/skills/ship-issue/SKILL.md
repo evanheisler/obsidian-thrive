@@ -90,6 +90,17 @@ This catches issues for free, before paying bot-review latency. The reviewer als
 explicitly checks **regression risk** in touched call-sites/consumers (stored data
 ≠ current code).
 
+**Reuse audit — required, part of this gate.** Before the PR is reviewable, audit
+**every new file, symbol, helper, component, and validation** the diff introduces
+against the existing repo (`git grep` across other `apps/*`, `packages/*`,
+`components/ui/*`, `utils/*`, and sibling features). Anything that re-implements
+something that already exists gets collapsed onto the existing one — or its
+divergence justified against the contract — **never shipped as a parallel copy**. A
+fresh-context executor doesn't know what already exists; grepping is how you find
+out. This is the DRY miss that repeatedly slips through: `date-mask` duplicating
+MWL's `validateDobDigit`, copied phone/height-weight helpers, a `LocationList` that
+was only an `OptionCard`.
+
 ### 5. Full preflight (always-on)
 
 All must be green, and you must **see** them green (`verification-before-completion`
@@ -203,6 +214,9 @@ edits, excluding generated / lockfiles / snapshots / `argocd` / fixtures.
 - Worktree commands failing weirdly → check hydration (`pnpm install && pnpm
   setup:all`) before debugging anything else.
 - About to push through a migration / access-control / new-pattern decision → park.
+- About to open a PR without having `git grep`ed the repo for pre-existing
+  equivalents of the new symbols/files it adds → STOP; run the reuse audit (step 4).
+  A parallel copy of an existing helper/component is the recurring DRY miss.
 - About to run `git checkout -b`, a commit, or an edit in the **root checkout** →
   STOP. `nwt` worktree FIRST, then everything inside `$WT`. (Claim with `linear
   issue update --state "In Progress"`, never `linear issue start` — `start` checks out a

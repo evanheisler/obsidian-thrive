@@ -127,6 +127,37 @@ An executor returns one of:
 Keep a thin in-session **ledger** (shipped / in-review / parked / remaining). It is
 a cache only — Linear + GitHub remain the source of truth.
 
+### Review handling — dispatch a `receiving-code-review` subagent (never inline)
+
+The loop is **already polling** open loop PRs (step 1 re-derive; the step-6 watch).
+Bot and human review **will** land on them. When it does, the orchestrator
+**dispatches a subagent that runs `receiving-code-review` — it never fetches,
+evaluates, fixes, or replies inline.** Hand the subagent the PR number + worktree; it
+evaluates each finding, fixes what needs fixing in the worktree, re-runs preflight,
+pushes, replies in-thread (`Addressed in <sha>`) or pushes back with a technical
+reason, resolves the addressed threads, and returns a **one-paragraph** summary.
+
+Re-firing the bots (label toggle) and re-polling stay with you; the *handling* does
+not. You read the summary, update the ledger, and relay — you do **not** ingest the
+individual findings. The only human gate is still **merge** (the loop never un-drafts
+or merges).
+
+**Active, never batched.** The trigger to dispatch the handler is *feedback exists on
+an open loop PR* — not *the bot round finished*. The moment your polling (step 1 /
+step 6) shows an unresolved human or bot thread on any loop PR, dispatch the handler
+for that PR **that turn**. Do not wait for a monitor to report "terminal," do not
+batch threads across rounds, and **never report a PR as "waiting on review" or
+"batching" while it carries an unresolved thread** — a thread parked on a monitor is a
+dropped review, the exact failure this loop exists to prevent. A monitor tells you
+feedback *exists*; it is a backstop, not the trigger.
+
+| Rationalization | Reality |
+|---|---|
+| "It's only a couple findings — faster to fix them here." | Those findings become the whole review detail in your context; that bloat is exactly what this prevents. Dispatch. |
+| "I have to evaluate the findings before I can delegate." | The subagent runs `receiving-code-review`. Evaluation IS the delegated work, not a prerequisite you do first. |
+| "The fix is done, I'll just post the replies myself." | Fetch + draft + post is the review loop; it goes to the subagent. |
+| "I'll batch these threads once the whole round is terminal." | Feedback *existing* is the trigger, not round-completion. An unresolved thread waiting on a monitor is a dropped review — dispatch now. |
+
 ### 6. Stack maintenance (squash merge changes history)
 
 We **squash-merge**. When the human merges a stacked PR's parent, the parent's
@@ -174,9 +205,11 @@ resolution is a human judgment call.
 > the human gate / ready for review" table built from memory. It is not a memory
 > problem; it is this gate. Honor it mechanically.
 >
-> **Before ANY status summary, table, or "your move" sentence — no exceptions,
-> including the final halt report and every mid-loop check-in — you MUST, THIS
-> TURN, run and show the output of:**
+> **Before ANY sentence that asserts a PR or issue lifecycle state
+> (draft / ready / open / merged / approved / closed / in-review / "human gate") —
+> whether in a status summary or table, a "your move" line, a mid-loop check-in, an
+> aside, a forward plan, OR the answer to a direct question — no exceptions, you
+> MUST, THIS TURN, run and show the output of:**
 > - `gh pr view <n> --json number,state,isDraft,mergedAt,reviewDecision` for
 >   **every** PR you are about to mention (both repos — use `--repo` for thrive).
 > - `linear issue list --project "<name>" --team BH --all-states --all-assignees
@@ -215,9 +248,17 @@ parked-on-conflict.
 - About to retry a parked issue automatically → parks are human business; move on.
 - About to merge, or push to `main`, or un-draft a PR → that's the human gate.
 - About to author or re-scope issues → that's the planning gate, not this loop.
-- About to write a status word (draft/ready/open/merged/closed/in-review/"human
+- About to fetch review comments, evaluate findings, or draft/post a reply
+  **yourself** → STOP. Review handling is delegated to a subagent; you only
+  dispatch, gate, and relay.
+- About to write a status word (draft/ready/open/merged/closed/in-review/approved/"human
   gate") without having run `gh pr view` + `linear issue list` **this turn** → STOP,
-  fetch first (step-7 gate). The ledger is stale the instant the human acts.
+  fetch first (step-7 gate). This includes asserting a PR's state **while answering a
+  question** or in an aside — not only in a formal status block. The ledger is stale
+  the instant the human acts.
+- About to report a loop PR as "waiting" / "batching" while it has an **unresolved
+  review thread** → STOP; dispatch the review handler this turn. Feedback existing is
+  the trigger, not the bot round finishing.
 - About to `git rebase main` (plain) on a stacked child after its parent merged →
   use `git rebase --onto main <old-base> <child>`; a plain rebase re-applies the
   squashed parent's commits and conflicts.
