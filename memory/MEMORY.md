@@ -58,6 +58,8 @@
 - [Report outcomes, not plumbing](feedback-report-outcomes-not-plumbing.md) — status = progress against the goal; ticket homes and orchestration wiring are mine, never narrated
 - [Figma node outranks blanket ruling](feedback-figma-node-outranks-blanket-ruling.md) — a node spec in hand IS the answer; never ask Evan to arbitrate it against his earlier info-poor ruling
 - [Cap is agents, not open PRs](feedback-cap-is-agents-not-open-prs.md) — open draft PRs are the output buffer; count only running executors against the pool cap, never halt dispatch on review-queue depth
+- [Stabilize-first, no churn](feedback-stabilize-first-no-churn.md) — dependent slices dispatch N+1 only after N's draft PR is green; state the dependency in one line, don't pose an eager-vs-stabilize fork
+- [Run prescribed skills, not hand-rolled](feedback-run-prescribed-skills-not-handrolled.md) — a workflow composes sub-skills (work-project→ship-issue→write-pr + PR template); invoke them verbatim, never hand-roll executor prompts or PR bodies
 - [Pillars not member-visible](pillars-not-member-visible.md) — pillar surfaces never reach the sign-off bar; check feature visibility before flagging a surface as sign-off risk
 - [Resolve addressed threads](feedback-resolve-addressed-threads.md) — fixed+replied threads get resolved too; only untouched/informational threads stay open
 - [HubSpot BAA intake telemetry stance](hubspot-baa-intake-telemetry-stance.md) — forbidden-props guards were agent-authored, not compliance; surface conflicts to Evan, don't park; one issue spans both repos
