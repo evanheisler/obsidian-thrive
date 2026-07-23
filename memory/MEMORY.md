@@ -1,6 +1,8 @@
 # Memory index
 
 - [Bionic Health context](bionic-health-context.md) — this vault is the context brain for Evan's Bionic Health (Thrive) work
+- [Invoked skill defines the deliverable](feedback-invoked-skill-defines-deliverable.md) — don't ask a scope question the invoked skill already settles; plan-project is plan-only, "perform the migration" means plan it
+- [Explicit directive overrides stale copy](feedback-explicit-directive-overrides-stale-copy.md) — a user-named project/approach is settled; rewrite conflicting charter copy, never re-ask; contextual over literal
 - [Mechanical sequencing is not a fork](feedback-mechanical-sequencing-is-not-a-fork.md) — resolve producer→consumer / cross-repo ordering yourself; don't escalate obvious sequencing as a question
 - [No fabricated evidence](feedback-no-fabricated-evidence.md) — never invent empirical claims to prop up a position; a disproven idea stays disproven
 - [Vault retention wiring](vault-retention-wiring.md) — auto-memory dir IS the vault (symlink); SessionEnd hook auto-commits+pushes; /session-close distills manually; setup.sh can't run from a worktree
