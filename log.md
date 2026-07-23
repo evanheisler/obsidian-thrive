@@ -400,3 +400,32 @@ repo: Bionic-Health/bionic-health-app (#2211, merged) + Bionic-Health/thrive (#8
   re-raise it. Hardened `hubspot-baa-intake-telemetry-stance`. (4) **Resolve threads I addressed**
   overrides the ship-issue/approval-gated skills' "never resolve" line; hardened
   `feedback-resolve-addressed-threads`.
+
+## 2026-07-23 — BH-3499 light-mode feedback: dark-on-brand sweep + native theme-layer sync
+repo: Bionic-Health/thrive (PR #913, draft)
+
+- Ran /ship-issue BH-3499 (light-mode punchlist). Started scoped to the 3 listed items
+  (profile initials, Documents sort toggle, glassmorphic-dark-until-scroll) — Evan twice
+  re-scoped upward: (1) item 1's "Evan to investigate" aside did NOT assign it to him — research
+  and fix it; (2) the issue is a whole bug *class* (dark `foreground-default` text/glyph on a
+  `brand-default` green surface), not those 3 examples — fix every clear instance app-wide.
+- **Fixes shipped (4 commits):** items 2/3 → `foreground-inverted`; native iOS glass chrome via
+  `Appearance.setColorScheme(mode)` in `LiveThemeProvider` (stage-1 review caught my tab-bar edit
+  was dead Expo-template code — dropped it; NativeTabs already syncs via
+  `experimental_userInterfaceStyle`); class sweep of 14 sites (chat AI-assistant + Care Team
+  native/web own-messages, `CustomAvatar`, send button, camera badge, More/announcement/document
+  buttons, web video buttons) — nuanced ones scoped so *received* messages (Stream `myMessageTheme`)
+  and shared video CSS vars aren't regressed; header-slot white→dark mount flash via
+  `NavigationThemeSync` (react-navigation `ThemeProvider` synced to mode — Expo Router's default
+  light theme was creating headers light).
+- Rebased #913 onto fresh main mid-work (clean, no re-fire of bots). Header-flash fix is
+  **diagnosis-driven, awaiting Evan's iOS spot-check** (can't repro native timing headless).
+- Wiki/os pages touched: [[thrive-patient-architecture]] (corrected stale "dark-mode-only" →
+  live theme mode; added the three-theme-layer sync rule + `foreground-inverted`-on-brand-default
+  convention + Stream own-message theming).
+- Learnings: **Enumerated issue items / parenthetical "X to investigate" asides don't bound
+  scope — the underlying goal or bug-class does.** Descoping a named/clear item is the mirror of
+  inventing scope; both mis-set the deliverable. Captured as auto-memory
+  `feedback-anecdotal-notes-dont-descope` (re-fires at scope-read time); it reverses my earlier
+  over-application of `feedback-proposals-cover-named-surface-only` (that guards unnamed *adjacent*
+  elements, not named/class instances). Read which kind of issue it is first.

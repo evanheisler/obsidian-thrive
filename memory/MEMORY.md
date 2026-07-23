@@ -2,6 +2,7 @@
 
 - [Bionic Health context](bionic-health-context.md) — this vault is the context brain for Evan's Bionic Health (Thrive) work
 - [Invoked skill defines the deliverable](feedback-invoked-skill-defines-deliverable.md) — don't ask a scope question the invoked skill already settles; plan-project is plan-only, "perform the migration" means plan it
+- [Anecdotal notes don't descope](feedback-anecdotal-notes-dont-descope.md) — an issue's "X to investigate" aside doesn't remove that NAMED item from agent scope; research + attempt before deferring
 - [Explicit directive overrides stale copy](feedback-explicit-directive-overrides-stale-copy.md) — a user-named project/approach is settled; rewrite conflicting charter copy, never re-ask; contextual over literal
 - [Mechanical sequencing is not a fork](feedback-mechanical-sequencing-is-not-a-fork.md) — resolve producer→consumer / cross-repo ordering yourself; don't escalate obvious sequencing as a question
 - [No fabricated evidence](feedback-no-fabricated-evidence.md) — never invent empirical claims to prop up a position; a disproven idea stays disproven
@@ -107,3 +108,6 @@
 - [Read full PR feedback every cycle](feedback-read-full-pr-feedback-every-cycle.md) — monitor ALL open PRs' full feedback (threads incl resolved + review bodies + approval nits) each cycle; approved/un-drafted ≠ no actionable feedback; never a shallow thread-count
 - [DRY targets functional identity, not UI](feedback-dry-targets-functional-identity-not-ui.md) — dedup pure logic (parse/convert/validate); never extract a shared UI mini-form; a prop-driven component needing per-consumer key/label injection is over-abstraction
 - [Never re-fire bot reviews on push](feedback-never-refire-bot-reviews-on-push.md) — bots review a PR ONCE; NEVER toggle claude-review/codex-review labels after a fix push; fix→push→reply-in-thread→resolve; re-firing burned 8 bot runs on one PR
+- [Draft status is a gate](feedback-draft-status-is-a-gate.md) — re-fetch isDraft before autonomous PR handling; Evan un-drafts loop PRs himself, flipping them from autonomous to approval-gated
+- [Blocked-by is not a stack](feedback-blocked-by-is-not-a-stack.md) — stack PRs only for a real code dependency; disjoint-file Blocked-by chains branch off main with a merge-order note, not a git stack
+- [Red check is not green](feedback-red-check-is-not-green.md) — never call a PR green while any check fails, even non-required/infra; back an infra-vs-diff claim with logs across PRs before asserting
