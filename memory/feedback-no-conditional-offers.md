@@ -23,6 +23,7 @@ shape by applying a decision template to things that were not decisions.
 
 **How to apply:** Before asking anything, check it's a real fork — two defensible paths
 whose tradeoff Evan owns. Sequencing, tooling, layout, and harness internals are mine to
-decide and report. Now rules 2–3 of `core-rules.md`. Related:
+decide and report. Now rules 3–4 of `core-rules.md`. Evan flagged (2026-07-24) that this
+ban is a SYMPTOM — the root rule is [[feedback-one-decidable-item-per-turn]]. Related:
 [[feedback-question-is-not-permission]], [[feedback-resolve-framing-dont-confirm-it]],
 [[feedback-no-abbreviated-decision-prompts]].
