@@ -24,36 +24,8 @@
         "--disable-elasticsearch"
       ],
       "env": {
-        "GRAFANA_URL": "https://grafana-new.bionichealth.com",
-        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "op://Agents/Grafana/prod-token"
-      }
-    },
-    "grafana-dev": {
-      "type": "stdio",
-      "command": "op",
-      "args": [
-        "run",
-        "--",
-        "docker",
-        "run",
-        "-i",
-        "--rm",
-        "-e",
-        "GRAFANA_URL",
-        "-e",
-        "GRAFANA_SERVICE_ACCOUNT_TOKEN",
-        "grafana/mcp-grafana",
-        "--transport",
-        "stdio",
-        "--disable-oncall",
-        "--disable-admin",
-        "--disable-clickhouse",
-        "--disable-cloudwatch",
-        "--disable-elasticsearch"
-      ],
-      "env": {
-        "GRAFANA_URL": "https://grafana-new.dev.bionichealth.com",
-        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "op://Agents/Grafana/dev-token"
+        "GRAFANA_URL": "https://grafana.ops.bionichealth.com",
+        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "op://Agents/Grafana/ops-token"
       }
     }
   }
