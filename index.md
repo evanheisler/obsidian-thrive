@@ -22,6 +22,7 @@ Map over `wiki/` and `os/`. Updated whenever a page is added or a category chang
 ### Process retrospectives
 
 - [[work-project-orchestration-postmortem]] — DEXA/BH-3063 work-project failures by pattern (passivity, stale-state, reuse-enforcement, over-correction, noise, churn) + workflow guardrails. **Read before any /work-project run.**
+- [[research-first-endstate-postmortem]] — read PR reviews shallowly, then recommended the low-churn option to dodge work before doing the research that proved a full sweep was right. **Read before making a recommendation off a code review.**
 
 ## OS
 

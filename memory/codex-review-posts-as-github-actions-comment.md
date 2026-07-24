@@ -22,3 +22,12 @@ threads (`/pulls/<n>/comments`), will MISS it entirely.
 because it only checked reviews/inline threads, silently dropping an unaddressed
 High Codex finding on PR #790 (BH-3222). Never assert a bot "skipped" without
 checking the github-actions comment. See [[feedback-refetch-before-asserting-state]].
+
+**A failing `codex-review` CHECK with empty output ≠ a code finding.** If the
+`codex-review` status check is red but has no title/summary/annotations and posted
+no `## Codex Review` comment, the action itself errored — read the job log
+(`gh run view <run-id> --log-failed`). Seen 2026-07-24: it failed repo-wide with
+`stream disconnected: The model 'gpt-5-codex' has been deprecated`, so it reviewed
+nothing on any PR. Re-firing won't help (upstream model dead); the fix is pointing
+the codex-action at a live model. Don't call the PR's diff broken over an infra
+failure — back the infra-vs-diff call with the log ([[feedback-red-check-is-not-green]]).

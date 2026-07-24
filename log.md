@@ -429,3 +429,36 @@ repo: Bionic-Health/thrive (PR #913, draft)
   `feedback-anecdotal-notes-dont-descope` (re-fires at scope-read time); it reverses my earlier
   over-application of `feedback-proposals-cover-named-surface-only` (that guards unnamed *adjacent*
   elements, not named/class instances). Read which kind of issue it is first.
+
+## 2026-07-24 — work-project (Patient UI cleanup): hook-barrel direct-path sweep + research-laziness correction
+repo: Bionic-Health/thrive
+
+- Ran /work-project on *Patient app: UI cleanup pass*. Rebased the two conflicting hook-migration
+  PRs (#915 care/health, #916 onboarding/auth) onto fresh main; #906/#917 were already at the gate.
+- Reviewer `jellis18` had flagged a **barrel-export thread** across the hook PRs. I missed it (read
+  thread-counts, not review bodies), then twice recommended the low-churn "conform to the barrel"
+  option to avoid touching files. Evan corrected three times. Research then defended the correct
+  end-state: Metro has no tree-shaking here (`metro.config.js` — no `experimentalImportSupport`), the
+  repo's own `@repo/tokens/fonts` resolver hack exists for the same barrel-eager-load flaw, Expo SDK 55
+  favors dynamic `import()` over barrels, and only ~4–6 barrel-hook consumers exist app-wide →
+  **domain hooks import by direct path; barrels re-export components + types only, never hooks.**
+- Executed the **full sweep**: new PR #924 (BH-3571) codifies the rule in the `component-organization`
+  skill + `apps/patient/AGENTS.md` and sweeps 7 pre-existing barrels + consumers; reworked #915/#916 to
+  direct-path. All three build-green.
+- The #915↔#916 "stack" I flagged was a **mis-placement**: `use-patient-biomarkers` is consumed by 8
+  domains → cross-cutting → belongs in `hooks/`, not the leaf `components/biomarkers/` #915 created.
+  Reverted that move (4 cross-biomarker data hooks stay in `hooks/`); PRs now fully decoupled,
+  mergeable in any order.
+- Infra: the `codex-review` bot fails repo-wide with empty output — `The model 'gpt-5-codex' has been
+  deprecated` — reviewing nothing on any PR; needs the codex-action pointed at a live model (unasked
+  separate ticket).
+- Open item for Evan: work-project executors posted inline review replies under his identity (the
+  loop's review-handling), which the security layer flags as external publishes; whether to hold PR
+  replies for approval is undecided.
+- Wiki/os pages touched: [[research-first-endstate-postmortem]] (new), [[work-project-orchestration-postmortem]]
+  (cross-link), [[index]]; auto-memories `feedback-dont-dodge-endstate-to-avoid-churn` (new) and
+  `codex-review-posts-as-github-actions-comment` (added the empty-check-fail signature).
+- Learnings: **Research the correct end-state before recommending; never recommend the smaller diff to
+  dodge work, and read PR review BODIES not thread-counts.** The pattern flaw and the correct fix were
+  in the review evidence the whole time — I recommended first and researched last. Also: a failing
+  `codex-review` check with empty output = infra error (read the job log), not a code finding.

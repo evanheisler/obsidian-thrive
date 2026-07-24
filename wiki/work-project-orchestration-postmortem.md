@@ -89,3 +89,5 @@ Patterns A and C **recurred after correction within the same session**. Per [[th
 Keeping the pool busy is table stakes, not the job. The job is owning state-truth and convention-enforcement at the points executors can't. When in doubt this session, I chose to look productive (dispatch, monitor, narrate) over being correct (fetch, audit, drive to done) — and that is precisely where every course-correction landed.
 
 Related memories: `work-project-verify-bot-reviews-yourself`, `reuse-existing-system-prove-divergence`, `refetch-before-asserting-state`, `stabilize-first-no-churn`, `feedback-is-not-a-halt-order`, `dups-are-followups-not-rewrites`, `report-outcomes-not-plumbing`.
+
+Related pages: [[research-first-endstate-postmortem]] — a later work-project run where the failure was research-laziness (shallow review read + churn-dodging recommendation) rather than the patterns above; its mis-placement finding is the sibling of Pattern C.
