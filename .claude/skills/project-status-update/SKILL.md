@@ -11,9 +11,10 @@ Post a **status update** for a Linear project you lead. An update is a **delta
 since the last one**, grounded in real issue state — not a vibe. Its job is to tell
 stakeholders what moved, what's left, and **what's stuck** so they can unstick it.
 
-**Core principle — derive, then reality-check.** Post whenever you ask — across
-**every project you lead** or a **single named one**; no Linear prompt required.
-Build the picture from live Linear data, but the tracker **isn't ground truth** —
+**Core principle — derive, then reality-check.** On invocation, list every project
+you lead, then post for **all** of them, only the ones **due**, or a **single** named
+project — your pick, no Linear prompt required. Build the picture from live Linear
+data, but the tracker **isn't ground truth** —
 "Done" work gets reworked, a `blocked` label outlives its blocker — so the lead
 corrects it before you draft. Health is a recommendation from the signals; **the
 human confirms it, and the human posts.**
@@ -30,62 +31,62 @@ re-scoping work · projects you don't lead.
 
 ## Process
 
-### 1. Check which led projects are due (informational)
+### 1. List led projects, then pick scope
 
-Surface what Linear is currently prompting for — a project is **due** when it has an
-unsnoozed `projectUpdatePrompt` and no `projectUpdate` since that prompt. This is
-**context, not a gate**: report the due set, then continue to step 2 whether or not
-anything is due.
-
-```bash
-linear api '{ viewer { email }
-  notifications(first:80) { nodes { __typename
-    ... on ProjectNotification { type createdAt snoozedUntilAt
-      project { id name lead { email } projectUpdates(first:1){ nodes { createdAt } } } } } } }' \
-| jq -r '.data.viewer.email as $me
-  | [ .data.notifications.nodes[]
-      | select(.__typename=="ProjectNotification" and .type=="projectUpdatePrompt" and .snoozedUntilAt==null) ]
-  | group_by(.project.id)
-  | map({ name:.[0].project.name, id:.[0].project.id, lead:.[0].project.lead.email,
-          lastPrompt:(max_by(.createdAt).createdAt),
-          lastUpdate:(.[0].project.projectUpdates.nodes[0].createdAt) })
-  | map(select(.lead==$me and (.lastUpdate==null or .lastUpdate < .lastPrompt)))
-  | .[] | "DUE: \(.name)\t\(.id)"'
-```
-
-Report the due projects (or "none currently due") — it annotates the choice in
-step 2. **Never stop here**, even when nothing is due.
-
-### 2. Pick scope — all led projects, or one
-
-Enumerate the **active** projects you lead (`state` not `completed`/`canceled`),
-newest-update-first so staleness is visible:
+On invocation, **first** query every active project you lead and show it as a table —
+no gating, no early questions. The single call below lists each project and flags
+which ones Linear is currently prompting for (`UPDATE DUE`):
 
 ```bash
-linear api '{ projects(first: 100, filter: { lead: { isMe: { eq: true } } }) {
-  nodes { id name state health targetDate
-    projectUpdates(first:1){ nodes { createdAt health } } } } }' \
-| jq -r '[ .data.projects.nodes[]
-    | select(.state != "completed" and .state != "canceled") ]
-  | sort_by(.projectUpdates.nodes[0].createdAt // "")
-  | .[] | "\(.name)\t\(.id)\tstate=\(.state)\thealth=\(.health)\tlastUpdate=\(.projectUpdates.nodes[0].createdAt // "never")"'
+linear api '{
+  viewer { email }
+  projects(first: 100, filter: { lead: { isMe: { eq: true } } }) {
+    nodes { id name state projectUpdates(first:1){ nodes { createdAt } } } }
+  notifications(first: 80) {
+    nodes { __typename
+      ... on ProjectNotification { type snoozedUntilAt createdAt project { id } } } }
+}' | jq -r '
+  .data as $d
+  | ( [ $d.notifications.nodes[]
+        | select(.__typename=="ProjectNotification" and .type=="projectUpdatePrompt" and .snoozedUntilAt==null) ]
+      | group_by(.project.id)
+      | map({ id: .[0].project.id, lastPrompt: (max_by(.createdAt).createdAt) })
+      | INDEX(.id) ) as $prompts
+  | ["PROJECT","UPDATE DUE","LAST UPDATE","ID"], ["-------","----------","-----------","--"],
+    ( $d.projects.nodes[]
+      | select(.state!="completed" and .state!="canceled")
+      | . as $p
+      | ($prompts[$p.id]) as $pr
+      | (($p.projectUpdates.nodes[0].createdAt) // null) as $u
+      | (if $pr == null then false else ($u == null or $u < $pr.lastPrompt) end) as $due
+      | [ $p.name, (if $due then "yes" else "no" end), ($u // "never"), $p.id ] )
+  | @tsv' | column -t -s$'\t'
 ```
 
-Then branch on how the skill was invoked:
+`UPDATE DUE = yes` means the project has an unsnoozed `projectUpdatePrompt` with no
+`projectUpdate` since it — i.e. Linear is asking. Render the table like:
 
-- **Project named as an argument** → that's the target; go to step 3.
-- **No argument** → ask **once**: *"Post an update to **all** projects you lead, or a
-  **specific** one?"* Show the enumerated list annotated with which are due (from step
-  1) and each project's last-update age, so the choice is informed. Recommend
-  **specific** unless it's a deliberate sweep (a periodic review, several stale at once).
-  - **Specific** → resolve the named project and run steps 3–6 once.
-  - **All** → run steps 3–6 for **each** active led project, **one at a time**: derive,
-    reality-check, draft, get approval, post — then the next. Never batch-post; every
-    project earns its own reality-check and its own go.
+```
+PROJECT           UPDATE DUE  LAST UPDATE
+Alpha migration   yes         never
+Billing revamp    no          2026-06-18
+Search reindex    yes         2026-05-02
+```
 
-Keep it to that single scope question; the per-project confirmation happens in step 4.
+**Then** ask **once** which branch to run:
 
-### 3. Re-derive state (one call — Linear is the source of truth)
+- **All** — every project in the table.
+- **Due** — only the rows marked `UPDATE DUE = yes`.
+- **Single** — one named project.
+
+Recommend **due** if any row is due, otherwise **single**. (If a project was named as
+an argument, still show the table, then default the branch to **single** on it.)
+
+For the chosen set, run steps 2–5 for **each** project **one at a time**: derive,
+reality-check, draft, get approval, post — then the next. A single project is a set
+of one. Never batch-post; every project earns its own reality-check and its own go.
+
+### 2. Re-derive state (one call — Linear is the source of truth)
 
 ```bash
 linear api <<'GRAPHQL'
@@ -104,7 +105,7 @@ GRAPHQL
 progress**, `backlog`/`unstarted`/`triage` = **remaining**. (Paginate if `issues`
 hits 250.)
 
-### 4. Reality-check the tracker (brief)
+### 3. Reality-check the tracker (brief)
 
 Bucket the issues by `state.type` and map labels to gates (below). Then show the
 lead **one compact block** — `Done N · In progress N · Remaining N` plus the gate
@@ -122,7 +123,7 @@ tracker. Keep it to that single check; don't interrogate.
 A gate that stalls a meaningful chunk of remaining scope is the headline, not a
 footnote.
 
-### 5. Compute the delta (from the corrected picture)
+### 4. Compute the delta (from the corrected picture)
 
 - **Shipped** = issues the lead confirmed done, completed **after** the last update's
   `createdAt` (no prior update → summarize the arc; group, don't enumerate all).
@@ -130,7 +131,7 @@ footnote.
 - **Duration** = now − `startedAt` (fall back to first `progressHistory` entry).
 - **Pace** = current `progress` vs progress at last update vs time elapsed.
 
-### 6. Draft, recommend health, present
+### 5. Draft, recommend health, present
 
 Write the body in the format below. Recommend a health with one line of reasoning
 (§ Health). **Present the draft + recommended health and wait.** On approval:
