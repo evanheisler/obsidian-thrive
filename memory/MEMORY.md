@@ -117,3 +117,4 @@
 - [Don't dodge the end-state to avoid churn](feedback-dont-dodge-endstate-to-avoid-churn.md) — research + defend + full-sweep the end-state; read review BODIES
 - [Found bug gets fixed, not filed](feedback-found-bug-gets-fixed-not-filed.md) — rebase on origin/main before calling it a bug; then fix it in that PR, never file it
 - [Ask what a punchlist line means](feedback-ask-what-a-punchlist-line-means.md) — a one-line outcome is not a spec; ask before authoring, never write an inferred defect up as the ticket
+- [Bespoke neighbor is not a pattern](feedback-bespoke-neighbor-is-not-a-pattern.md) — render the ui/ primitive; a copied dimension is not a requirement and a fixed size is a gap to close, never a fork
