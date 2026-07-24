@@ -111,3 +111,4 @@
 - [Draft status is a gate](feedback-draft-status-is-a-gate.md) — re-fetch isDraft before autonomous PR handling; Evan un-drafts loop PRs himself, flipping them from autonomous to approval-gated
 - [Blocked-by is not a stack](feedback-blocked-by-is-not-a-stack.md) — stack PRs only for a real code dependency; disjoint-file Blocked-by chains branch off main with a merge-order note, not a git stack
 - [Red check is not green](feedback-red-check-is-not-green.md) — never call a PR green while any check fails, even non-required/infra; back an infra-vs-diff claim with logs across PRs before asserting
+- [Don't dodge the end-state to avoid churn](feedback-dont-dodge-endstate-to-avoid-churn.md) — when a review exposes a pattern flaw, research + defend + full-sweep the correct end-state; "fewer files / already merged" is not a recommendation; read review BODIES not thread-counts

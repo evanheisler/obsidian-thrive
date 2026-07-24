@@ -5,6 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: 7d99dd87-fa90-4d67-896e-2bbee4335a8e
+  modified: 2026-07-23T20:10:19.213Z
 ---
 
 Under approval-gated-code-review, the gate covers *publication of review responses*:
@@ -17,6 +18,13 @@ for approval on a syntax-level fixup.
 noise; it treats a mechanical correction as a new decision. Mirrors the standing rule
 "design decisions need approval; mechanical fixes don't" ([[feedback-dont-repave-deliberate-wiring]]).
 
+The gate also does NOT cover my own **bookkeeping**: resolving review threads I authored
+myself to document a resolution is just tidying my own notes — never ask "can I resolve my
+own notes?" (Evan: "Why are you asking me if you can update your notes"). Gate = publishing
+substantive responses to *reviewers* (the commit, replies to their findings, resolving
+*their* threads); it is not my own annotations.
+
 **How to apply:** After a gated commit lands, if CI fails on that commit, diagnose + fix +
-verify + push in one pass. Reserve the stop-and-ask for a NEW review-feedback response or
-a genuine design choice, not for making my own approved diff green.
+verify + push in one pass. Resolve my own documentation/response threads without asking.
+Reserve the stop-and-ask for a NEW review-feedback response, resolving a *reviewer's* thread,
+or a genuine design choice — not for making my own approved diff green or tidying my own notes.

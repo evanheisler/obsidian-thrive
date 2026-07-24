@@ -1,40 +1,41 @@
 ---
 name: project-status-update
-description: Use when a Linear project you lead is explicitly asking for a status update — the inbox "Write a project update…" nudge, or an overdue/at-risk update prompt. Only acts on projects whose update is currently due; never posts out of band. For projects authored by plan-project and run by work-project.
+description: Use to post a Linear project status update on demand — for all projects you lead, or one you name. No Linear prompt required. Derives the delta from live issue state, reality-checks it with you, recommends health, and posts on your approval.
 disable-model-invocation: true
-argument-hint: "<Linear project name or id (the one being nudged)>"
+argument-hint: "<Linear project name or id (optional — omit to choose scope)>"
 ---
 
 # Project Status Update
 
-Post the **status update** a Linear project is asking for. An update is a **delta
+Post a **status update** for a Linear project you lead. An update is a **delta
 since the last one**, grounded in real issue state — not a vibe. Its job is to tell
 stakeholders what moved, what's left, and **what's stuck** so they can unstick it.
 
-**Core principle — only on demand; derive, then reality-check.** Act only on a
-project whose update is **currently due** (Linear is prompting for it); never post
-out of band. Build the picture from live Linear data, but the tracker **isn't ground
-truth** — "Done" work gets reworked, a `blocked` label outlives its blocker — so the
-lead corrects it before you draft. Health is a recommendation from the signals; **the
+**Core principle — derive, then reality-check.** Post whenever you ask — across
+**every project you lead** or a **single named one**; no Linear prompt required.
+Build the picture from live Linear data, but the tracker **isn't ground truth** —
+"Done" work gets reworked, a `blocked` label outlives its blocker — so the lead
+corrects it before you draft. Health is a recommendation from the signals; **the
 human confirms it, and the human posts.**
 
 ## When to Use
 
-- You got the "Write a project update…" nudge for a project you lead.
-- A led project's update is overdue / its health is being prompted.
+- You want to post an update for a specific project you lead.
+- You want to refresh updates across all projects you lead (before a review or when
+  several have gone stale).
+- Linear nudged you for an update — still a valid trigger, just no longer required.
 
-**Don't use for:** posting an update no one asked for · issue-level updates (→
-comment on the issue) · authoring or re-scoping work (→ `plan-project`) · projects
-you don't lead.
+**Don't use for:** issue-level updates (→ comment on the issue) · authoring or
+re-scoping work · projects you don't lead.
 
 ## Process
 
-### 1. Confirm the project is asking for an update
+### 1. Check which led projects are due (informational)
 
-The source of truth is Linear's **`projectUpdatePrompt`** inbox notification — not a
-derived date window (a reminder is anchored to a recurring day, so weeks-since-start
-gives false negatives). A project is **due** when it has a `projectUpdatePrompt`
-(not snoozed) and no `projectUpdate` has been posted since the latest prompt:
+Surface what Linear is currently prompting for — a project is **due** when it has an
+unsnoozed `projectUpdatePrompt` and no `projectUpdate` since that prompt. This is
+**context, not a gate**: report the due set, then continue to step 2 whether or not
+anything is due.
 
 ```bash
 linear api '{ viewer { email }
@@ -49,19 +50,42 @@ linear api '{ viewer { email }
           lastPrompt:(max_by(.createdAt).createdAt),
           lastUpdate:(.[0].project.projectUpdates.nodes[0].createdAt) })
   | map(select(.lead==$me and (.lastUpdate==null or .lastUpdate < .lastPrompt)))
-  | .[] | "\(.name)\t\(.id)\tlastUpdate=\(.lastUpdate)"'
+  | .[] | "DUE: \(.name)\t\(.id)"'
 ```
 
-**Due** = `lead.email` is you · a `projectUpdatePrompt` exists, unsnoozed · no update
-since its `createdAt`.
+Report the due projects (or "none currently due") — it annotates the choice in
+step 2. **Never stop here**, even when nothing is due.
 
-- **Named project, due** → proceed.
-- **Named project, not due** → say so and **wait** — don't draft unless the human
-  says to anyway.
-- **No project given** → list only the due ones and let the human pick. If none are
-  due, say "nothing is asking for an update" and stop.
+### 2. Pick scope — all led projects, or one
 
-### 2. Re-derive state (one call — Linear is the source of truth)
+Enumerate the **active** projects you lead (`state` not `completed`/`canceled`),
+newest-update-first so staleness is visible:
+
+```bash
+linear api '{ projects(first: 100, filter: { lead: { isMe: { eq: true } } }) {
+  nodes { id name state health targetDate
+    projectUpdates(first:1){ nodes { createdAt health } } } } }' \
+| jq -r '[ .data.projects.nodes[]
+    | select(.state != "completed" and .state != "canceled") ]
+  | sort_by(.projectUpdates.nodes[0].createdAt // "")
+  | .[] | "\(.name)\t\(.id)\tstate=\(.state)\thealth=\(.health)\tlastUpdate=\(.projectUpdates.nodes[0].createdAt // "never")"'
+```
+
+Then branch on how the skill was invoked:
+
+- **Project named as an argument** → that's the target; go to step 3.
+- **No argument** → ask **once**: *"Post an update to **all** projects you lead, or a
+  **specific** one?"* Show the enumerated list annotated with which are due (from step
+  1) and each project's last-update age, so the choice is informed. Recommend
+  **specific** unless it's a deliberate sweep (a periodic review, several stale at once).
+  - **Specific** → resolve the named project and run steps 3–6 once.
+  - **All** → run steps 3–6 for **each** active led project, **one at a time**: derive,
+    reality-check, draft, get approval, post — then the next. Never batch-post; every
+    project earns its own reality-check and its own go.
+
+Keep it to that single scope question; the per-project confirmation happens in step 4.
+
+### 3. Re-derive state (one call — Linear is the source of truth)
 
 ```bash
 linear api <<'GRAPHQL'
@@ -80,7 +104,7 @@ GRAPHQL
 progress**, `backlog`/`unstarted`/`triage` = **remaining**. (Paginate if `issues`
 hits 250.)
 
-### 3. Reality-check the tracker (brief)
+### 4. Reality-check the tracker (brief)
 
 Bucket the issues by `state.type` and map labels to gates (below). Then show the
 lead **one compact block** — `Done N · In progress N · Remaining N` plus the gate
@@ -98,7 +122,7 @@ tracker. Keep it to that single check; don't interrogate.
 A gate that stalls a meaningful chunk of remaining scope is the headline, not a
 footnote.
 
-### 4. Compute the delta (from the corrected picture)
+### 5. Compute the delta (from the corrected picture)
 
 - **Shipped** = issues the lead confirmed done, completed **after** the last update's
   `createdAt` (no prior update → summarize the arc; group, don't enumerate all).
@@ -106,7 +130,7 @@ footnote.
 - **Duration** = now − `startedAt` (fall back to first `progressHistory` entry).
 - **Pace** = current `progress` vs progress at last update vs time elapsed.
 
-### 5. Draft, recommend health, present
+### 6. Draft, recommend health, present
 
 Write the body in the format below. Recommend a health with one line of reasoning
 (§ Health). **Present the draft + recommended health and wait.** On approval:
@@ -132,7 +156,7 @@ empty buckets; never pad.
 📋 Needs spec: <issues>
 ```
 
-Real example (modern-header project):
+Example:
 
 ```
 iOS nearly done; Web/Android await design.
@@ -157,7 +181,8 @@ Recommend from the signals; the human may know context the data doesn't, so conf
 
 ## Red Flags — STOP
 
-- About to post for a project that isn't asking for an update → out of band; stop.
+- About to batch-post across all led projects in one shot → each project gets its own
+  reality-check, draft, and go. Loop one at a time; never batch-post.
 - About to run `project-update create` without showing the draft + health → present
   and wait. Posting is the human's call.
 - About to restate health % / progress % in the body → that's UI chrome; cut it.
@@ -167,8 +192,10 @@ Recommend from the signals; the human may know context the data doesn't, so conf
 - About to write an essay → this is bullets. Trust the reader; one line per fact.
 - About to bury a 🔴/🎨/🧑 gate below narrative → gates are why the update exists.
 
-## Related Skills
+## Requires
 
-- `plan-project` / `work-project` — author and run the queue this reports on.
-- `triage` — the label/state taxonomy the gate buckets come from.
-- `linear-cli` — `project-update`, `project`, `api` commands.
+- The `linear` CLI, authenticated to your Linear account — the `api` and
+  `project-update` subcommands used throughout.
+- `jq` for shaping the query output.
+- Gate labels (§ Reality-check) map to whatever label taxonomy your workspace uses;
+  adjust the table to your own labels.
