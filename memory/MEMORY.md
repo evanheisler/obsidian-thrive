@@ -1,5 +1,7 @@
 # Memory index
 
+- [A question is not permission](feedback-question-is-not-permission.md) — a question/criticism/error gets an ANSWER, never edits or commits; permission is an imperative
+- [No conditional offers](feedback-no-conditional-offers.md) — one correct action = bare imperative ("Add the token to 1Password. Ask if you need help."), never "or would you rather"
 - [Bionic Health context](bionic-health-context.md) — this vault is the context brain for Evan's Bionic Health (Thrive) work
 - [Invoked skill defines the deliverable](feedback-invoked-skill-defines-deliverable.md) — don't ask a scope question the invoked skill already settles; plan-project is plan-only, "perform the migration" means plan it
 - [Anecdotal notes don't descope](feedback-anecdotal-notes-dont-descope.md) — an issue's "X to investigate" aside doesn't remove that NAMED item from agent scope; research + attempt before deferring
