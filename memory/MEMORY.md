@@ -118,3 +118,7 @@
 - [Found bug gets fixed, not filed](feedback-found-bug-gets-fixed-not-filed.md) — rebase on origin/main before calling it a bug; then fix it in that PR, never file it
 - [Ask what a punchlist line means](feedback-ask-what-a-punchlist-line-means.md) — a one-line outcome is not a spec; ask before authoring, never write an inferred defect up as the ticket
 - [Bespoke neighbor is not a pattern](feedback-bespoke-neighbor-is-not-a-pattern.md) — render the ui/ primitive; a copied dimension is not a requirement and a fixed size is a gap to close, never a fork
+- [Design system ≠ base primitives](feedback-design-system-is-not-base-primitives.md) — use the right UI component; never swap the interaction model
+- [No method narration to Evan](feedback-no-method-narration-to-evan.md) — never report verification method or dispatch internals; outcome in plain language, or the exact ask
+- [Verify the rationale holds at each site](feedback-verify-the-rationale-holds-at-each-site.md) — same code shape ≠ same problem; test the reason before sweeping or filing
+- [House rule ≠ vendor match](feedback-house-rule-doesnt-override-vendor-match.md) — hand-rolled next to a vendor SDK is deliberate; take the behavior, leave the paint
