@@ -76,7 +76,7 @@
 - [No dead code for test churn](feedback-no-dead-code-for-test-churn.md) — code a change orphans gets deleted in that same PR; vet executor scope-cuts
 - [Pushback owns the decision](feedback-pushback-owns-the-decision.md) — declining review feedback = own it, never punt to "product's call"
 - [gh api body file gotcha](feedback-gh-api-body-file.md) — `-f body=@file` posts literal text; use `-F` or inline; verify it landed
-- [Top-level PR comments blocked in thrive](thrive-top-level-pr-comments-blocked.md) — a hook blocks `gh pr comment`; reply inline on a code line
+- [Top-level PR comments blocked (thrive + bionic-health-app)](thrive-top-level-pr-comments-blocked.md) — a hook blocks `gh pr comment`; PR-wide notes go as a review-COMMENT, line feedback inline
 - [Verify branch protection before blocker](feedback-verify-branch-protection-before-blocker.md) — read required_status_checks; can't-read ≠ is-a-blocker
 - [thrive node_modules cache no payoff](thrive-node-modules-cache-no-payoff.md) — measured net-negative; path-gating is the lever; don't re-propose
 - [Review current head, not the bot's comment](feedback-review-current-head-not-bot-comment.md) — pin review to the head SHA; a bot's prior review can be stale

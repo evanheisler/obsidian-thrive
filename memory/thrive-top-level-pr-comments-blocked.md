@@ -1,16 +1,20 @@
 ---
 name: thrive-top-level-pr-comments-blocked
-description: "In thrive, a hook blocks top-level PR/issue *comments* (gh pr comment) to force feedback inline — but a PR *review* body (pulls/N/reviews event=COMMENT) IS allowed for PR-level summaries"
+description: "In BOTH thrive and bionic-health-app, a hook blocks top-level PR/issue *comments* (gh pr comment) to force feedback inline — but a PR *review* body (pulls/N/reviews event=COMMENT) IS allowed for PR-level summaries"
 metadata: 
   node_type: memory
   type: reference
   originSessionId: 0329d59a-995f-46d0-9472-854332698a8f
-  modified: 2026-07-23T20:33:24.690Z
+  modified: 2026-07-27T14:26:59.228Z
 ---
 
-A PreToolUse hook in the thrive repo blocks top-level PR/issue **comments**
-(`gh pr comment`, `gh api .../issues/N/comments`) — even a *read* of that endpoint
-matches. The block aborts the **entire** Bash call, so batching a top-level comment
+A PreToolUse hook blocks top-level PR/issue **comments** in **both** `thrive` and
+`bionic-health-app` (confirmed in bionic-health-app on 2026-07-27, PR #2250) —
+`gh pr comment` returns "Top-level PR comments are blocked." Assume it applies to any
+Bionic repo, not just thrive.
+
+The block covers `gh pr comment` and `gh api .../issues/N/comments` — even a *read* of
+that endpoint matches. The block aborts the **entire** Bash call, so batching a top-level comment
 with allowed calls loses all of them — verify what actually posted before re-running.
 
 **The block's intent is to route line-level feedback inline, NOT to forbid all
