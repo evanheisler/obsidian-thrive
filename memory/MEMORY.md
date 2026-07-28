@@ -107,6 +107,7 @@
 - [ready-for-human = AI-cannot-do only](feedback-ready-for-human-means-ai-cannot.md) — executable→agent, needs-a-decision→Backlog, AI-can't→human
 - [BH Linear project status gotcha](bh-linear-project-status-gotcha.md) — `-s started` = "To Release" in BH; omit -s or use Planned at creation
 - [Feedback is not a halt order](feedback-feedback-is-not-a-halt-order.md) — criticism = fix the go-forward plan; never stop work without a stop directive
+- [Completion instruction closes the unit](feedback-completion-instruction-closes-the-unit.md) — "commit and push" ends the work; a bug I noticed is a one-line report, not a new task
 - [Dups mid-review = follow-up, not rewrite](feedback-dups-are-followups-not-rewrites.md) — never refactor out from under an open PR
 - [Read full PR feedback every cycle](feedback-read-full-pr-feedback-every-cycle.md) — threads incl resolved + review bodies + nits, never a thread-count
 - [DRY targets functional identity, not UI](feedback-dry-targets-functional-identity-not-ui.md) — dedup pure logic; per-consumer label injection means over-abstraction
