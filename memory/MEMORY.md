@@ -124,3 +124,4 @@
 - [No method narration to Evan](feedback-no-method-narration-to-evan.md) — never report verification method or dispatch internals; outcome in plain language, or the exact ask
 - [Verify the rationale holds at each site](feedback-verify-the-rationale-holds-at-each-site.md) — same code shape ≠ same problem; test the reason before sweeping or filing
 - [House rule ≠ vendor match](feedback-house-rule-doesnt-override-vendor-match.md) — hand-rolled next to a vendor SDK is deliberate; take the behavior, leave the paint
+- [Touching it makes it yours](feedback-touching-it-makes-it-yours.md) — an issue bounds where you look, never correctness of what you edited; "not in the ticket" is never the answer
