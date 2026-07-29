@@ -1,5 +1,8 @@
 # Memory index
 
+- [Serve the rule's purpose](feedback-serve-the-rules-purpose.md) — literal compliance that leaves dead code or a follow-up PR is not a real option
+- [Measure the fingerprint, don't infer](patient-fingerprint-measure-dont-infer.md) — the CI comment's baseline falls back; generate it and grep `sources[]`
+
 - [A question is not permission](feedback-question-is-not-permission.md) — question/criticism/error gets an ANSWER; permission is an imperative
 - [One decidable item per turn](feedback-one-decidable-item-per-turn.md) — one ask, isolated, at the end; offers and re-raised items count as asks
 - [No conditional offers](feedback-no-conditional-offers.md) — one correct action = bare imperative, never "or would you rather"
@@ -128,3 +131,4 @@
 - [Reviewer finding lands in that PR](feedback-reviewer-finding-lands-in-that-pr.md) — "deserves a ticket" is deferral; fix it in the open PR, never promise a ticket you don't create
 - [Current shape is not a requirement](feedback-current-shape-is-not-a-requirement.md) — consolidation deletes a copy; if nothing gets deleted I designed the wrong thing
 - [Ticket text is not Evans decision](feedback-ticket-text-is-not-evans-decision.md) — agent-authored ticket bodies dictate PR count/slicing; surface the shape before executing it
+- [Never run the app to verify](feedback-never-run-the-app-to-verify.md) — no sim/Metro boots to check visuals, no sim-run exceptions in dispatch prompts, never drive Evans UI
