@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: f81fc5bf-48a6-4b30-b4a1-27f125a75f47
-  modified: 2026-07-29T21:26:12.927Z
+  modified: 2026-07-29T21:49:30.382Z
 ---
 
 `.github/workflows/patient-fingerprint.yaml` restores its baseline with
@@ -32,10 +32,20 @@ npx -y @expo/fingerprint fingerprint:diff <baseline.json> fp.json
   `packageJson:scripts:lifecycle` — the dependency list itself is **not** hashed, so a dep change
   moves the fingerprint only when that package is autolinked.
 
-Worked example (icon convergence, BH-3628): adding `@react-native-vector-icons/lucide` and
-removing `expo-symbols` both move it (RN-core and Expo-iOS autolinked respectively); removing
-`@expo/vector-icons` and `lucide-react-native` does not — neither appears in any source.
+Worked example (icon convergence, BH-3628): of four dependency changes, only **adding**
+`@react-native-vector-icons/lucide` moved the fingerprint. Removing `@expo/vector-icons` and
+`lucide-react-native` did not — neither is autolinked. Removing `expo-symbols` did not either,
+and that one is the trap: it *is* an autolinked Expo iOS module, but `expo-router@55.0.16`
+hard-depends on it, so autolinking resolves it whether or not `apps/patient/package.json` lists
+it. Dropping the direct dep only removes a symlink.
 
 **How to apply:** grep the generated `sources[]` for the package or file in question before
-claiming anything is OTA-safe. See [[feedback-no-fabricated-evidence]] — a plausible reading of
-a CI comment is not proof, and being wrong here is only discovered after a release ships.
+claiming anything is OTA-safe — and for a *removal*, check whether another dependency still
+pulls the package in (`grep` the lockfile, read the parent's `dependencies`). Being autolinked
+is not the same as being autolinked *because of you*. See [[feedback-no-fabricated-evidence]] —
+a plausible reading of a CI comment is not proof, and being wrong here surfaces only after a
+release ships.
+
+Generate baselines from a clean throwaway worktree: an existing worktree with gitignored
+prebuild `android`/`ios` dirs adds two null-hashing `bareNativeDir` sources, which changes no
+hash but makes `fingerprint:diff` noisy.
