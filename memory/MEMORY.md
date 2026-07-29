@@ -125,3 +125,5 @@
 - [Verify the rationale holds at each site](feedback-verify-the-rationale-holds-at-each-site.md) — same code shape ≠ same problem; test the reason before sweeping or filing
 - [House rule ≠ vendor match](feedback-house-rule-doesnt-override-vendor-match.md) — hand-rolled next to a vendor SDK is deliberate; take the behavior, leave the paint
 - [Touching it makes it yours](feedback-touching-it-makes-it-yours.md) — an issue bounds where you look, never correctness of what you edited; "not in the ticket" is never the answer
+- [Reviewer finding lands in that PR](feedback-reviewer-finding-lands-in-that-pr.md) — "deserves a ticket" is deferral; fix it in the open PR, never promise a ticket you don't create
+- [Current shape is not a requirement](feedback-current-shape-is-not-a-requirement.md) — consolidation deletes a copy; if nothing gets deleted I designed the wrong thing
