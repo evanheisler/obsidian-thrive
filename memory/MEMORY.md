@@ -127,3 +127,4 @@
 - [Touching it makes it yours](feedback-touching-it-makes-it-yours.md) — an issue bounds where you look, never correctness of what you edited; "not in the ticket" is never the answer
 - [Reviewer finding lands in that PR](feedback-reviewer-finding-lands-in-that-pr.md) — "deserves a ticket" is deferral; fix it in the open PR, never promise a ticket you don't create
 - [Current shape is not a requirement](feedback-current-shape-is-not-a-requirement.md) — consolidation deletes a copy; if nothing gets deleted I designed the wrong thing
+- [Ticket text is not Evans decision](feedback-ticket-text-is-not-evans-decision.md) — agent-authored ticket bodies dictate PR count/slicing; surface the shape before executing it
