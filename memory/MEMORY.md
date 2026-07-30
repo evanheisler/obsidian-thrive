@@ -132,3 +132,5 @@
 - [Current shape is not a requirement](feedback-current-shape-is-not-a-requirement.md) — consolidation deletes a copy; if nothing gets deleted I designed the wrong thing
 - [Ticket text is not Evans decision](feedback-ticket-text-is-not-evans-decision.md) — agent-authored ticket bodies dictate PR count/slicing; surface the shape before executing it
 - [Never run the app to verify](feedback-never-run-the-app-to-verify.md) — no sim/Metro boots to check visuals, no sim-run exceptions in dispatch prompts, never drive Evans UI
+- [Build for the base case](feedback-build-for-the-base-case.md) — one shared impl; vendor components and .native/.web splits must be earned
+- [RN-web Modal portals escape CSS-var scope](rn-web-modal-portals-escape-css-var-scope.md) — vendor DOM in an RN-web Modal loses root-scoped custom properties; re-wrap inside the portal
