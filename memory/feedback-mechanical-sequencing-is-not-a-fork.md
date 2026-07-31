@@ -5,6 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: f31f3ac0-6b6d-43b4-8aa3-ba2cbdf7d81a
+  modified: 2026-07-31T16:24:08.628Z
 ---
 
 When a task splits across repos or slices and there's an obvious correct order (producer before consumer, backend marker before the patient app that reads it), that's mechanics, not a design fork. Resolve it yourself and dispatch; don't stop to ask.
@@ -12,3 +13,5 @@ When a task splits across repos or slices and there's an obvious correct order (
 **Why:** Evan: "A obviously. Why is this even a question?" — I asked how to dispatch a cross-repo ticket (backend FHIR marker in bionic-health-app before the thrive consumer that reads it) when backend-first was the only coherent ordering. Escalating it wasted a turn and defeated the AFK autonomy of /work-project.
 
 **How to apply:** In /work-project and similar, reserve questions for genuine forks (ambiguous product/scope decisions the human owns). Sequencing a producer→consumer split, choosing the prerequisite to land first, two-PRs-for-one-ticket coordination — decide and go. See [[feedback-resolve-framing-dont-confirm-it]], [[work-project-verify-bot-reviews-yourself]].
+
+Same rule for invented risk-timing gates (2026-07-31, grilling the Stream debt sweep): I asked "extract the call shell immediately vs. after a bake period?" — Evan: "This whole new project is post-launch. Why the fuck would you call out immediately vs. bake period." A slice's start date inside an already-approved project is sequencing; the existing gate (Evan reviews and merges every PR) already carries the risk decision. Don't manufacture a timing fork on top of a gate that exists.
