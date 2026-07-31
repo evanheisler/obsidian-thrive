@@ -136,3 +136,4 @@
 - [RN-web Modal portals escape CSS-var scope](rn-web-modal-portals-escape-css-var-scope.md) — re-wrap inside the portal
 - [Testing loop = edits only](feedback-testing-loop-edits-only.md) — required edits + "retest"; pipeline once at sign-off
 - [Config derives from repos](feedback-config-derives-from-repos.md) — no local overrides; cleanups don't touch repos
+- [Check all three review surfaces](feedback-check-all-three-review-surfaces.md) — thread count alone is a false negative

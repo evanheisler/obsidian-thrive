@@ -73,11 +73,21 @@ or restart, reconstruct reality:
   with `linear issue view BH-XXXX`. (More CLI: `docs/agents/issue-tracker.md`.)
 - **GitHub** — open draft PRs and remote branches for issues in scope. Also flag any
   **open stacked PR whose parent has already merged** — it needs a rebase (step 6).
+- **Feedback on every open loop PR — all three surfaces** (see "What counts as
+  feedback"). Counting unresolved review threads alone is a **false negative**, not a
+  shortcut.
 
 **Orphan rule:** an issue in `Started` with **no draft PR and no remote branch** =
 a crashed executor's leftover → reset to `Todo`/`ready-for-agent` and re-dispatch
 into a fresh worktree (safe — nothing landed). `Started` **with** a draft PR =
 in-review, leave it.
+
+**Arm the feedback watch before leaving step 1.** Re-derive is a one-shot snapshot;
+it is not polling. Nothing between turns is seen unless a watch is running, so start
+a persistent background monitor over the in-scope PRs covering all three surfaces
+plus merges, and keep it alive for the loop. Re-arm it on every restart. A loop with
+no armed watch is blind between turns — that is a dropped review waiting to happen,
+not a stylistic preference.
 
 ### 2. Build the ready set + order
 
@@ -129,13 +139,37 @@ a cache only — Linear + GitHub remain the source of truth.
 
 ### Review handling — dispatch a `receiving-code-review` subagent (never inline)
 
-The loop is **already polling** open loop PRs (step 1 re-derive; the step-6 watch).
-Bot and human review **will** land on them. When it does, the orchestrator
+Bot and human review **will** land on open loop PRs. When it does, the orchestrator
 **dispatches a subagent that runs `receiving-code-review` — it never fetches,
 evaluates, fixes, or replies inline.** Hand the subagent the PR number + worktree; it
 evaluates each finding, fixes what needs fixing in the worktree, re-runs preflight,
 pushes, replies in-thread (`Addressed in <sha>`) or pushes back with a technical
 reason, resolves the addressed threads, and returns a **one-paragraph** summary.
+
+#### What counts as feedback — three surfaces, not one
+
+Feedback lives on **three independent GitHub surfaces**. A review submitted with a
+body and **zero inline comments creates zero review threads**, so a thread count
+returns `0` while an 8000-character human review sits unread. Check all three, every
+cycle, per PR:
+
+```
+gh api repos/<owner>/<repo>/pulls/<n>/reviews   --jq '.[] | select((.body|length) > 0) | {user: .user.login, state, submitted_at, len: (.body|length)}'
+gh api repos/<owner>/<repo>/issues/<n>/comments --jq '.[] | {user: .user.login, created_at, len: (.body|length)}'
+gh api graphql -f query='...pullRequest(number: <n>){reviewThreads(first:100){nodes{isResolved comments(first:1){nodes{createdAt author{login} path}}}}}'
+```
+
+- **Review bodies** — `state` is `COMMENTED` / `CHANGES_REQUESTED` / `APPROVED`. Body-only
+  reviews are invisible to `reviewThreads`. **This is the surface that gets missed.**
+- **Issue comments** — bot summaries and human follow-ups. Filter out `vercel` /
+  `linear` / `github-actions` noise; everything else is real.
+- **Inline review threads** — the only surface with a resolve state.
+
+Only threads can be *resolved*, so "unresolved" is not a usable completeness test for
+the other two. For bodies and comments, handled = a reply exists that post-dates them.
+When in doubt whether an older review was ever addressed, dispatch a handler to verify
+against the current tree rather than assuming it was — a body from days ago sitting
+unanswered looks identical to one that was handled silently.
 
 Re-polling (reading PR state) stays with you; the *handling* does not. You read the
 summary, update the ledger, and relay — you do **not** ingest the individual findings.
@@ -146,21 +180,28 @@ push + reply in-thread, and CI re-runs on push on its own. Re-firing on each pus
 burns tokens + CI minutes (one PR hit 8 bot runs this way).** The only human gate is still
 **merge** (the loop never un-drafts or merges).
 
-**Active, never batched.** The trigger to dispatch the handler is *feedback exists on
-an open loop PR* — not *the bot round finished*. The moment your polling (step 1 /
-step 6) shows an unresolved human or bot thread on any loop PR, dispatch the handler
+**Active, never batched.** The trigger to dispatch the handler is *unhandled feedback
+exists on an open loop PR* — on **any of the three surfaces** — not *the bot round
+finished*. The moment a watch event or a re-derive surfaces one, dispatch the handler
 for that PR **that turn**. Do not wait for a monitor to report "terminal," do not
-batch threads across rounds, and **never report a PR as "waiting on review" or
-"batching" while it carries an unresolved thread** — a thread parked on a monitor is a
-dropped review, the exact failure this loop exists to prevent. A monitor tells you
-feedback *exists*; it is a backstop, not the trigger.
+batch across rounds, and **never report a PR as "clean" / "waiting on review" /
+"batching" while it carries unhandled feedback** — feedback parked on a monitor is a
+dropped review, the exact failure this loop exists to prevent.
+
+**Report what you measured, not what you queried.** "0 unresolved threads" is a fact
+about one surface; "no feedback" is a claim about three. Never let the first become
+the second. If you have not checked review bodies and issue comments this turn, you
+may not call a PR clean — say which surface you checked.
 
 | Rationalization | Reality |
 |---|---|
 | "It's only a couple findings — faster to fix them here." | Those findings become the whole review detail in your context; that bloat is exactly what this prevents. Dispatch. |
 | "I have to evaluate the findings before I can delegate." | The subagent runs `receiving-code-review`. Evaluation IS the delegated work, not a prerequisite you do first. |
 | "The fix is done, I'll just post the replies myself." | Fetch + draft + post is the review loop; it goes to the subagent. |
-| "I'll batch these threads once the whole round is terminal." | Feedback *existing* is the trigger, not round-completion. An unresolved thread waiting on a monitor is a dropped review — dispatch now. |
+| "I'll batch these threads once the whole round is terminal." | Feedback *existing* is the trigger, not round-completion. Feedback waiting on a monitor is a dropped review — dispatch now. |
+| "`unresolved=0`, so that PR is clean." | You measured one surface of three. A body-only review creates no thread and returns `0`. Check reviews + comments before saying clean. |
+| "I re-derived at the start of the turn, so I'm current." | Re-derive is a snapshot. Feedback landing between turns is invisible without an armed watch. Arm it in step 1. |
+| "That review body is from days ago — it must have been handled." | Bodies carry no resolve state, so old and unhandled looks exactly like old and handled. Dispatch a handler to verify against the tree. |
 
 ### 6. Stack maintenance (squash merge changes history)
 
@@ -170,9 +211,9 @@ so every descendant is now based on history that no longer exists. Its diff doub
 up the parent's changes and will conflict. Keeping open stacks rebased is the loop's
 job.
 
-**When:** a derived condition — checked on every re-derive (step 1) and while the
-loop is alive (it's already polling). Trigger = an **open** stacked PR whose
-**parent just merged**, or whose parent's history just changed from its own rebase.
+**When:** a derived condition — checked on every re-derive (step 1) and on every merge
+event from the armed watch. Trigger = an **open** stacked PR whose **parent just
+merged**, or whose parent's history just changed from its own rebase.
 
 **Rebase one child** — in that child's worktree (`cd "$WT" &&`):
 
@@ -260,9 +301,14 @@ parked-on-conflict.
   fetch first (step-7 gate). This includes asserting a PR's state **while answering a
   question** or in an aside — not only in a formal status block. The ledger is stale
   the instant the human acts.
-- About to report a loop PR as "waiting" / "batching" while it has an **unresolved
-  review thread** → STOP; dispatch the review handler this turn. Feedback existing is
-  the trigger, not the bot round finishing.
+- About to report a loop PR as "clean" / "waiting" / "batching" while it carries
+  **unhandled feedback on any of the three surfaces** → STOP; dispatch the review
+  handler this turn. Feedback existing is the trigger, not the bot round finishing.
+- About to call a PR clean off an **unresolved-thread count alone** → STOP. That
+  measures one surface of three; a body-only review returns `0`. Check
+  `pulls/<n>/reviews` and `issues/<n>/comments` before the word "clean".
+- About to run the loop with **no armed feedback watch** → STOP, arm it (step 1).
+  Re-derive is a snapshot; between turns you are blind without a monitor.
 - About to `git rebase main` (plain) on a stacked child after its parent merged →
   use `git rebase --onto main <old-base> <child>`; a plain rebase re-applies the
   squashed parent's commits and conflicts.
