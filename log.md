@@ -504,3 +504,21 @@ repo: Bionic-Health/thrive
 - Learnings: never assume a vendor CSS variable or class exists — grep the shipped stylesheet. A
   rule that matches nothing reads as coverage that isn't there, which is how #933's light mode
   looked wired for months while writing to three variables the SDK doesn't define.
+
+## 2026-07-31 — Skills: codex-review label retired; testing-feedback-loop mode
+repo: this vault
+
+- Per Evan's directives, updated `/ship-issue`, `/work-project`, and the executor prompt:
+  (1) `codex-review` label is dead — drafts get `claude-review` only; Codex fires on its own
+  when the human opens the PR (his decision), so no waiting on a Codex pass for drafts.
+  (2) New ship-issue mode — **human testing feedback loop = required edits + "retest" only**;
+  preflight, test updates, commit, and push are deferred until sign-off, then run once.
+- Wiki/os pages touched: none (skill + memory edits). Auto-memories:
+  `feedback-testing-loop-edits-only` (new); label facts corrected in
+  `thrive-bot-reviews-label-triggered`, `feedback-never-refire-bot-reviews-on-push`,
+  `feedback-no-refire-bots-after-noop-rebase`, `work-project-verify-bot-reviews-yourself`;
+  MEMORY.md hooks updated.
+- Learnings: **Mid-testing-loop the ship pipeline is deferred, not run per iteration** — the
+  executor's per-iteration preflight/tests/commit/push burned time + CI minutes on changes
+  Evan had not approved; the loop's value is turnaround speed. Captured where it re-fires:
+  ship-issue section + red flag, executor-prompt hard rule, auto-memory.

@@ -32,11 +32,16 @@ worktree. Invoke the **`ship-issue`** skill and follow it exactly.
   orchestrator already claimed the issue (In Progress + assigned via `linear issue
   update`) — don't re-claim, and never use `linear issue start` (its git
   integration would hijack the root checkout).
-- Open a **draft** PR and add the `claude-review` + `codex-review` labels **once** to
-  trigger bot review. Run the bounded review loop — address findings by **push + reply
-  in-thread**; **NEVER re-toggle the review labels after the initial add** (bots review
-  a PR once; re-firing on each push burns tokens + CI). Then **assign the human** as PR
-  assignee and do the Linear writeback.
+- Open a **draft** PR and add the `claude-review` label **once** to trigger bot
+  review — **never `codex-review`; that label is dead** (Codex fires on its own when
+  the human opens the PR; do not wait for it). Run the bounded review loop — address
+  findings by **push + reply in-thread**; **NEVER re-toggle the review label after
+  the initial add** (the bot reviews a PR once; re-firing on each push burns tokens
+  + CI). Then **assign the human** as PR assignee and do the Linear writeback.
+- **Human testing feedback loop = edits only.** When the human is testing and
+  telling you what to fix, each iteration is: required edits → report → "retest."
+  No preflight, no test updates, no commit, no push until the human signs off —
+  then run the full pipeline once (tests, preflight, commit, push).
 - **Running the app is debugging-only.** The human spot-checks every edit after it
   lands — never boot the app to "verify" your change visually. If a debugging run
   needs sign-in, the magic-link user is `evan.heisler+202602@bionichealth.com`

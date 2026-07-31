@@ -122,6 +122,9 @@ All must be green, and you must **see** them green (`verification-before-complet
 The "skip preflight on trivial" shortcut is a human judgment call — it does **not**
 apply here. Every slice is real work.
 
+One deferral exists: during a **human testing feedback loop** (section below),
+preflight waits until the human signs off — then runs once, in full.
+
 ### 6. Draft PR (`write-pr`)
 
 Open a **draft** PR via `write-pr`, body trimmed to standing conventions:
@@ -140,16 +143,18 @@ Open a **draft** PR via `write-pr`, body trimmed to standing conventions:
 
 ### 7. External review loop (bots)
 
-- Trigger the bot reviews **once** by adding two labels to the draft PR:
-  `claude-review` and `codex-review` (`gh pr edit <pr> --add-label claude-review
-  --add-label codex-review`). The labels kick off each bot **one time only**.
-- **Bots review a PR exactly ONCE — NEVER re-toggle the review labels afterward.**
-  Wait for the first complete pass from both bots (timeout ~10 min for a no-show) →
+- Trigger the bot review **once** by adding the `claude-review` label to the
+  draft PR (`gh pr edit <pr> --add-label claude-review`). The label kicks off the
+  bot **one time only**. **Never add `codex-review` — that label is dead.** Codex
+  fires on its own when the PR is opened, and opening is the human's call — so a
+  draft gets **Claude review only**, and you never wait for a Codex pass.
+- **The bot reviews a PR exactly ONCE — NEVER re-toggle the label afterward.**
+  Wait for the first complete Claude pass (timeout ~10 min for a no-show) →
   run `receiving-code-review` → address the comments → **push the fix + reply
   in-thread** (thread policy below). That is the entire cycle. Do **not**
-  remove-and-re-add the labels to re-run the bots to "confirm" a fix — the reviewer
+  remove-and-re-add the label to re-run the bot to "confirm" a fix — the reviewer
   sees the change from the diff and your reply. Re-firing on each push multiplies
-  full Claude+Codex reviews and burns tokens + CI minutes (one PR accrued **8 bot
+  full reviews and burns tokens + CI minutes (one PR accrued **8 bot
   runs** this way). CI checks (tests/lint) re-run on push automatically and
   unavoidably; the **bot review** must never be re-triggered. The human adjudicates
   at merge.
@@ -195,6 +200,30 @@ bot reviewers. Personal identity; **neutral voice, never first-person**.
 
 Return `SHIPPED` (PR url, assignee, writeback summary) to the caller.
 
+## Human testing feedback loop — edits only until sign-off
+
+**Trigger:** the human is testing the change and telling you what to fix ("still
+broken", "move it above the total", a pasted error). This is live iteration on
+work only the human can sign off — a different mode from a bot thread, and its
+whole value is turnaround speed.
+
+Each iteration is exactly two moves:
+
+1. Make the **required edits** — nothing else.
+2. Report what changed and say **retest**.
+
+**Until the human signs off: no preflight, no test updates or additions, no
+commit, no push.** Each of those spends minutes (and CI, on push) on a change the
+next test round may throw away. On sign-off, run the pipeline **once**: update
+tests, full preflight (step 5), commit, push.
+
+| Rationalization | Reality |
+|---|---|
+| "Preflight is always-on (step 5)." | Step 5 gates the PR, not each iteration. It runs once, at sign-off. |
+| "I'll commit/push so nothing is lost." | The worktree holds the edits. Per-iteration pushes burn CI on unapproved code. |
+| "Tests should track each change." | Tests chase the **approved** shape. Write them once, at sign-off. |
+| "It's faster to batch the fix with the pipeline." | The human is waiting to retest. The pipeline is the slow part — defer it. |
+
 ## Park triggers — park, don't push through
 
 When any of these hit: flip the issue to `ready-for-human` (or `needs-info` for
@@ -227,6 +256,9 @@ edits, excluding generated / lockfiles / snapshots / `argocd` / fixtures.
   `evan.heisler+202602@bionichealth.com` → stop; invented accounts don't exist.
 - Worktree commands failing weirdly → check hydration (`pnpm install && pnpm
   setup:all`) before debugging anything else.
+- Human is mid-testing-loop (no sign-off yet) and you're about to run preflight,
+  update tests, commit, or push → STOP. Required edits + "retest" only; the full
+  pipeline runs once, at sign-off.
 - About to push through a migration / access-control / new-pattern decision → park.
 - About to open a PR without having `git grep`ed the repo for pre-existing
   equivalents of the new symbols/files it adds → STOP; run the reuse audit (step 4).

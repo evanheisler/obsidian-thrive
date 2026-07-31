@@ -5,10 +5,10 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: d2aeadc4-a3bf-468c-a3c7-78aa8e3b177a
-  modified: 2026-07-22T15:47:16.168Z
+  modified: 2026-07-31T17:11:50.871Z
 ---
 
-When a stacked PR's parent merges and I rebase the child `--onto main`, and the rebase is a **clean replay (no conflicts)**, the child's **diff vs main is byte-identical — the code did not change**. Do **NOT** re-fire the bot reviews (the `claude-review` / `codex-review` label toggle). The prior round's bot review still stands; re-running produces the same verdict for zero new signal and burns CI minutes + Evan's time.
+When a stacked PR's parent merges and I rebase the child `--onto main`, and the rebase is a **clean replay (no conflicts)**, the child's **diff vs main is byte-identical — the code did not change**. Do **NOT** re-fire the bot review (the `claude-review` label toggle; `codex-review` is dead as of 2026-07-31 — never added at all). The prior round's bot review still stands; re-running produces the same verdict for zero new signal and burns CI minutes + Evan's time.
 
 The force-push to the new head SHA auto-triggers **required** CI (e.g. Patient Fingerprint) — that is unavoidable and not mine to suppress. The **bot re-review is a separate, manual label toggle** — that is the waste I added unprompted. Don't.
 

@@ -36,7 +36,7 @@
 - [Mirror the user's model verbatim](feedback-mirror-users-model-verbatim.md) — echo Evan's words; never re-abstract
 - [Resolve framing, don't confirm it](feedback-resolve-framing-dont-confirm-it.md) — never ask Evan to validate my model
 - [Map tokens by color not role](token-map-by-color-not-role.md) — primitive → same-color token; never add tokens
-- [Codex review = github-actions comment](codex-review-posts-as-github-actions-comment.md) — one top-level comment
+- [Codex review fires on PR open](codex-review-posts-as-github-actions-comment.md) — label inert; never on drafts
 - [Theme-v2 integration branch](theme-v2-integration-branch.md) — merged via #796; theme work bases on main
 - [Worktree base must be fresh origin](feedback-worktree-base-must-be-fresh-origin.md) — branch off origin/<base>
 - [Spec invariants, not just deltas](feedback-spec-invariants-not-just-deltas.md) — state what MUST NOT change
@@ -83,7 +83,7 @@
 - [Verify branch protection before blocker](feedback-verify-branch-protection-before-blocker.md) — can't-read ≠ is-a-blocker
 - [thrive node_modules cache no payoff](thrive-node-modules-cache-no-payoff.md) — measured net-negative; don't re-propose
 - [Review current head, not the bot's comment](feedback-review-current-head-not-bot-comment.md) — pin to head SHA
-- [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — add labels at PR creation, verify dispatch
+- [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — `claude-review` only at PR creation; `codex-review` is dead
 - [Theme Tailwind axes, not custom utilities](feedback-theme-tailwind-axes-not-custom-utilities.md) — native scales; no addUtilities
 - ["Codebase patterns" = whole repo](feedback-patterns-mean-whole-codebase.md) — grep all apps/ + packages/; use captureError
 - [Systemic failure needs repo guidance](feedback-systemic-failure-needs-repo-guidance.md) — skill/lint in-repo; RED tests tempt the failure
@@ -134,3 +134,4 @@
 - [Never run the app to verify](feedback-never-run-the-app-to-verify.md) — no sim/Metro boots; never drive Evans UI
 - [Build for the base case](feedback-build-for-the-base-case.md) — .native/.web splits must be earned
 - [RN-web Modal portals escape CSS-var scope](rn-web-modal-portals-escape-css-var-scope.md) — re-wrap inside the portal
+- [Testing loop = edits only](feedback-testing-loop-edits-only.md) — required edits + "retest"; pipeline once at sign-off
