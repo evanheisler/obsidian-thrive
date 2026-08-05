@@ -145,3 +145,4 @@
 - [Arm the watch at invocation](feedback-arm-the-watch-at-invocation.md) — loop step 1 runs before the first PR exists
 - [Decisions never live in PR text](feedback-never-tag-evan-in-pr-comments.md) — surfaced in session; tagging is the loud version of the same failure
 - [Conventions before machinery](feedback-conventions-before-machinery.md) — v1 workflow = documented rules; no guard scripts/CI
+- [Lead with what changes on screen](feedback-lead-with-what-changes-on-screen.md) — visible change first; topology cut unless it shows

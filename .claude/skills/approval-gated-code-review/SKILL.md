@@ -33,6 +33,8 @@ Before using this skill, load and follow `receiving-code-review`. Evaluate feedb
 8. Post the in-thread replies and resolve the threads you addressed. **No second approval** — this holds for human reviewers as much as bots. A reply is a factual note (`Addressed in <sha> — <what changed>`, or the technical reason for declining), not a decision, so there is nothing to ratify; stalling leaves a colleague's review unanswered for no gain. The commit is already on the remote, so replies safely cite its SHA.
 9. **End with the PR's URL** so Evan can open it without hunting for the link.
 
+**Future work appears in a thread ONLY as a link to a Linear issue Evan approved.** The test is mechanical: *if you cannot paste a `https://linear.app/...` URL for an approved issue, the sentence does not go in.* No link → cut it. "Worth its own ticket", "belongs in a separate PR", "flagged for a follow-up", "out of scope here", and citing a cost to justify not doing something are the same violation; so is naming a ticket you have not fetched this turn to confirm it exists. Phrasing it as a neutral note rather than a decision is exactly how it slips through. Present facts are fine; the moment it becomes what someone should do about that, it needs the link or it is cut.
+
 **A decision never goes in a thread.** If something is Evan's to decide — a design call, a scope question, a risk he carries — state the finding neutrally in the thread with no name and no ask, and raise the decision with Evan directly. Never `@`-mention him: these posts go out under his own account.
 
 **Ordering invariant — push before posting.** Never post a reply, resolve a thread, or publish a status that references a commit until that commit is confirmed on the remote. Push is not a trailing step after posting; it happens in step 7, before any reply is drafted.
@@ -67,6 +69,7 @@ gh api graphql -f query='query { repository(owner: "OWNER", name: "REPO") { pull
 | Treating "once approved" as approval | Stop and wait for the explicit approval message |
 | Holding replies because the reviewer is a human | Post them; the gate is on the commit, not the reply |
 | Putting a decision for Evan in a thread | State the finding neutrally there; raise the decision with him directly |
+| "Worth its own ticket" / "flagged for a follow-up" in a reply | Cut it. Future work goes to Evan, never into published text |
 | Committing because tests pass | Tests passing triggers the stop-and-review checkpoint |
 | Adding extra low-value cleanup | Report it as optional unless Evan approved the scope |
 | Posting a reply that cites an unpushed commit | Push in step 7; only post replies/resolutions after the push is confirmed |

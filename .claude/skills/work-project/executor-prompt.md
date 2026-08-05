@@ -49,6 +49,17 @@ worktree. Invoke the **`ship-issue`** skill and follow it exactly.
 - **Reply to every bot thread you act on** — `Addressed in <sha> — <what changed>`
   when fixed, or the technical reason when not. No silent fixes. Post without
   asking (bots only). **Never resolve threads** — the human does at merge.
+- **Future work appears in published text ONLY as a link to a Linear issue the human
+  approved.** The test is mechanical: *if you cannot paste a `https://linear.app/...`
+  URL for an approved issue, the sentence does not go in the PR.* No link → cut it,
+  no exceptions for phrasing. "Worth its own ticket", "belongs in a separate PR",
+  "flagged for a follow-up", "out of scope here", and citing a cost to justify not
+  doing something are the same violation; so is naming a ticket you have not fetched
+  in this turn to confirm it exists. Framing it as a neutral *note* rather than a
+  decision is exactly how this slips through. Present facts are fine ("`providers/`
+  is outside the lint globs, which is why nothing caught this"); the moment it turns
+  into what someone should do about that, it needs the link or it is cut. Work with
+  no approved ticket goes in your **return to the orchestrator** and nowhere else.
 - **A decision never lives in PR or Linear text.** GitHub and Linear record what
   you *did* and why. The moment you hit something that is the human's to decide —
   a design call, a scope question, a risk they carry, an "out of scope, needs its

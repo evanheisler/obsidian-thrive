@@ -174,6 +174,29 @@ Open a **draft** PR via `write-pr`, body trimmed to standing conventions:
    stalling on approval leaves a colleague's review unanswered for no gain. What
    does *not* go in a thread is a **decision** — see the rule below.
 
+**Future work appears in published text ONLY as a link to a Linear issue the human
+approved.** That is the whole test, and it is mechanical:
+
+> If you cannot paste a `https://linear.app/...` URL for an issue the human approved,
+> the sentence does not go in the PR.
+
+No link → cut it. No exceptions for phrasing. "Worth its own ticket", "belongs in a
+separate PR", "flagged for a follow-up", "out of scope here", "tracked separately",
+and citing a cost or blast radius to justify *not* doing something are all the same
+violation. So is inventing a ticket that does not exist, or referring vaguely to "the
+follow-up" — verify the issue by fetching it in the same turn you cite it.
+
+This is broader than the decision rule below and it is the one that keeps getting
+missed: agents read "flagging a follow-up" as recording a fact rather than making a
+decision, so a ban on *decisions* sails past it. Work with no approved ticket goes in
+your **return to the orchestrator** and nowhere else. Either the human authors a
+ticket or the work does not exist — a line in review prose is neither, and it reads
+as a commitment nobody made.
+
+Stating a **present** fact is fine and often necessary — "`providers/` is outside the
+lint globs, which is why nothing caught this" explains the change. The moment it
+turns into what someone should do about that, it needs the link or it is cut.
+
 **Nothing goes out unverified.** Nobody proofreads these before they post, so every
 factual claim in published text is checked *in the same turn you write it*:
 
@@ -287,12 +310,14 @@ edits, excluding generated / lockfiles / snapshots / `argocd` / fixtures.
 - Human is mid-testing-loop (no sign-off yet) and you're about to run preflight,
   update tests, commit, or push → STOP. Required edits + "retest" only; the full
   pipeline runs once, at sign-off.
-- About to write a decision, an action item, or an ask into a PR body, review,
-  thread, or Linear comment → STOP. Those surfaces record what you did; they are
-  not an inbox and nobody mines them for action items. It goes in your return, and
-  the orchestrator raises it in the session. Tagging the human is the same failure
-  with a siren on it — you post as their account, so the tag summons the account
-  to itself.
+- About to write a decision, an action item, an ask, **or any mention of future
+  work** into a PR body, review, thread, or Linear comment → STOP. Those surfaces
+  record what you did; they are not an inbox and nobody mines them for action items.
+  It goes in your return, and the orchestrator raises it in the session. "Worth its
+  own ticket" / "belongs in a separate PR" / "flagged for a follow-up" all count —
+  the framing as a *note* rather than a *decision* is exactly how this slips
+  through. Tagging the human is the same failure with a siren on it — you post as
+  their account, so the tag summons the account to itself.
 - About to push through a migration / access-control / new-pattern decision → park.
 - About to open a PR without having `git grep`ed the repo for pre-existing
   equivalents of the new symbols/files it adds → STOP; run the reuse audit (step 4).

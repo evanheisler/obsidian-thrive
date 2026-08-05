@@ -90,4 +90,4 @@ Keeping the pool busy is table stakes, not the job. The job is owning state-trut
 
 Related memories: `work-project-verify-bot-reviews-yourself`, `reuse-existing-system-prove-divergence`, `refetch-before-asserting-state`, `stabilize-first-no-churn`, `feedback-is-not-a-halt-order`, `dups-are-followups-not-rewrites`, `report-outcomes-not-plumbing`.
 
-Related pages: [[research-first-endstate-postmortem]] — a later work-project run where the failure was research-laziness (shallow review read + churn-dodging recommendation) rather than the patterns above; its mis-placement finding is the sibling of Pattern C.
+Related pages: [[research-first-endstate-postmortem]] — a later work-project run where the failure was research-laziness (shallow review read + churn-dodging recommendation) rather than the patterns above; its mis-placement finding is the sibling of Pattern C. [[published-text-discipline]] — a later run (`log: 2026-08-05`) where the code was sound and nearly every correction landed on what the loop *wrote to GitHub* under Evan's account; read it alongside this page before any `/work-project`.

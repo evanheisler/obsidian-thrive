@@ -146,7 +146,24 @@ evaluates each finding, fixes what needs fixing in the worktree, re-runs preflig
 pushes, replies in-thread (`Addressed in <sha>`) or pushes back with a technical
 reason, resolves the addressed threads, and returns a **one-paragraph** summary.
 
-#### Decisions come back here — never into the PR
+#### Future work and decisions come back here — never into the PR
+
+**Future work appears in published text ONLY as a link to a Linear issue the human
+approved.** The test is mechanical, so put it in every dispatch prompt verbatim:
+
+> If you cannot paste a `https://linear.app/...` URL for an issue the human approved,
+> the sentence does not go in the PR.
+
+No link → cut it. "Worth its own ticket", "belongs in a separate PR", "flagged for a
+follow-up", "out of scope here", and citing a cost to justify not doing something are
+all the same violation, and so is naming a ticket without fetching it in the same
+turn to confirm it exists. This catches what the decision rule below misses: an agent
+reads "flagging a follow-up" as recording a fact, not making a decision, so a ban on
+*decisions* sails past it. **Check returned work for it — it recurred three times in
+one session with the decision rule already in the prompt.** Work with no approved
+ticket is either a ticket the human authors or it does not exist; a line in review
+prose is neither.
+
 
 GitHub and Linear record what was *done* and why. They are not the human's inbox,
 and nobody mines review prose for action items. So **anything that is the human's
@@ -307,10 +324,12 @@ parked-on-conflict.
 - About to retry a parked issue automatically → parks are human business; move on.
 - About to merge, or push to `main`, or un-draft a PR → that's the human gate.
 - About to author or re-scope issues → that's the planning gate, not this loop.
-- About to let a decision, action item, or ask ship inside a PR body, review,
-  thread, or Linear comment — yours or a subagent's → STOP. It comes back in the
-  return and is raised in the session. `@`-tagging the human is the same failure
-  with a siren on it; the loop posts as their account.
+- About to let a decision, action item, ask, **or any mention of future work** ship
+  inside a PR body, review, thread, or Linear comment — yours or a subagent's →
+  STOP. It comes back in the return and is raised in the session. "Worth its own
+  ticket" / "belongs in a separate PR" / "flagged for a follow-up" count; the
+  note-not-decision framing is how they slip through. `@`-tagging the human is the
+  same failure with a siren on it; the loop posts as their account.
 - About to fetch review comments, evaluate findings, or draft/post a reply
   **yourself** → STOP. Review handling is delegated to a subagent; you only
   dispatch, gate, and relay.

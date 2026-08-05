@@ -522,3 +522,37 @@ repo: this vault
   executor's per-iteration preflight/tests/commit/push burned time + CI minutes on changes
   Evan had not approved; the loop's value is turnaround speed. Captured where it re-fires:
   ship-issue section + red flag, executor-prompt hard rule, auto-memory.
+
+## 2026-08-05 — Patient UI cleanup loop: gated header filters, three merges, published-text discipline
+repo: Bionic-Health/thrive (code) + this vault (skills/wiki)
+
+- Ran `/work-project` over "Patient app: UI cleanup pass". Merged #953 (BH-3507 buttons),
+  #958 (BH-3508 Input), #959 (BH-3538 medplum-tanstack), #988 (storybook brand shim); all
+  Linear writebacks done. Rebased every descendant with `--onto` as parents squash-merged:
+  #958, #960, #968, #990, and the #956→#976→#977 cascade twice.
+- **Header-filter rework (Evan's call).** #976/#977 were hard cutovers deleting the in-body
+  filter path on three member-facing screens with no design behind them. Reshaped behind
+  `Feature.HeaderFilters` (registry rule `() => 'hidden'`, no FTS flag, `use-header-filters.ts`
+  as the only consumption path, dev-tools row), mirroring the modern-header lifecycle
+  (`f1316943` gated → `29331b88` released by deleting the flag). Both paths live; deletion
+  deferred to a post-flag-on slice. BH-3511's description + ACs rewritten to match.
+- Filed BH-3722 (widen the patient lint target; 120 errors measured across 10 directories).
+  BH-3693 parked `needs-info` — the ticket's prescribed `surface-strong` fails in 3 of 4
+  brand×mode cells.
+- Skills changed: `ship-issue`, `work-project` (SKILL + executor-prompt),
+  `approval-gated-code-review` — struck the human-reviewer reply-approval gate (Evan's ruling),
+  added the published-text rules.
+- Wiki/os pages touched: [[published-text-discipline]] (new), [[work-project-orchestration-postmortem]]
+  (cross-link), [[index]]. Auto-memory `feedback-never-tag-evan-in-pr-comments` rewritten to
+  cover future-work, not just tags.
+- Learnings: **Future work goes in published text ONLY as a link to a Linear issue Evan
+  approved — no link, no sentence.** Every softer phrasing failed: the bans were written around
+  *decisions* and every real failure was framed as a *note* ("worth its own ticket", "flagged
+  for a follow-up"), so they sailed through three times in one session with the decision rule
+  already in the dispatch prompts. Worse, on the third the approved ticket already existed and
+  an executor re-derived it publicly with a different number — **search Linear before writing
+  anything about work beyond the change.** Second learning: **skill text is advisory to a
+  subagent, the dispatch prompt binds** — the human-reviewer gate sat in `ship-issue` all
+  session and four handlers walked past it, while every agent given the rule in its prompt
+  complied. Rules that matter go in all three skill files *and* every dispatch prompt, and the
+  orchestrator checks returned work for them.
