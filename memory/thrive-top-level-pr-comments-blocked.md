@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: reference
   originSessionId: 0329d59a-995f-46d0-9472-854332698a8f
-  modified: 2026-07-27T14:26:59.228Z
+  modified: 2026-07-31T22:02:15.206Z
 ---
 
 A PreToolUse hook blocks top-level PR/issue **comments** in **both** `thrive` and
@@ -17,17 +17,24 @@ The block covers `gh pr comment` and `gh api .../issues/N/comments` — even a *
 that endpoint matches. The block aborts the **entire** Bash call, so batching a top-level comment
 with allowed calls loses all of them — verify what actually posted before re-running.
 
-**The block's intent is to route line-level feedback inline, NOT to forbid all
-commentary.** A PR-level summary/status comment (e.g. "this POC is superseded") is
-allowed as a **PR review body** — this is NOT blocked and is the right mechanism:
+**2026-07-31 update — `gh pr review --comment` is ALSO blocked now.** On thrive PR #953 it
+returned the same "Top-level PR comments are blocked" error, with the hook naming the inline
+form as the required replacement. So the escape hatch below is narrower than it was: whether
+`gh api .../pulls/N/reviews -X POST -f event=COMMENT` still works is **unverified from the main
+session** — subagents reported posting review-COMMENTs successfully in the same session, so the
+hook may not apply to them. Do not plan around the review-body path from the main session
+without testing it; the inline form always works.
+
+Previously-working mechanism, keep trying it first for a genuinely PR-wide note:
 
 ```
 gh api repos/OWNER/REPO/pulls/N/reviews -X POST -f event=COMMENT -F body=@file
 ```
 
-(It renders as a top-level review on the PR — `#pullrequestreview-...`.) Do NOT
-conclude "any comment is blocked" and fall back to an awkward inline anchor for a
-PR-wide note — use a review-COMMENT. Reserve inline for feedback about a specific line.
+(It renders as a top-level review — `#pullrequestreview-...`.) When it is refused, anchor the
+PR-wide note inline to the most representative changed line rather than dropping it — a
+sign-off or summary that stays in chat instead of landing on the PR is worse than an imperfect
+anchor. Pick a line the note is actually about.
 
 Line-specific feedback must be an **inline review comment anchored to a code line**:
 

@@ -137,3 +137,5 @@
 - [Testing loop = edits only](feedback-testing-loop-edits-only.md) — required edits + "retest"; pipeline once at sign-off
 - [Config derives from repos](feedback-config-derives-from-repos.md) — no local overrides; cleanups don't touch repos
 - [Check all three review surfaces](feedback-check-all-three-review-surfaces.md) — thread count alone is a false negative
+- [Blocked work drops out of status](feedback-blocked-work-drops-out-of-status.md) — "can't merge until X" = stop reporting it
+- [Render color, never ask about numbers](feedback-render-color-never-ask-about-numbers.md) — swatches, not contrast ratios
