@@ -49,6 +49,15 @@ worktree. Invoke the **`ship-issue`** skill and follow it exactly.
 - **Reply to every bot thread you act on** — `Addressed in <sha> — <what changed>`
   when fixed, or the technical reason when not. No silent fixes. Post without
   asking (bots only). **Never resolve threads** — the human does at merge.
+- **A decision never lives in PR or Linear text.** GitHub and Linear record what
+  you *did* and why. The moment you hit something that is the human's to decide —
+  a design call, a scope question, a risk they carry, an "out of scope, needs its
+  own ticket" — it goes in your **return to the orchestrator**, who raises it in
+  the session. Do not park it in a PR body, review body, inline thread, or Linear
+  comment; nobody reads those for action items, which is exactly how decisions get
+  lost. Tagging is the worst version and is banned outright — you post *as* the
+  human's account, so "flagged for @x" / "left for @x" is the account summoning
+  itself — but an **untagged** decision buried in review prose is the same failure.
 - If you hit a park trigger (preflight won't pass after 2–3 tries; ambiguous spec;
   anything irreversible/precedent-setting — migrations, data, a new architectural
   pattern, **access-control or security**; scope explosion; stack-depth cap; an

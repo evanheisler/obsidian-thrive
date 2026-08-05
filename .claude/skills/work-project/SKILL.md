@@ -146,6 +146,20 @@ evaluates each finding, fixes what needs fixing in the worktree, re-runs preflig
 pushes, replies in-thread (`Addressed in <sha>`) or pushes back with a technical
 reason, resolves the addressed threads, and returns a **one-paragraph** summary.
 
+#### Decisions come back here — never into the PR
+
+GitHub and Linear record what was *done* and why. They are not the human's inbox,
+and nobody mines review prose for action items. So **anything that is the human's
+to decide — a design call, a scope question, a risk they carry, an "out of scope,
+needs its own ticket" — travels in the handler's return, and you raise it in the
+session.** Say so in every dispatch prompt.
+
+Tagging the human is the worst version and is banned outright: the loop posts *as*
+their account, so "flagged for @x" / "left for @x" is the account summoning itself.
+But an **untagged** decision buried in a review body is the same failure — the item
+is parked on a surface no one reads for action. Findings go in the PR stated
+neutrally, with no name and no ask; decisions go in the return.
+
 #### What counts as feedback — three surfaces, not one
 
 Feedback lives on **three independent GitHub surfaces**. A review submitted with a
@@ -293,6 +307,10 @@ parked-on-conflict.
 - About to retry a parked issue automatically → parks are human business; move on.
 - About to merge, or push to `main`, or un-draft a PR → that's the human gate.
 - About to author or re-scope issues → that's the planning gate, not this loop.
+- About to let a decision, action item, or ask ship inside a PR body, review,
+  thread, or Linear comment — yours or a subagent's → STOP. It comes back in the
+  return and is raised in the session. `@`-tagging the human is the same failure
+  with a siren on it; the loop posts as their account.
 - About to fetch review comments, evaluate findings, or draft/post a reply
   **yourself** → STOP. Review handling is delegated to a subagent; you only
   dispatch, gate, and relay.

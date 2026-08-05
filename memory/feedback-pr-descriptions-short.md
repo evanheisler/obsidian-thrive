@@ -5,6 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: d50bfc6c-34ce-4daf-ba04-c11f52520403
+  modified: 2026-08-05T16:00:05.550Z
 ---
 
 Evan: "Shorter. I never like your PR descriptions." (2026-07-06, GTM PR)
@@ -24,3 +25,10 @@ Repeat offense (2026-07-15, access_control.denied removal). Three failures in on
 - **Cut Test plan and Out of scope by default.** `write-pr` offers them; that is not a reason to fill them. Include a Test plan only when a reviewer must do something non-obvious by hand. "Confirm the thing still works" is not a step.
 - **Never reference session-local artifacts.** I cited `docs/plans/…` — a local planning doc no reviewer knows exists — to flag stale docs on an *unrelated* feature. A PR body may only reference what the reviewer can open and what this diff touches. My process, my scratch files, my todo list: none of it belongs.
 - **Don't hedge about verification the change makes impossible.** I repeated "I haven't run the app" three times after *deleting the emitter*. Evan: "You removed code — why would it still trigger?" When the diff removes the code path, the behavior is gone by construction — reason from the change, don't perform verification ritual. Hedging is only honest when the claim is actually in doubt.
+
+Repeat offense, twice in one day (2026-07-31 PR #956, 2026-08-05 PR #988). Both times the body led with **mechanism instead of the change**:
+
+- #956 opened with layout arithmetic ("filters need ~350pt of ~271pt of usable header width"). Evan: *"That means nothing to a reviewer. The reviewer doesn't even have the context that the PR is aimed at removing on screen buttons and replacing them with a header action. THAT is the context needed."*
+- #988 buried "Storybook's Brand toggle didn't change theme values" under alias-resolution order, `shimMissingExports`, Proxy identity, and the browser-automation method. Evan: *"You fixed brand toggle to load the correct theme values. What the fuck does this other gibberish have to do with anything."*
+
+**The rule this gives:** the first sentence states what the change does in the product's terms — what a user or reviewer would observe — before any file, token, bundler, or measurement appears. Numbers I needed in order to *find* the fix are almost never what the reader needs in order to *review* it; they go under Notes if they explain why the fix isn't where you'd look, and otherwise they get cut. Investigation detail is the single biggest source of bloat, and it reads as noise precisely because it is my work, not the change.

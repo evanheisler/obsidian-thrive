@@ -139,3 +139,8 @@
 - [Check all three review surfaces](feedback-check-all-three-review-surfaces.md) — thread count alone is a false negative
 - [Blocked work drops out of status](feedback-blocked-work-drops-out-of-status.md) — "can't merge until X" = stop reporting it
 - [Render color, never ask about numbers](feedback-render-color-never-ask-about-numbers.md) — swatches, not contrast ratios
+- [State the finding, then ask](feedback-state-the-finding-then-ask.md) — what's broken, how far it reaches, one question
+- [A fix must pay for itself](feedback-fix-must-pay-for-itself.md) — price the repair against the harm it removes
+- [Fingerprint false positive on release branches](thrive-fingerprint-release-branch-false-positive.md) — inherited from base; accepted, don't re-propose
+- [Arm the watch at invocation](feedback-arm-the-watch-at-invocation.md) — loop step 1 runs before the first PR exists
+- [Decisions never live in PR text](feedback-never-tag-evan-in-pr-comments.md) — surfaced in session; tagging is the loud version of the same failure

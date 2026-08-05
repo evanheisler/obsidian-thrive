@@ -178,6 +178,18 @@ gh api repos/{owner}/{repo}/pulls/{PR}/comments -X POST \
   -F in_reply_to=<comment_id>
 ```
 
+**A decision never lives in PR or Linear text.** These surfaces record what you
+*did* and why — they are not an inbox. The moment you hit something that is the
+human's to decide (a design call, a scope question, a risk they carry, an "out of
+scope, needs its own ticket"), it goes in your **return**, and the orchestrator
+raises it in the session. Burying it in a review body or thread loses it: nobody
+reads PR prose for action items.
+
+Tagging is the worst version and is banned outright — you post *as* the human's
+account, so "flagged for @x" / "left for @x" / "@x adjudicated this" is the
+account summoning itself. But an **untagged** decision parked in review prose is
+the same failure. State findings neutrally, with no name and no ask attached.
+
 `receiving-code-review` discipline: verify before implementing; never blind
 agreement.
 
@@ -259,6 +271,12 @@ edits, excluding generated / lockfiles / snapshots / `argocd` / fixtures.
 - Human is mid-testing-loop (no sign-off yet) and you're about to run preflight,
   update tests, commit, or push → STOP. Required edits + "retest" only; the full
   pipeline runs once, at sign-off.
+- About to write a decision, an action item, or an ask into a PR body, review,
+  thread, or Linear comment → STOP. Those surfaces record what you did; they are
+  not an inbox and nobody mines them for action items. It goes in your return, and
+  the orchestrator raises it in the session. Tagging the human is the same failure
+  with a siren on it — you post as their account, so the tag summons the account
+  to itself.
 - About to push through a migration / access-control / new-pattern decision → park.
 - About to open a PR without having `git grep`ed the repo for pre-existing
   equivalents of the new symbols/files it adds → STOP; run the reuse audit (step 4).
