@@ -30,10 +30,10 @@ Before using this skill, load and follow `receiving-code-review`. Evaluate feedb
    This checkpoint authorizes the commit **and** its push to the PR branch as one unit — replies cite the commit SHA, and a commit addressing review feedback is meaningless until it is on the remote.
 6. Wait for Evan to explicitly approve committing.
 7. Commit the approved changes, then **immediately push** to the PR branch. Confirm the push succeeded before doing anything else.
-8. Draft exact GitHub inline replies and thread resolutions.
-9. **STOP again.** Wait for Evan to explicitly approve the reply/resolution text.
-10. Post the approved comments and resolutions using `gh`. The commit is already on the remote, so replies safely cite its SHA.
-11. **End with the PR's URL** so Evan can open it without hunting for the link.
+8. Post the in-thread replies and resolve the threads you addressed. **No second approval** — this holds for human reviewers as much as bots. A reply is a factual note (`Addressed in <sha> — <what changed>`, or the technical reason for declining), not a decision, so there is nothing to ratify; stalling leaves a colleague's review unanswered for no gain. The commit is already on the remote, so replies safely cite its SHA.
+9. **End with the PR's URL** so Evan can open it without hunting for the link.
+
+**A decision never goes in a thread.** If something is Evan's to decide — a design call, a scope question, a risk he carries — state the finding neutrally in the thread with no name and no ask, and raise the decision with Evan directly. Never `@`-mention him: these posts go out under his own account.
 
 **Ordering invariant — push before posting.** Never post a reply, resolve a thread, or publish a status that references a commit until that commit is confirmed on the remote. Push is not a trailing step after posting; it happens in step 7, before any reply is drafted.
 
@@ -45,8 +45,9 @@ Do not do any of these before the relevant approval checkpoint:
 
 - create a commit
 - push or force-push
-- post, edit, resolve, or reopen GitHub comments or review threads
 - publish status updates that imply GitHub has been handled
+
+In-thread replies and resolutions are **not** gated — they follow the push in step 8.
 
 If you cross the gate, stop immediately and report only current state and recovery options.
 
@@ -64,8 +65,8 @@ gh api graphql -f query='query { repository(owner: "OWNER", name: "REPO") { pull
 | Mistake | Correct Behavior |
 | --- | --- |
 | Treating "once approved" as approval | Stop and wait for the explicit approval message |
-| Replying to threads after local fixes | Draft reply text only; wait for approval |
-| Resolving outdated threads automatically | Include proposed resolutions in the approval checkpoint |
+| Holding replies because the reviewer is a human | Post them; the gate is on the commit, not the reply |
+| Putting a decision for Evan in a thread | State the finding neutrally there; raise the decision with him directly |
 | Committing because tests pass | Tests passing triggers the stop-and-review checkpoint |
 | Adding extra low-value cleanup | Report it as optional unless Evan approved the scope |
 | Posting a reply that cites an unpushed commit | Push in step 7; only post replies/resolutions after the push is confirmed |

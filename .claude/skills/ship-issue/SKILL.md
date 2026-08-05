@@ -159,16 +159,33 @@ Open a **draft** PR via `write-pr`, body trimmed to standing conventions:
   unavoidably; the **bot review** must never be re-triggered. The human adjudicates
   at merge.
 
-**Thread policy (bots on a draft PR) — three rules:**
+**Thread policy — three rules, and they apply to bot and human reviewers alike:**
 
 1. **Reply to every thread you act on.** Pushing the fix is *not* the end of a
    thread. Post an in-thread reply: when fixed → `Addressed in <sha> — <one phrase
    on what changed>`; when you deliberately didn't change it → the technical
    reason (`receiving-code-review` pushback). **A fixed thread left without a reply
    is exactly the bug this rule exists to prevent — no silent fixes.**
-2. **Never resolve a thread.** The human resolves at merge.
-3. **No per-comment approval needed** — these are bots on a draft. (For a **human**
-   reviewer the standing "approve every reply first" gate stays absolute.)
+2. **Resolve the threads you addressed.** A fixed-and-replied thread gets resolved
+   so the remaining count means something.
+3. **No per-comment approval needed — including on a human reviewer's threads.**
+   Post as you go. These replies are factual notes (a sha and what changed, or a
+   technical reason), not decisions, so there is nothing for the human to ratify;
+   stalling on approval leaves a colleague's review unanswered for no gain. What
+   does *not* go in a thread is a **decision** — see the rule below.
+
+**Nothing goes out unverified.** Nobody proofreads these before they post, so every
+factual claim in published text is checked *in the same turn you write it*:
+
+- **A ticket you name must exist.** Before writing "tracked in BH-XXXX", "carried
+  into the follow-up", or "covered by another PR", run the `linear`/`gh` call and
+  read the result. A reply that routes a reviewer to a ticket that was never filed
+  is worse than saying nothing — it closes the thread on a promise no one kept.
+- **A sha you cite must be pushed**, and must still be head. A rebase retires the
+  sha a reviewer would click.
+- **A `file:line` you cite must resolve** in the tree at that sha.
+- **A behavior you assert must be one you observed** — ran the test, read the code,
+  reproduced the failure. Never "this is handled elsewhere" from memory.
 
 Reply in-thread (never a top-level PR comment), neutral voice, no first person:
 
@@ -259,9 +276,8 @@ edits, excluding generated / lockfiles / snapshots / `argocd` / fixtures.
 ## Red Flags — STOP
 
 - About to merge, push to `main`, or un-draft → human gate.
-- About to resolve a review thread → leave it for the human.
-- About to ask approval before replying to a **bot** → don't; that gate is for
-  humans.
+- About to hold a reply because the reviewer is a human → don't; post it. The
+  reply is a sha and what changed, not a decision.
 - About to boot the app to verify or screenshot your change → don't. App runs are
   debugging-only; the human spot-checks every edit. Describe visuals in words.
 - About to type an email into a magic-link screen that isn't

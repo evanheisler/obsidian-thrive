@@ -144,3 +144,4 @@
 - [Fingerprint false positive on release branches](thrive-fingerprint-release-branch-false-positive.md) — inherited from base; accepted, don't re-propose
 - [Arm the watch at invocation](feedback-arm-the-watch-at-invocation.md) — loop step 1 runs before the first PR exists
 - [Decisions never live in PR text](feedback-never-tag-evan-in-pr-comments.md) — surfaced in session; tagging is the loud version of the same failure
+- [Conventions before machinery](feedback-conventions-before-machinery.md) — v1 workflow = documented rules; no guard scripts/CI
