@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: d50bfc6c-34ce-4daf-ba04-c11f52520403
-  modified: 2026-08-05T16:00:05.550Z
+  modified: 2026-08-06T15:21:30.703Z
 ---
 
 Evan: "Shorter. I never like your PR descriptions." (2026-07-06, GTM PR)
@@ -32,3 +32,7 @@ Repeat offense, twice in one day (2026-07-31 PR #956, 2026-08-05 PR #988). Both 
 - #988 buried "Storybook's Brand toggle didn't change theme values" under alias-resolution order, `shimMissingExports`, Proxy identity, and the browser-automation method. Evan: *"You fixed brand toggle to load the correct theme values. What the fuck does this other gibberish have to do with anything."*
 
 **The rule this gives:** the first sentence states what the change does in the product's terms — what a user or reviewer would observe — before any file, token, bundler, or measurement appears. Numbers I needed in order to *find* the fix are almost never what the reader needs in order to *review* it; they go under Notes if they explain why the fix isn't where you'd look, and otherwise they get cut. Investigation detail is the single biggest source of bloat, and it reads as noise precisely because it is my work, not the change.
+
+Repeat offense (2026-08-05, PR #997) — **the session is not shared context.** I titled a PR "salvage the standalone fixes from the abandoned header-filter stack" and opened Why with a cancelled ticket, an iOS platform limitation, and three closed PRs. Evan: *"NO ONE ELSE KNOWS we abandoned the filter rewrite. No one else even knows I was addressing the filters-in-header."* Everything I'd spent the session learning felt like background; to a reviewer it was a dead feature they had to reconstruct before they could read three unrelated fixes.
+
+**Test before writing any title or Why:** would this sentence parse for someone whose only inputs are `main` and this diff? Words like *salvage*, *abandoned*, *remaining*, *the rest of*, *now that we've decided* all encode a history only I have — they name a **process**, and a title must name a **change**. When work is carved out of something larger, describe what the surviving code fixes on its own terms and never mention the parent effort. Applies to commit subjects identically: git history outlives every session, and the abandoned branch it points at will be gone.
