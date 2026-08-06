@@ -150,3 +150,4 @@
 - [PR prose speaks with your authority](feedback-pr-prose-speaks-with-evans-authority.md) — states decisions; never "isn't mine to make"
 - ["Can't fix here" is a stop signal](feedback-cant-fix-here-is-a-stop-signal.md) — loop Evan in; publish nothing off that finding
 - [Name things as they appear on screen](feedback-name-things-as-they-appear-on-screen.md) — never a vendor's or ticket's internal noun
+- [Rebase on merge, not on commit](feedback-rebase-on-merge-not-on-commit.md) — parent merging is the trigger; stale descendants are fine
