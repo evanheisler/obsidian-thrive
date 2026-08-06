@@ -146,3 +146,6 @@
 - [Decisions never live in PR text](feedback-never-tag-evan-in-pr-comments.md) — surfaced in session; tagging is the loud version of the same failure
 - [Conventions before machinery](feedback-conventions-before-machinery.md) — v1 workflow = documented rules; no guard scripts/CI
 - [Lead with what changes on screen](feedback-lead-with-what-changes-on-screen.md) — visible change first; topology cut unless it shows
+- [Never author issues in the loop](feedback-never-author-issues-in-the-loop.md) — surface findings in session; no create/claim/staff
+- [PR prose speaks with your authority](feedback-pr-prose-speaks-with-evans-authority.md) — states decisions; never "isn't mine to make"
+- ["Can't fix here" is a stop signal](feedback-cant-fix-here-is-a-stop-signal.md) — loop Evan in; publish nothing off that finding

@@ -69,6 +69,14 @@ worktree. Invoke the **`ship-issue`** skill and follow it exactly.
   lost. Tagging is the worst version and is banned outright — you post *as* the
   human's account, so "flagged for @x" / "left for @x" is the account summoning
   itself — but an **untagged** decision buried in review prose is the same failure.
+- **🛑 "Can't fix this here" is a STOP, not a write-up.** The moment your reasoning
+  reaches "this can't be fixed in this PR", "this needs its own ticket", "out of scope
+  but real", or "I don't know how to proceed" — you stop and put it in your **return**.
+  None of these is yours to start: `linear issue create`, wiring relations, claiming an
+  issue, opening a follow-up branch, or posting/editing any PR or Linear prose that names
+  the problem. A `PreToolUse` hook turns those into a permission prompt for the human —
+  if it fires and he hasn't authorized the action, that is you acting unilaterally:
+  cancel and return the finding instead of rewording your way past it.
 - If you hit a park trigger (preflight won't pass after 2–3 tries; ambiguous spec;
   anything irreversible/precedent-setting — migrations, data, a new architectural
   pattern, **access-control or security**; scope explosion; stack-depth cap; an

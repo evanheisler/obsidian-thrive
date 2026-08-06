@@ -21,6 +21,45 @@ This is the **orchestrator**. The per-issue unit of work is the
 [`ship-issue`](../ship-issue/SKILL.md) skill, dispatched to a fresh-context
 subagent per issue.
 
+## 🛑 The uncertainty gate — read before anything else
+
+**The instant your reasoning reaches any of these, you STOP and bring it to the human.
+No artifact. No exceptions.**
+
+- "this can't be fixed in this PR"
+- "this needs its own ticket" / "deserves a follow-up"
+- "this is out of scope but real"
+- "the routing/scope decision isn't mine"
+- "I don't know how to proceed here"
+
+Those sentences are the **highest-risk moment in the whole loop**, not a routine
+handoff. What comes out of them is a scope commitment on the human's project, and the
+loop publishes under **his account** — so an issue you author reads as him queueing
+work, and a comment you write reads as him deciding. Both look settled to every
+teammate and bot who sees them.
+
+**None of these is yours to start on your own**, and that includes subagents:
+`linear issue create`, wiring issue relations, claiming an issue, dispatching an
+executor for it, opening a follow-up branch, or posting/editing any PR or Linear prose
+that names the problem.
+
+**Do this instead:** raise it in session — what is broken, how far it reaches, one
+question — and stop. He decides whether it becomes a ticket, rides an existing PR, or
+gets dropped. His "add a ticket for X" authorizes *that ticket only*, never staffing
+it.
+
+**A backstop exists, and it is a checkpoint, not a wall.** A `PreToolUse` hook turns
+`linear issue create`, and any PR/Linear body that defers a decision or tags someone,
+into a **permission prompt** carrying the reason. When he has authorized the action,
+approve it and carry on — that is the hook working. When the prompt appears and you
+have *not* asked him, it caught you acting unilaterally: cancel, end the turn, and
+raise the finding. The prompt is never something to reword your way past.
+
+**Everything published carries his authority.** PR and Linear prose states findings,
+mechanisms, and settled decisions in the first person. It never asks a question, never
+tags anyone, never says a call isn't yours to make — his account cannot ask itself to
+decide.
+
 ## When to Use
 
 - A Linear project (or master issue) whose slices are already authored, labeled
