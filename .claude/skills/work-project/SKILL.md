@@ -148,6 +148,12 @@ not a stylistic preference.
 Fill the pool up to the cap with **independent** ready issues. For each, dispatch
 an executor subagent with the filled-in [`executor-prompt.md`](./executor-prompt.md).
 
+**Pin every executor to Opus — `model: "opus"` on the dispatch.** Subagents inherit
+the main-loop model, so an orchestrator session running Fable fans out *Fable*
+executors by default, at Fable's rate, for build work Opus does well. The pin is what
+keeps the expensive model on orchestration and the cheaper one on execution; it costs
+nothing when the orchestrator is already Opus.
+
 **Parallel is safe here** (unlike `subagent-driven-development`, which forbids it)
 **because each executor gets its own `nwt` worktree** — no shared working tree, no
 conflicts.
@@ -196,7 +202,8 @@ a cache only — Linear + GitHub remain the source of truth.
 
 Bot and human review **will** land on open loop PRs. When it does, the orchestrator
 **dispatches a subagent that runs `receiving-code-review` — it never fetches,
-evaluates, fixes, or replies inline.** Hand the subagent the PR number + worktree; it
+evaluates, fixes, or replies inline.** Pin it to Opus the same way (`model: "opus"`).
+Hand the subagent the PR number + worktree; it
 evaluates each finding, fixes what needs fixing in the worktree, re-runs preflight,
 pushes, replies in-thread (`Addressed in <sha>`) or pushes back with a technical
 reason, resolves the addressed threads, and returns a **one-paragraph** summary.
@@ -401,6 +408,8 @@ parked-on-conflict.
 - About to grab a `ready-for-human` / `needs-info` issue → off-limits.
 - About to dispatch two executors against the **same** issue → claim via `Started`
   first; re-derive if unsure.
+- About to dispatch an executor or review handler **without `model: "opus"`** → STOP.
+  Unpinned subagents inherit the orchestrator's model.
 - About to retry a parked issue automatically → parks are human business; move on.
 - About to merge, or push to `main`, or un-draft a PR → that's the human gate.
 - About to author or re-scope issues → that's the planning gate, not this loop.
