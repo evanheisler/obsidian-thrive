@@ -142,19 +142,37 @@ linear project-update create <ID> --health <onTrack|atRisk|offTrack> --body-file
 
 ## Body format (terse bullets)
 
+**The reader is a project manager. They already have the board — they can see every
+issue, its state, and its title. Restating that is the one failure this section
+exists to prevent.** They cannot see what the product can now do, or when the rest
+lands. Write only that.
+
 Linear's UI already shows health and progress % as chrome — **don't repeat them in
 the body.** Lead with one substance line, then only the bullets that apply. Omit
 empty buckets; never pad.
 
+Hard rules:
+
+- **Zero ticket identifiers.** Not in Shipped, not in Next, not on gate lines. If a
+  reader needs the ticket, they open the board.
+- **Never enumerate issues.** A ten-issue slice is one clause naming what it
+  achieves, not ten items with the emoji moved to the front.
+- **One short clause per bullet**, phrased as an outcome a non-engineer recognizes —
+  "back no longer dead-ends", not "back button honors the back contract: local pop,
+  then root-stack pop, then tab index".
+- **Ceiling: headline + at most three bullets, one line each.** A whole update is
+  three to five lines. If it's longer, you're reporting work items, not outcomes.
+
 ```
 <one-line headline: where it stands + the dominant gate, if any>
 
-✅ Shipped: <what completed since the last update>
+✅ Shipped: <what the product can now do that it couldn't>
 ⏳ Next: <what's actively next>
-🎨 Needs design: <issues>
-🔴 Blocked: <issue + why>
-🧑 Human-led: <issues>
-📋 Needs spec: <issues>
+✖️ Dropped: <capability abandoned, if any>
+🎨 Needs design: <what's waiting>
+🔴 Blocked: <what's stuck + why>
+🧑 Human-led: <what needs a person>
+📋 Needs spec: <what's undefined>
 ```
 
 Example:
@@ -167,6 +185,17 @@ iOS nearly done; Web/Android await design.
 🎨 Needs design: Web, Android, responsive sidebar, branded header
 🔴 Blocked: iOS 26 pop-back glitch
 🧑 Human-led: branded translucent header
+```
+
+Same project, written wrong — this is the board with emoji, and it is the default
+mistake:
+
+```
+✅ Shipped: BH-3677 Back button honors the back contract: local pop, then root-stack
+pop, then tab index, BH-3678 Move More off the tab bar to a root-level /more stack
+behind the profile button
+⏳ Next: BH-3679 Search links follow the navigation invariant, BH-3680 Sweep
+navigation call sites to the invariant, BH-3743 Screens that dismiss themselves...
 ```
 
 ## Health
@@ -187,6 +216,9 @@ Recommend from the signals; the human may know context the data doesn't, so conf
 - About to run `project-update create` without showing the draft + health → present
   and wait. Posting is the human's call.
 - About to restate health % / progress % in the body → that's UI chrome; cut it.
+- About to put a ticket identifier in the body, or list issues one per clause → the
+  PM has the board. Collapse to outcomes; identifiers belong only in the internal
+  reality-check block, never in what gets published.
 - About to claim shipped/at-risk without an issue behind it → derive or drop it.
 - About to assert tracker `Done`/`blocked` as fact without the lead's reality-check →
   present the picture, get corrections, then draft.

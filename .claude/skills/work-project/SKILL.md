@@ -75,6 +75,9 @@ decide.
 - Scope resolves to **one** Linear project or master issue.
 - Issues carry the `ready-for-agent` label, `Todo` state, and `Blocked by` links.
 - Planning gate is closed — you are not authoring or re-scoping issues here.
+- `gh stack` is installed (`gh extension install github/gh-stack`) — it is a `gh`
+  extension, not core. Without it the loop can still branch-chain, but has no stack
+  registration and no `unstack` abort (steps 4 and 6).
 
 ## Inputs
 
@@ -110,8 +113,12 @@ or restart, reconstruct reality:
   `ready-for-agent` / `ready-for-human` directly, so the whole ready-set comes from
   this one call — no per-issue lookup for the label. Read `Blocked by` relations
   with `linear issue view BH-XXXX`. (More CLI: `docs/agents/issue-tracker.md`.)
-- **GitHub** — open draft PRs and remote branches for issues in scope. Also flag any
-  **open stacked PR whose parent has already merged** — it needs a rebase (step 6).
+- **GitHub** — open draft PRs and remote branches for issues in scope, plus **stack
+  membership**: `gh api repos/<owner>/<repo>/stacks --jq '.[] | select(.open)'`
+  enumerates open stacks with their PRs bottom-to-top; one PR's slot comes from
+  `gh api repos/<owner>/<repo>/pulls/<n> --jq .stack`. Flag any open stacked PR whose
+  **parent has already merged** — GitHub restacks the next child itself, so that is a
+  verification, not a rebase (step 6).
 - **Feedback on every open loop PR — all three surfaces** (see "What counts as
   feedback"). Counting unresolved review threads alone is a **false negative**, not a
   shortcut.
@@ -155,13 +162,22 @@ executor does all the actual changes inside its own worktree.
 ### 4. Handle dependency chains (stacking)
 
 - Independent issues branch off `main` and run concurrently.
-- When B is `Blocked by` A and A's PR is open-but-unmerged, dispatch B to **stack
-  on A's branch** (PR targets A's branch). Pass the base branch in the prompt.
+- When B is `Blocked by` A and A's PR is open-but-unmerged, dispatch B to **branch
+  off A's branch** (PR targets A's branch). Pass the base branch in the prompt.
+- **Once B's PR exists, register the stack on GitHub** — arguments run bottom to top:
+  ```
+  gh stack link <A-pr> <B-pr>
+  ```
+  Use **`link`, never `init` / `add` / `submit`**: those assume one locally-tracked
+  working tree, and every executor has its own `nwt` worktree. `link` needs no local
+  tracking, creates the stack when none exists, extends it when A is already in one,
+  and never removes a PR.
 - Stacking is for **true `Blocked by` chains only**. **Stack-depth cap ~3** — past
   that, park the next link and surface, rather than build a rebase nightmare.
 - **Record each stacked child's parent branch + base tip in the ledger** when you
-  create the stack — you need that old base ref for `git rebase --onto` once the
-  parent merges and its branch is deleted (step 6).
+  link. GitHub's auto-restack makes that ref unnecessary on the happy path; it is what
+  the **abort** path needs (step 6), and an abort is the worst moment to be
+  reconstructing a deleted ref.
 
 ### 5. On each executor return
 
@@ -273,41 +289,66 @@ may not call a PR clean — say which surface you checked.
 | "I re-derived at the start of the turn, so I'm current." | Re-derive is a snapshot. Feedback landing between turns is invisible without an armed watch. Arm it in step 1. |
 | "That review body is from days ago — it must have been handled." | Bodies carry no resolve state, so old and unhandled looks exactly like old and handled. Dispatch a handler to verify against the tree. |
 
-### 6. Stack maintenance (squash merge changes history)
+### 6. Stack maintenance — verify GitHub's restack, abort if it goes wrong
 
-We **squash-merge**. When the human merges a stacked PR's parent, the parent's
-commits collapse into one new squash commit on `main` and its branch is deleted —
-so every descendant is now based on history that no longer exists. Its diff doubles
-up the parent's changes and will conflict. Keeping open stacks rebased is the loop's
-job.
+We **squash-merge**, and stacks support it: each PR lands as one squashed commit,
+bottom-up. When the human merges a stacked PR's parent, **GitHub rebases the next
+unmerged PR onto the stack base itself.** Replaying children by hand is no longer the
+happy path — verifying the restack is.
 
-**When:** a derived condition — checked on every re-derive (step 1) and on every merge
-event from the armed watch. Trigger = an **open** stacked PR whose **parent just
-merged**, or whose parent's history just changed from its own rebase.
+**When:** every re-derive (step 1) and every merge event from the armed watch.
 
-**Rebase one child** — in that child's worktree (`cd "$WT" &&`):
+**Verify, never assume** — after a parent merges, per remaining child:
 
-1. Replay only the child's own commits onto the parent's new base. **Use `--onto`**
-   to drop the parent's now-squashed commits — never a plain `git rebase main`,
-   which re-applies them and conflicts:
+1. Re-read the stack (`gh api repos/<owner>/<repo>/stacks/<n>`): the merged PR is
+   gone and the next child now sits at the bottom on the stack base.
+2. Confirm the PR retargeted: `gh pr view <child> --json baseRefName`.
+3. **Re-run preflight in that child's worktree** — a restack onto a moved `main` can
+   break the build. Green → done. Red, stale, or conflicted → abort.
+
+**Abort → fall back to manual stack management.** This is the escape hatch, and it is
+lossless:
+
+```
+gh stack unstack <stack-number>
+```
+
+It drops the stack grouping on GitHub and **leaves every PR's base branch untouched**
+— the PRs stay exactly as this loop created them, each chained on its parent's
+branch. The pre-stacks procedure then applies unchanged, in the child's worktree
+(`cd "$WT" &&`):
+
+1. Replay only the child's own commits. **Use `--onto`** to drop the parent's
+   now-squashed commits — never a plain `git rebase main`, which re-applies them and
+   conflicts:
    ```
-   git rebase --onto main <parent-branch-or-recorded-base-tip> <child-branch>
+   git rebase --onto main <recorded-base-tip> <child-branch>
    ```
-   (For a mid-stack child, the new base is the parent's *rebased* tip, not `main`.)
-2. **Re-run preflight** in the worktree — rebasing onto a moved `main` can break the
-   build. Green → continue; red → **park** (never force-push broken history).
+   (Mid-stack child: onto the parent's *rebased* tip, not `main`.)
+2. **Re-run preflight.** Green → continue; red → **park** (never force-push broken
+   history).
 3. `git push --force-with-lease` — never plain `--force`.
-4. Confirm the PR base: GitHub auto-retargets a child to `main` when the parent
-   branch is deleted, but verify (`gh pr edit <child> --base main`, or the parent's
-   branch for a mid-stack child).
-
-**Cascade top-down.** A rebase rewrites the child's history, so its own descendants
-must then rebase onto the new tip. Process parent first, then each descendant onto
-its rebased parent.
+4. Confirm the PR base (`gh pr edit <child> --base main`, or the parent's branch for a
+   mid-stack child).
+5. **Cascade top-down** — the rebase rewrote this child's history, so each descendant
+   rebases onto the new tip in turn.
 
 **Conflict → park the child and everything below it.** `git rebase --abort`, leave
 the branch untouched, and park with a note naming the parent that moved. Conflict
 resolution is a human judgment call.
+
+**`unstack` is not guaranteed total.** GitHub refuses to unstack PRs that are queued
+for merge or have auto-merge enabled, and keeps the stack alive when any member stays.
+Read the command's output instead of assuming the abort landed.
+
+**Merge is still the human's gate, and stacks change its shape** — relay this, never
+do it:
+
+- `gh stack merge` is atomic and bottom-up: everything below the chosen PR merges
+  with it, all-or-nothing. **A mid-stack PR cannot merge alone.**
+- **Auto-merge is unsupported** on stacked PRs.
+- If `main` gains a merge queue, the queue picks the merge method and any
+  merge-method flag is ignored with a warning.
 
 ### 7. Halt + report
 
@@ -385,9 +426,16 @@ parked-on-conflict.
   `pulls/<n>/reviews` and `issues/<n>/comments` before the word "clean".
 - About to run the loop with **no armed feedback watch** → STOP, arm it (step 1).
   Re-derive is a snapshot; between turns you are blind without a monitor.
-- About to `git rebase main` (plain) on a stacked child after its parent merged →
+- About to hand-rebase a stacked child right after its parent merged → STOP; GitHub
+  restacks the next child itself. Verify first (step 6). Hand-rebasing is the **abort**
+  path and only runs after `gh stack unstack`.
+- About to `git rebase main` (plain) on a stacked child during an abort →
   use `git rebase --onto main <old-base> <child>`; a plain rebase re-applies the
   squashed parent's commits and conflicts.
+- About to run `gh stack init` / `add` / `submit` → STOP. Those assume one
+  locally-tracked working tree and the loop has one worktree per executor. Stack
+  membership is `gh stack link <parent-pr> <child-pr>`, run from here.
+- About to run `gh stack merge` → that's the merge gate; the loop never merges.
 - About to `git push --force` → use `--force-with-lease`, and only ever on the
   loop's own stacked branches — never anything the human owns.
 

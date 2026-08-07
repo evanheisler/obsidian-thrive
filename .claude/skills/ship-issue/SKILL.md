@@ -21,6 +21,13 @@ looks. Never merge, never push to `main`, never un-draft.
 - **Base branch** — `main` for an independent issue; the dependency's branch when
   **stacking** on an unmerged `Blocked by`.
 
+**Stack membership is not yours.** Branch off the base and target it with the PR —
+that is the whole job here. The orchestrator registers the GitHub stack with
+`gh stack link <parent-pr> <this-pr>` once this PR exists. Running standalone on a
+stacked issue, run that one command yourself after step 6. Never `gh stack init` /
+`add` / `submit`: they assume one locally-tracked working tree and you are in an
+isolated worktree.
+
 ## Procedure
 
 ### 1. Isolated worktree — FIRST action; every change happens here
@@ -298,7 +305,11 @@ edits, excluding generated / lockfiles / snapshots / `argocd` / fixtures.
 
 ## Red Flags — STOP
 
-- About to merge, push to `main`, or un-draft → human gate.
+- About to merge, push to `main`, or un-draft → human gate. `gh stack merge` is the
+  same gate — it merges the whole stack below your PR atomically.
+- About to run `gh stack init` / `add` / `submit` in your worktree → STOP. Those need
+  one locally-tracked tree. Stack membership is `gh stack link`, and the orchestrator
+  owns it.
 - About to hold a reply because the reviewer is a human → don't; post it. The
   reply is a sha and what changed, not a decision.
 - About to boot the app to verify or screenshot your change → don't. App runs are

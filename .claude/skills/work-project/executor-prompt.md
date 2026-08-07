@@ -11,7 +11,10 @@ worktree. Invoke the **`ship-issue`** skill and follow it exactly.
 **Issue:** {ISSUE_ID} — {ISSUE_TITLE}
 
 **Base branch:** {BASE_BRANCH}
-<!-- `main` for an independent issue; the dependency's branch when stacking. -->
+<!-- `main` for an independent issue; the dependency's branch when stacking.
+     Branch off it and target it with the PR — that is all. The orchestrator
+     registers the GitHub stack with `gh stack link` after your PR exists; never
+     run `gh stack init` / `add` / `submit` / `merge` yourself. -->
 
 **Repo:** {REPO}  <!-- thrive | bionic-health-app -->
 
