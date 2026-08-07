@@ -140,6 +140,17 @@ Write the body in the format below. Recommend a health with one line of reasonin
 linear project-update create <ID> --health <onTrack|atRisk|offTrack> --body-file <path>
 ```
 
+**Fixing an already-posted update.** The CLI has no edit subcommand — go through the
+API. Get the update's id from `project(id:){ projectUpdates(first:1){ nodes{ id } } }`,
+then mutate (`ProjectUpdateUpdateInput` takes `body`, `bodyData`, `health`). Note the
+flag is `--variables-json`, not `--variables`:
+
+```bash
+VARS=$(jq -n --rawfile b <path> '{id:"<update-id>", b:$b}')
+linear api 'mutation($id:String!,$b:String!){
+  projectUpdateUpdate(id:$id, input:{ body:$b }) { success } }' --variables-json "$VARS"
+```
+
 ## Body format (terse bullets)
 
 **The reader is a project manager. They already have the board — they can see every

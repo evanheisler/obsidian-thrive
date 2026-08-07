@@ -556,3 +556,32 @@ repo: Bionic-Health/thrive (code) + this vault (skills/wiki)
   session and four handlers walked past it, while every agent given the rule in its prompt
   complied. Rules that matter go in all three skill files *and* every dispatch prompt, and the
   orchestrator checks returned work for them.
+
+## 2026-08-07 — Project status updates across all led projects; the fix goes in the skill
+repo: this vault
+
+- Ran `/project-status-update` over all 8 led projects. Posted 5: Claude Design workflow
+  (onTrack, starts today / ready EOD Mon), Patient Tab Navigation Model (onTrack), Patient app
+  UI cleanup pass (onTrack, review backlog cleared), Stream.io for Video Calls (onTrack, all 29
+  issues closed, waiting on the release), Configurable Theme mode (**atRisk** — launch scope
+  done and QA'd a week ago, whole thing sits behind one approval to release). Skipped 3
+  not-yet-started ones: Stream video debt sweep, App version gate, Releases as deploy artifacts.
+- Corrected twice on the body: first two updates pasted ticket IDs and issue titles into
+  `✅ Shipped:` / `⏳ Next:` — "just regurgitating what is already visible on the board" — then,
+  once identifiers were stripped, still had to be cut in half ("this is for a project manager").
+  Rewrote both in place; `linear project-update` has no edit subcommand, so via
+  `projectUpdateUpdate` (flag is `--variables-json`, not `--variables`).
+- Skills changed: `project-status-update` — reader-is-a-PM framing at the top of § Body format,
+  four hard rules (zero identifiers anywhere incl. gate lines, never enumerate issues, one
+  outcome clause per bullet, 3–5 line ceiling), a counter-example built from this session's bad
+  draft, a Red Flag entry, and the post-hoc-edit recipe. Installed via `claude-os/setup.sh`.
+- Wiki/os pages touched: [[skills]] (correction-placement rule). Auto-memory
+  `feedback-updates-written-for-stakeholders` rewritten with the concrete tell.
+- Learnings: **A correction that fires while executing a skill gets fixed in that skill —
+  auto-memory alone is not capture.** The memory describing this exact failure was in the index
+  the entire session and did not stop me from writing the board back to the board; Evan's
+  question was why I'd patch a memory "you are just going to ignore anyway" instead of the
+  instructions that are guaranteed to load at the decision point. The rule has to sit *where the
+  decision happens* (in § Body format, not a preamble), be stated as a hard rule with the
+  concrete tell, and carry a counter-example made from the real bad output. Second: editing a
+  vault skill is inert until `setup.sh` runs — `~/.claude/skills/` holds copies, not symlinks.

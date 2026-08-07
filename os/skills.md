@@ -22,6 +22,16 @@ claude-os `setup.sh` owns divergences as a patch list (`MODEL_INVOCABLE`), upgra
 `skills update && ./setup.sh`. Rule adopted from the personal vault, where both wrong paths were
 tried first (`log: 2026-07-06`; personal vault `log: 2026-07-05`). When unsure, ask.
 
+**A correction that fires while executing a skill gets fixed in that skill.** Auto-memory is a
+backstop, not the fix: memory recall is probabilistic and the skill text is guaranteed to be in
+context at the decision point. `log: 2026-08-07` — the memory naming this exact failure
+(`feedback-updates-written-for-stakeholders`) was in the index all session and did not prevent
+it; Evan's question was why the skill wasn't edited instead. Write the rule into the skill
+*where the decision happens* (the drafting section, not a preamble), state it as a hard rule
+with the concrete tell, and add a counter-example built from the actual bad output. Update the
+memory too — but never *only* the memory. Also install the skill after editing (`setup.sh`);
+`~/.claude/skills/` holds copies, not symlinks, so an un-synced vault edit does not take effect.
+
 | Skill | Scope | Use when |
 |---|---|---|
 | `/session-close` | claude-os | Ending any session — log, distill, commit, push |
