@@ -585,3 +585,35 @@ repo: this vault
   decision happens* (in § Body format, not a preamble), be stated as a hard rule with the
   concrete tell, and carry a counter-example made from the real bad output. Second: editing a
   vault skill is inert until `setup.sh` runs — `~/.claude/skills/` holds copies, not symlinks.
+
+## 2026-08-07 — GitHub stacks adopted in the work-project loop; model split for orchestrator vs executors
+repo: this vault
+
+- Reworked `work-project` / `ship-issue` for GitHub's stacked PRs (public preview since
+  2026-07-30), verified against the docs rather than assumed. `gh stack link <parent-pr>
+  <child-pr>` is the only variant compatible with the loop's one-worktree-per-executor shape —
+  `init`/`add`/`submit` assume a single locally-tracked tree. Step 6 flipped from *rebase every
+  child by hand* to *verify GitHub's auto-restack*; `gh stack unstack <n>` is the abort and is
+  lossless (base branches untouched), so the old `git rebase --onto` procedure is kept verbatim
+  as the fallback rather than deleted. Squash is supported (n PRs → n squashed commits,
+  bottom-up), which is what made adoption viable at all. Also recorded at the merge gate: atomic
+  bottom-up merges, no mid-stack solo merge, no auto-merge, merge queue overrides the method.
+  `gh stack` is a `gh` extension, not core — added as a prerequisite.
+- Model split: `work-project` now pins `model: "opus"` on every executor and review-handler
+  dispatch. The orchestrator half is not mine to set — `/model fable` is Evan's command.
+- `plan-project` deliberately unchanged; nothing in it touches stack mechanics.
+- Wiki/os pages touched: [[claude-os]] (model ownership + subagent inheritance). No new wiki
+  page for stacks — the mechanics live in `work-project/SKILL.md` at the decision point, per the
+  2026-08-07 learning that a rule belongs where the decision happens, and a wiki copy would
+  duplicate the skill rather than serve it. New auto-memory
+  `feedback-design-talk-cites-design-artifacts`.
+- Learnings: **Scope governs what I cite, not only what I change.** Mid-discussion I probed the
+  live repo and used an existing open stack as evidence for a workflow-design question; Evan cut
+  it off — "I never said anything about the current state of my PRs. We are discussing an UPDATE
+  TO THE WORKFLOW." Nothing was edited out of scope, which is exactly why the existing
+  scope-invention rule (written about *changes*) did not catch it. When the subject is a
+  procedure, evidence comes from vendor docs and the procedure's own files. Second:
+  **`~/.claude/settings.json` has no agent route for the model key** — `claude-dir-guard.py`
+  blocks the file tools and `setup.sh` deliberately preserves rather than writes it, so the
+  correct answer to "can you set my model" is `/model <alias>`, not a repo edit and not a Bash
+  redirect around the guard.

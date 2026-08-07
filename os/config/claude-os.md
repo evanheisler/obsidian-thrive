@@ -1,7 +1,7 @@
 ---
 title: Claude OS on this machine
-summary: Local claude-os install facts — repo path, drift check, memory symlink, vault remote, permission rules
-last_updated: 2026-07-16
+summary: Local claude-os install facts — repo path, drift check, memory symlink, vault remote, permission rules, model ownership
+last_updated: 2026-08-07
 ---
 
 # Claude OS — machine facts
@@ -32,6 +32,18 @@ last_updated: 2026-07-16
   `tui`, model/theme) is machine-local and untouched. An "always allow → user settings" choice
   is therefore reverted on the next `setup.sh` run — re-add it to the repo fragment instead.
   `--check` flags a permissions mismatch as drift. `log: 2026-07-15`
+- The main-loop **model is Evan's to set, and there is no agent route to it**:
+  `claude-dir-guard.py` lists `settings.json` in `MANAGED_TOPLEVEL`, so agent Edit/Write
+  is blocked, and `setup.sh` never writes the key (it merges `hooks`, overwrites
+  `permissions`, preserves model/theme — see the split above). So a model change is
+  `/model <alias>` typed by him; proposing a repo edit + `setup.sh` for it is wrong, and
+  a Bash redirect around the guard is worse. Aliases include `fable` alongside
+  `opus`/`sonnet`/`haiku`. `log: 2026-08-07`
+- **Subagents inherit the main-loop model unless the dispatch pins one.** A Fable
+  orchestrator fans out Fable subagents by default. Pin with `model: "opus"` on the
+  Agent call; there is no setting that scopes a model to one skill, so the pin lives in
+  skill text and is advisory — nothing in the harness enforces it. `work-project`
+  carries the pin for executors and the review handler. `log: 2026-08-07`
 - Claude Code **2.1.210** (2026-07-14) changed permission-rule matching: only `Edit(path)` and
   `Read(path)` rules match file tools. `Write(path)`, `MultiEdit(path)`, `NotebookEdit(path)`
   → use `Edit(path)`; `Glob(path)` → use `Read(path)`. Rules in the dead form warn at startup

@@ -152,3 +152,4 @@
 - [Name things as they appear on screen](feedback-name-things-as-they-appear-on-screen.md) — never a vendor's or ticket's internal noun
 - [Rebase on merge, not on commit](feedback-rebase-on-merge-not-on-commit.md) — parent merging is the trigger; stale descendants are fine
 - [All commits must be signed](feedback-all-commits-must-be-signed.md) — never disable gpgsign; a failure is a blocker, not a switch
+- [Design talk cites design artifacts](feedback-design-talk-cites-design-artifacts.md) — docs + the workflow's own files, never live PRs
