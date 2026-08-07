@@ -55,6 +55,11 @@ last_updated: 2026-08-07
   self-modification regardless of whether the rules are new. Evan must place that file by hand
   (`cp` from a draft); routing around the block with Bash would defeat it. The rest of the
   change (`setup.sh`, README, install, commit) is unblocked. `log: 2026-07-15`
+- **Vault commits are SSH-signed and `git log --show-signature` cannot verify them locally** —
+  `gpg.ssh.allowedSignersFile` is unset, so verification errors out and `%G?` reports `N`. That
+  is a *verification* gap, not a signing failure: `commit.gpgsign=true`, `gpg.format=ssh`, and
+  every commit carries a `gpgsig` header (check with `git cat-file commit <sha> | grep gpgsig`).
+  Never "fix" an `N` by touching `gpgsign`. `log: 2026-08-07`
 - **`rm -rf` is denied**, including on gitignored build output. Use `git clean -xfd <path>`
   (dry-run `-xfdn` first) to drop artifacts inside a repo. Compound commands are denied as a
   unit — a single denied clause blocks the whole invocation, so keep destructive steps in their
