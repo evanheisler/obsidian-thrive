@@ -1,5 +1,6 @@
 # Memory index
 
+- [Adoption tickets are sweeps](feedback-adoption-tickets-are-sweeps.md) — named sites are examples; done-when = repo-wide grep
 - [Serve the rule's purpose](feedback-serve-the-rules-purpose.md) — literal compliance leaving dead code isn't an option
 - [Measure the fingerprint, don't infer](patient-fingerprint-measure-dont-infer.md) — generate it and grep `sources[]`
 - [Bionic Health context](bionic-health-context.md) — vault = context brain for Evan's Bionic Health work
@@ -135,6 +136,7 @@
 - [No negative claims from bounded queries](feedback-no-negative-claims-from-bounded-queries.md) — targeted query + reconcile contradicting signals before any outage-shaped finding
 - [Loop posts human-review replies](feedback-loop-posts-human-review-replies.md) — bot and human threads alike, resolve fixed+replied; only @-tags and unapproved-work commitments are blocked (also feedback-resolve-addressed-threads.md)
 - [Storybook entries are earned, not migrated](feedback-storybook-entries-are-earned-not-migrated.md) — wrappers fold or die; file list ≠ subject inventory
+- [Rules encode the test, not verdicts](feedback-rules-encode-the-test-not-verdicts.md) — settled-case lists are brittle; write the generative question
 - [Agreement is not a directive](feedback-agreement-is-not-a-directive.md) — "might as well" is Evan deciding, not dispatching; execution needs an imperative naming the action
 - [Scope limits goal, not blast radius](feedback-scope-limits-goal-not-blast-radius.md) — "only care about X" never authorizes breaking Y; invariants need explicit "let it break"
 - [Audit the premise, not just defects](feedback-audit-the-premise-not-just-defects.md) — unasked-for mechanism in returned work = design fork for Evan, before iterating
