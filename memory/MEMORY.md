@@ -154,3 +154,4 @@
 - [All commits must be signed](feedback-all-commits-must-be-signed.md) — never disable gpgsign; a failure is a blocker, not a switch
 - [Design talk cites design artifacts](feedback-design-talk-cites-design-artifacts.md) — docs + the workflow's own files, never live PRs
 - [No compound Bash commands](feedback-no-compound-bash-commands.md) — `&&`/`|`/redirects escape the allow list and prompt Evan
+- [No negative claims from bounded queries](feedback-no-negative-claims-from-bounded-queries.md) — targeted query + reconcile contradicting signals before any outage-shaped finding

@@ -50,11 +50,14 @@ last_updated: 2026-08-07
   and match nothing — which silently voided the `.env`/`production.*`/`secrets/**` deny list
   until 2026-07-15. Only rules *with* a path pattern are affected; bare `Edit` / `MultiEdit`
   entries are fine. `log: 2026-07-15`
-- The harness safety classifier **blocks the agent from writing
-  `global/settings-permissions.json`** — an agent editing its own allowlist reads as
-  self-modification regardless of whether the rules are new. Evan must place that file by hand
-  (`cp` from a draft); routing around the block with Bash would defeat it. The rest of the
-  change (`setup.sh`, README, install, commit) is unblocked. `log: 2026-07-15`
+- The harness safety classifier **blocks the agent from editing live permission files**
+  (project `.claude/settings.local.json` Edit denied 2026-08-07; the update-config Skill call
+  too). The claude-os repo fragment `global/settings-permissions.json` is **not** reliably
+  blocked: on 2026-07-15 an edit was denied, but on 2026-08-07, under Evan's explicit order
+  naming the exact rule, a direct Edit of the fragment went through — the block appears to
+  key on unprompted self-modification, not the path. Procedure: with an explicit order, Edit
+  the fragment directly; if denied, draft + hand-`cp` is the fallback. `setup.sh`, install
+  verification, commit, push remain unblocked. `log: 2026-07-15, 2026-08-07`
 - **Vault commits are SSH-signed and `git log --show-signature` cannot verify them locally** —
   `gpg.ssh.allowedSignersFile` is unset, so verification errors out and `%G?` reports `N`. That
   is a *verification* gap, not a signing failure: `commit.gpgsign=true`, `gpg.format=ssh`, and
