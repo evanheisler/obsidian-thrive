@@ -155,3 +155,5 @@
 - [Design talk cites design artifacts](feedback-design-talk-cites-design-artifacts.md) — docs + the workflow's own files, never live PRs
 - [No compound Bash commands](feedback-no-compound-bash-commands.md) — `&&`/`|`/redirects escape the allow list and prompt Evan
 - [No negative claims from bounded queries](feedback-no-negative-claims-from-bounded-queries.md) — targeted query + reconcile contradicting signals before any outage-shaped finding
+- [Storybook entries are earned, not migrated](feedback-storybook-entries-are-earned-not-migrated.md) — wrappers fold or die; file list ≠ subject inventory
+- [Agreement is not a directive](feedback-agreement-is-not-a-directive.md) — "might as well" is Evan deciding, not dispatching; execution needs an imperative naming the action
