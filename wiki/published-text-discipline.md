@@ -66,7 +66,15 @@ who raises it in the session, one item per turn.
 **Skill text is advisory to a subagent; the dispatch prompt is what binds.** Direct evidence
 from this session: the human-reviewer reply-approval gate sat in `ship-issue/SKILL.md` all
 session and four handlers walked past it, while every agent handed the no-tagging line *in its
-prompt* complied, including two already mid-run. So a rule that matters goes in three places —
+prompt* complied, including two already mid-run.
+
+> **Correction (2026-08-10, Fitnescity loop):** the reply-approval gate itself is dead — do not
+> resurrect it from this page. Evan: "You are supposed to handle replies — you are only blocked
+> from posting with tags to me and committing to work I didn't approve." The standing rule is
+> ship-issue's thread policy: reply to bot and human threads alike, resolve fixed+replied
+> threads, no per-comment approval. The bans are content-shaped (tags, unapproved-work
+> commitments), never audience-shaped. A reply whose content depends on an undecided item stays
+> silent until Evan decides. Memory: `feedback-loop-posts-human-review-replies`. So a rule that matters goes in three places —
 `work-project/SKILL.md`, `work-project/executor-prompt.md`, `ship-issue/SKILL.md` — **and** into
 each dispatch prompt as it is written. The orchestrator must also check returned work for it;
 subagents self-reported clean while violating it.

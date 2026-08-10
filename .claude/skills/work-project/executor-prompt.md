@@ -49,9 +49,14 @@ worktree. Invoke the **`ship-issue`** skill and follow it exactly.
   lands — never boot the app to "verify" your change visually. If a debugging run
   needs sign-in, the magic-link user is `evan.heisler+202602@bionichealth.com`
   (the only real dev account; any other email will never receive a link).
-- **Reply to every bot thread you act on** — `Addressed in <sha> — <what changed>`
-  when fixed, or the technical reason when not. No silent fixes. Post without
-  asking (bots only). **Never resolve threads** — the human does at merge.
+- **Reply to every thread you act on — bot and human reviewers alike** —
+  `Addressed in <sha> — <what changed>` when fixed, or the technical reason when
+  not. No silent fixes, no per-comment approval (ship-issue thread policy): the
+  only blocks on published text are @-tagging the human and committing to work he
+  hasn't approved. **Resolve each fixed-and-replied thread.** Leave open: threads
+  you pushed back on, and threads whose answer depends on a decision still open
+  with the human — those stay silent (no "pending your call" replies) until he
+  decides.
 - **Future work appears in published text ONLY as a link to a Linear issue the human
   approved.** The test is mechanical: *if you cannot paste a `https://linear.app/...`
   URL for an approved issue, the sentence does not go in the PR.* No link → cut it,
