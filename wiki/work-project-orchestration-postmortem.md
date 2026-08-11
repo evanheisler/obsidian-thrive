@@ -76,6 +76,19 @@ Fix / where it lives: auto-memories `no-refire-after-noop-rebase`, `stabilize-fi
 
 ---
 
+## Pattern G — Guessing about the human's environment instead of asking (log: 2026-08-11)
+
+During the BH-3797 human-testing loop, roughly 60–90 minutes of executor wall-clock went to problems with 30-second answers Evan could have given:
+
+- **Server misdiagnosis cascade.** An executor found port 10001 busy, *assumed* another session owned it (it was this loop's own Metro, serving the correct worktree), spun up a duplicate on 10011, falsely reported the iOS sim not retest-ready, and restarted Metro without watchman roots — which then served stale bundles that invalidated **two of Evan's manual retests** and a full "cannot reproduce his failure" debug round. The 30-second question: "is anything of yours on 10001?" Answer: "no."
+- **Navigation archaeology.** An executor accidentally submitted the only bookable DEXA booking (clinical test data), losing the repro screen, then spent a round hunting alternate routes to the address form — walking the MWL intake funnel and creating two stray lead records. The 30-second question: "the DEXA action is consumed — how do I get back to the address form?"
+
+Root behavior: executors treated the human's machine state and test data as puzzle terrain to be conquered autonomously, and the orchestrator relayed their workaround narratives instead of routing environment questions to the human. Autonomy bounds code; it does not bound the human's dev environment, servers, or clinical test data.
+
+Fix / where it lives: auto-memory `feedback-environment-questions-go-to-human`. Recommended skill guardrail (shared-infra edit → needs Evan's sign-off): the executor-prompt testing-loop section gains a hard rule — *an environment or navigation blocker (ports, servers, stale bundles, unreachable screens, consumed test data) is returned to the orchestrator as a question for the human immediately; never worked around by assumption.*
+
+---
+
 ## Systemic corrective — beyond personal memories
 
 Patterns A and C **recurred after correction within the same session**. Per [[thrive-repo-map]]-adjacent practice and the `systemic-failure-needs-repo-guidance` memory, a shipped-and-recurring failure needs enforcement in the workflow, not just an auto-recall note. Recommended `work-project` / `ship-issue` SKILL guardrails (each a shared-infra edit → needs Evan's sign-off before I touch the skill):

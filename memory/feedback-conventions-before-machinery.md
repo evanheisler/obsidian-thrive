@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: 27fe36a4-04d9-4189-9b61-f6e0d736e04c
-  modified: 2026-08-05T18:52:48.704Z
+  modified: 2026-08-11T16:54:56.230Z
 ---
 
 Planning the Claude Design workflow (2026-08-05), I layered guard machinery into v1: a CI
@@ -25,3 +25,13 @@ existing gates (review requirement, the skill's own instructions). Add a script/
 after the failure it prevents has actually occurred, recurs, and demonstrably outruns human
 correction. Rules live in docs; enforcement lives in reviewers. Don't propose branch-protection
 or new required checks for non-nuclear PRs.
+
+Recurred 2026-08-11 (BH-3769/#1037): the issue text I drafted at planning said "a check that
+fails on a violation," and I dispatched an executor to build exactly that — an audit script
+enshrining rules Evan never approved (a Docs+Default sidebar cap contradicting his corrected
+!dev ruling; a section whitelist that fails the design workflow's own `Proposed/` namespace).
+Evan: "this issue was supposed to audit the final state of stories and make any further
+adjustments required to match the spec — thats its." An "assert X holds" ticket delivers the
+audit and the fixes, not a checker. Issue text drafted at planning is not his spec
+([[feedback-ticket-text-is-not-evans-decision]]) — before dispatching any slice whose deliverable
+is enforcement machinery, re-derive the deliverable against his current model and surface it.
