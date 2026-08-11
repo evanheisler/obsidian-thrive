@@ -89,6 +89,29 @@ Fix / where it lives: auto-memory `feedback-environment-questions-go-to-human`. 
 
 ---
 
+## Pattern H — Findings without current evidence or real harm (log: 2026-08-11)
+
+At the tab-nav loop's halt, the report raised three "unrouted findings." Two were failures,
+one dangerously so:
+
+- **Config-inferred defect, never observed.** "The claude-review workflow's allowlist grants
+  `gh pr comment` and a hook blocks it → bot summaries silently dropped repo-wide." The hook
+  is user-level and does not exist on GitHub runners; two `claude[bot]` summaries posted the
+  day before disproved the claim in one query. The false alarm extracted a real concession
+  from Evan (reviews-API COMMENT-only access) before it was retracted mid-implementation.
+- **Harmless smell raised as an item.** route-registry importing the context module —
+  "Irrelevant. You are just looking for issues."
+- **Compaction residue presented unvouched.** A pre-compaction "magic-link gap" with no
+  reconstructible evidence — "I can't tell if you are inventing work here also."
+
+Root behavior: the halt report treated *having findings* as part of the deliverable. Fix /
+where it lives: the finding bar in `work-project` step 7 (observed-this-session + harm-plus-
+action, one per turn); auto-memories `feedback-findings-need-current-evidence-and-harm`,
+`feedback-no-negative-claims-from-bounded-queries` (second instance: environment boundary —
+whose hooks run where — is part of any config-derived claim).
+
+---
+
 ## Systemic corrective — beyond personal memories
 
 Patterns A and C **recurred after correction within the same session**. Per [[thrive-repo-map]]-adjacent practice and the `systemic-failure-needs-repo-guidance` memory, a shipped-and-recurring failure needs enforcement in the workflow, not just an auto-recall note. Recommended `work-project` / `ship-issue` SKILL guardrails (each a shared-infra edit → needs Evan's sign-off before I touch the skill):

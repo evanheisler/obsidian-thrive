@@ -655,3 +655,33 @@ repo: Bionic-Health/thrive
   every reload — register `watchman watch-project` first, prove freshness on-device; (4)
   gorhom's keyboard path is target-gated (wiki'd with the mechanism and the
   `BottomSheetTextInput` blur-revocation trap).
+
+## 2026-08-11 — Tab-nav loop close: #1039/#1040 merged, false-finding retraction
+repo: Bionic-Health/thrive
+
+- work-project "Patient Tab Navigation Model" complete: all 7 issues Done. This window:
+  #1030 merged (route tables consolidated into tab-routes-context; healed main's type-red
+  from #1033's squash collision); #1039 rebase+fold (SmartBackButton folded into the
+  back-affordance seam; RouteGate derives backFallback from useSegments, prop deleted
+  repo-wide); #1040 stripped +941 → +224 after Evan's over-engineering ruling — custom lint
+  rule, ADR, and guardrail prose deleted, plain no-restricted-syntax ban + AGENTS.md section
+  + minimal skill shipped; merged 21:16Z.
+- Halt-report failure: raised a config-inferred "claude-review summaries dropped repo-wide"
+  defect — disproven by existing claude[bot] comments on #1027/#1030, but only after Evan
+  had conceded reviews-API COMMENT-only access on the false premise; retracted before any
+  edit landed. Same report carried a harmless layering smell ("Irrelevant. You are just
+  looking for issues") and an unvouchable pre-compaction item ("can't tell if you are
+  inventing work here also").
+- Wiki/os touched: [[work-project-orchestration-postmortem]] (Pattern H — the finding bar);
+  work-project SKILL step 7 (finding bar), executor-prompt + ship-issue SKILL (fetch first,
+  origin-qualified worktree base — nwt resolves a bare base name to the stale local branch;
+  bit #1039 and the BH-3681 executor in one day). New auto-memories:
+  feedback-findings-need-current-evidence-and-harm, feedback-enforcement-scales-with-model;
+  extended feedback-no-negative-claims-from-bounded-queries (2nd instance),
+  feedback-state-the-finding-then-ask (findings queue one per turn).
+- Learnings: (1) a finding reaches Evan only with this-session observed evidence AND a
+  harm-plus-action — config inference is a hypothesis, compaction resets verification, and
+  whose-hooks-run-where is part of any config-derived claim; (2) worktree bases must be
+  origin-qualified — fetch first, never bare `main`; (3) when a design simplifies, re-price
+  every downstream enforcement clause against the shipped model before building it — and
+  check repo precedent before any first-of-its-kind artifact.

@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: 9b312abb-2781-4129-827e-c162a412bb9d
-  modified: 2026-08-11T20:19:57.598Z
+  modified: 2026-08-11T21:00:05.069Z
 ---
 
 Issue text is **easily overridable** — it is a line item to start work from, not a spec to
@@ -24,7 +24,10 @@ yet you sided with the fucking project management tool."*
 
 **How to apply:** when issue text and repo evidence disagree on a technical approach, the
 test is "does the code already settle this?" — an in-repo precedent solving the identical
-problem is a settled answer, not a fork. Fix to match the precedent and report the override
+problem is a settled answer, not a fork. Reviewer suggestions are the same: when the repo's
+deliberate model contradicts a review thread, post the pushback — don't ask. (Failed again
+one turn after capture: asked whether to push back on a thread whose answer the reschedule
+flow's own pinned tests already gave. Evan: "what the fuck are you asking me.") Fix to match the precedent and report the override
 in one line ("ticket said X; repo pattern at file:line says Y; went with Y"). A real fork
 (product behavior, risk Evan carries, no in-repo answer) still goes to him — but the ticket
 having said something is never what makes it a fork.

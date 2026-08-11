@@ -34,10 +34,16 @@ isolated worktree.
 
 Create it with the **`nwt`** alias (never a hand-rolled `git worktree add`, never
 `.claude/worktrees/`), branching off the **base branch**. Name the branch with the
-issue id so Linear auto-links the eventual PR:
+issue id so Linear auto-links the eventual PR.
+
+**Fetch first, and base on the `origin/` ref — never bare `main`.** `nwt` passes the
+base ref straight to `git worktree add`, and a bare branch name resolves to the
+LOCAL branch, which lags origin in a long-lived checkout (this shipped a PR onto a
+5-commit-stale base twice on 2026-08-11). A stacked parent's branch is passed as-is
+— the executor that just built it made it locally.
 
 ```
-nwt bh-XXXX-<slug> <base> && pwd     # prints the worktree path → call it $WT
+git fetch origin && nwt bh-XXXX-<slug> origin/<base> && pwd   # worktree path → $WT
 ```
 
 `nwt` ends by `cd`-ing into the worktree, **but the Bash tool resets cwd between

@@ -385,6 +385,20 @@ do it:
 > The freshly-fetched values ARE the report; the ledger only tells you which PRs to
 > re-fetch.
 
+> **Finding bar — what the halt report may raise.** A finding reaches the human only
+> if BOTH hold: (1) **observed, this session** — you ran the command / read the output
+> that shows the failing behavior. Config inference ("the allowlist grants X and a hook
+> blocks X, so X must be failing") is a hypothesis, not a finding — one targeted query
+> of the actual output settles it, and whose-hooks-run-where is part of the claim
+> (user-level hooks do not exist on CI runners). A finding carried across a compaction
+> is unverified again — re-derive it this session or drop it; presenting it unvouched
+> is indistinguishable from inventing work. (2) **Harm worth his time** — a defect with
+> a consequence and an action, not a smell. A layering observation with no runtime
+> harm and no action needed is noise ("Irrelevant. You are just looking for issues").
+> Both failures shipped in one halt report on 2026-08-11: a "summaries silently
+> dropped repo-wide" defect disproven by two existing `claude[bot]` comments, and a
+> harmless import raised as an item. Findings that clear the bar go one per turn.
+
 **Park-and-continue:** the loop halts when **no ready issue remains** AND **no open
 stack still needs watching**. While stacked PRs are open with unmerged parents, stay
 in a low-frequency maintenance watch (step 6) — the human merges async, so catch

@@ -11,10 +11,12 @@ worktree. Invoke the **`ship-issue`** skill and follow it exactly.
 **Issue:** {ISSUE_ID} — {ISSUE_TITLE}
 
 **Base branch:** {BASE_BRANCH}
-<!-- `main` for an independent issue; the dependency's branch when stacking.
-     Branch off it and target it with the PR — that is all. The orchestrator
-     registers the GitHub stack with `gh stack link` after your PR exists; never
-     run `gh stack init` / `add` / `submit` / `merge` yourself. -->
+<!-- `origin/main` for an independent issue; the dependency's branch when stacking.
+     Always the origin-qualified ref for long-lived branches — a bare name resolves
+     to the stale LOCAL branch. Branch off it and target it with the PR — that is
+     all. The orchestrator registers the GitHub stack with `gh stack link` after
+     your PR exists; never run `gh stack init` / `add` / `submit` / `merge`
+     yourself. -->
 
 **Repo:** {REPO}  <!-- thrive | bionic-health-app -->
 
@@ -27,7 +29,9 @@ worktree. Invoke the **`ship-issue`** skill and follow it exactly.
 - Two human gates only: issue authoring (done) and merge. Do **not** merge,
   push to `main`, or un-draft the PR.
 - **All changes happen in a worktree.** Create the `nwt` worktree and capture its
-  path (`nwt bh-XXXX-<slug> {BASE_BRANCH} && pwd` → `$WT`) as your first action; run
+  path (`git fetch origin && nwt bh-XXXX-<slug> {BASE_BRANCH} && pwd` → `$WT`) as
+  your first action — fetch first, and the base must be the origin-qualified ref
+  (`origin/main`), never bare `main`, which resolves to the stale local branch; run
   every command inside it (`cd "$WT" && …` — the shell resets cwd between calls).
   Then hydrate before anything else — in thrive that is `cd "$WT" && pnpm install
   && pnpm setup:all` (both commands; skipping `setup:all` leaves a broken env and

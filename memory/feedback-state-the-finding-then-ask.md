@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: 2b342afe-cc25-445e-9d43-423bfae3d26c
-  modified: 2026-08-05T16:00:21.942Z
+  modified: 2026-08-11T21:21:12.975Z
 ---
 
 When I find a problem, the whole turn is: **what is broken, how far it reaches, one question.** Three
@@ -31,6 +31,14 @@ code (`theme-provider.tsx`) outside the stated scope.
   invented "hardcode a brand" as a rejected option he never raised).
 - Diagnosis is not permission, even when the defect is mine and the fix is obvious.
 - If a dispatch is already running when he questions it, kill it and say what it touched.
+
+**Multiple findings = a queue, not a list** (2026-08-11, tab-nav loop halt report): I closed
+the loop with a status list bundling three unrouted findings plus a session-close note plus
+one question. Evan: "You just brought up like 4 things that warrant discussion. Ask them one
+at a time." A finding awaiting his routing is a decidable item even inside a halt/status
+report — each gets its own turn (finding → reach → one question), most blocking first; the
+rest wait silently in my queue. "Status = zero asks" only covers items with no decision
+attached.
 
 Related: [[feedback-present-findings-before-acting]], [[feedback-question-is-not-permission]],
 [[feedback-no-method-narration-to-evan]], [[feedback-never-tear-down-inflight-work]]

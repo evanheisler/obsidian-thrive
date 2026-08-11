@@ -1,5 +1,7 @@
 # Memory index
 
+- [Design-handoff changeset = app code only](design-handoff-changeset-app-code-only.md) — tooling/bundles never ride the branch; goes into BH-3728 skill + BH-3726 brief
+
 - [Enforcement scales with the model](feedback-enforcement-scales-with-model.md) — design simplifies → re-price every downstream guardrail spec clause by clause
 
 - [Adoption tickets are sweeps](feedback-adoption-tickets-are-sweeps.md) — named sites are examples; done-when = repo-wide grep
@@ -147,3 +149,4 @@
 - [Scope limits goal, not blast radius](feedback-scope-limits-goal-not-blast-radius.md) — "only care about X" never authorizes breaking Y; invariants need explicit "let it break"
 - [Audit the premise, not just defects](feedback-audit-the-premise-not-just-defects.md) — unasked-for mechanism in returned work = design fork for Evan, before iterating
 - [Stated consequence is a work item](feedback-stated-consequence-is-a-work-item.md) — a named side effect gets driven to terminal state; stranded artifacts outrank new asks
+- [Findings need current evidence and harm](feedback-findings-need-current-evidence-and-harm.md) — compaction resets verification; smells without action never get raised
