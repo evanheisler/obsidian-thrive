@@ -140,3 +140,4 @@
 - [Agreement is not a directive](feedback-agreement-is-not-a-directive.md) — "might as well" is Evan deciding, not dispatching; execution needs an imperative naming the action
 - [Scope limits goal, not blast radius](feedback-scope-limits-goal-not-blast-radius.md) — "only care about X" never authorizes breaking Y; invariants need explicit "let it break"
 - [Audit the premise, not just defects](feedback-audit-the-premise-not-just-defects.md) — unasked-for mechanism in returned work = design fork for Evan, before iterating
+- [Stated consequence is a work item](feedback-stated-consequence-is-a-work-item.md) — a named side effect gets driven to terminal state; stranded artifacts outrank new asks
