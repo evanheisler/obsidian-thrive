@@ -1,8 +1,11 @@
 # Memory index
 
+- [Enforcement scales with the model](feedback-enforcement-scales-with-model.md) — design simplifies → re-price every downstream guardrail spec clause by clause
+
 - [Adoption tickets are sweeps](feedback-adoption-tickets-are-sweeps.md) — named sites are examples; done-when = repo-wide grep
 - [Environment questions go to Evan](feedback-environment-questions-go-to-human.md) — ports/servers/test-data blockers = ask, never assume
 - [MWL intake is web-only today](mwl-intake-web-only-today.md) — native intake defects are interim-acceptable
+- [Backtick scoped package names](feedback-backtick-scoped-package-names.md) — bare `@scope/pkg` in PR text tags the real account
 - [Serve the rule's purpose](feedback-serve-the-rules-purpose.md) — literal compliance leaving dead code isn't an option
 - [Measure the fingerprint, don't infer](patient-fingerprint-measure-dont-infer.md) — generate it and grep `sources[]`
 - [Bionic Health context](bionic-health-context.md) — vault = context brain for Evan's Bionic Health work
