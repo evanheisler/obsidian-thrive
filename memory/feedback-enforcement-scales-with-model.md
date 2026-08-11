@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: cfb1c4e0-469f-49af-aeab-0d04bd3200bd
-  modified: 2026-08-11T19:20:00.730Z
+  modified: 2026-08-11T19:55:31.679Z
 ---
 
 BH-3681 / PR #1040 (2026-08-11): the enforcement issue was specced while the navigation
@@ -29,5 +29,14 @@ against the old design gets re-priced clause by clause — not just re-aimed. Fo
 enforcement clause ask: which failure mode does this catch, and does that failure mode
 still exist under the shipped model? Cut clauses whose subject vanished. A validated-useful
 artifact (e.g. a skill proven RED→GREEN) earns its minimal form, not its specced form.
+
+Follow-up ruling (ADR, same PR): guardrail *prose* defending a decision against
+hypothetical re-litigation earns no place at all — "delete it… Why the fuck would an agent
+decide to re-architect the navigation without due cause." The recurrence channel must be
+real (a measured repeated failure, a live temptation in the code) before prose guarding it
+is justified; the merged design plus review is its own defense. Also: my strip pass
+*reduced* the ADR and skill instead of asking whether they should exist — reduction is not
+re-pricing. And check repo precedent before shipping any first-of-its-kind artifact (the
+repo had zero ADRs; the file would have founded a convention nobody chose).
 Related: [[feedback-fix-must-pay-for-itself]], [[feedback-audit-the-premise-not-just-defects]],
 [[feedback-conventions-before-machinery]].

@@ -117,6 +117,7 @@
 - [Reviewer finding lands in that PR](feedback-reviewer-finding-lands-in-that-pr.md) — "deserves a ticket" is deferral
 - [Current shape is not a requirement](feedback-current-shape-is-not-a-requirement.md) — consolidation deletes a copy
 - [Ticket text is not Evans decision](feedback-ticket-text-is-not-evans-decision.md) — surface the shape before executing
+- [Issue text is a starting point](feedback-issue-text-is-a-starting-point.md) — repo evidence overrides ticket lines; decide and report, never escalate what code settles
 - [Never run the app to verify](feedback-never-run-the-app-to-verify.md) — no sim/Metro boots; never drive Evans UI
 - [Build for the base case](feedback-build-for-the-base-case.md) — .native/.web splits must be earned
 - [RN-web Modal portals escape CSS-var scope](rn-web-modal-portals-escape-css-var-scope.md) — re-wrap inside the portal

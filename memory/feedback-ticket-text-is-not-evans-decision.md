@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: f81fc5bf-48a6-4b30-b4a1-27f125a75f47
-  modified: 2026-07-29T16:18:58.682Z
+  modified: 2026-08-11T20:19:59.984Z
 ---
 
 Linear ticket bodies in this workspace are largely **agent-authored during `/plan-project`**.
@@ -25,8 +25,11 @@ before dispatching. If the ticket's shape and the real scope disagree (four PRs 
 across 9 files), that is a fork Evan owns: state the mismatch and ask, in one line, before
 dispatching. Executing it silently and reporting after is the failure.
 
-The ticket's **technical content** — the site tables, the settled decisions, the acceptance
-criteria — stays binding. This is about deliverable shape only.
+The ticket's technical content is a **starting point, not a spec** — when repo evidence
+contradicts it, the code wins without escalation (see
+[[feedback-issue-text-is-a-starting-point]], Evan 2026-08-11). This memory is about
+deliverable shape only: shape gets surfaced *before* executing; technical lines get
+overridden *by evidence* and reported.
 
 Related: [[feedback-blocked-by-is-not-a-stack]], [[feedback-pr-descriptions-short]],
 [[feedback-present-findings-before-acting]], [[feedback-mechanical-sequencing-is-not-a-fork]]
