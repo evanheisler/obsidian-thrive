@@ -617,3 +617,41 @@ repo: this vault
   blocks the file tools and `setup.sh` deliberately preserves rather than writes it, so the
   correct answer to "can you set my model" is `/model <alias>`, not a repo edit and not a Bash
   redirect around the guard.
+
+## 2026-08-11 — UI-cleanup loop: chip sweep, BH-3797 keyboard saga, Pattern G
+repo: Bionic-Health/thrive
+
+- work-project on "Patient app: UI cleanup pass": #1015 (BH-3751 radios) and #1017 (BH-3775
+  not-found) approved by jellis18 and merged. BH-3776 rescoped by Evan mid-flight from a
+  one-site chip fix to a repo-wide sweep ("this ticket exists to SWEEP UP ALL THE
+  DERIVATIONS") → #1029 adopted 3 sites (incl. wearable-login `SelectInput`: inline color
+  objects, zero a11y, invisible to className greps), excluded 3 with role-based evidence
+  (gender radiogroup semantics, segmented control, popup option list), merged. All three Done.
+- BH-3797 (sheet keyboard): multi-round human-testing loop. Confirmed root cause: gorhom
+  5.2.14 discards keyboard events unless a target is claimed, and only `BottomSheetTextInput`
+  claims one — plain inputs got no keyboard behavior. Fix: sheet-owned `KeyboardTargetClaim`
+  + `interactive`; autocomplete keyboard-aware flip + wall-clock anchor tracking. Android:
+  the autocomplete overlay has NEVER painted (`FullWindowOverlay` iOS-only) → Evan chose an
+  interim (dropdown disabled, free-text accepted; intake is web-only today so its silent-
+  disable degradation is acceptable); Android `Input` padding reset rode along. #1032
+  finalized `5327321ef`, 17 checks green, at the merge gate. `Input.inputComponent` deleted —
+  `BottomSheetTextInput`'s blur revokes the sheet's claim (vendor source evidence).
+- BH-3818 created, then amended at Evan's direction to replace-or-refactor `ui/autocomplete`
+  (Android paint + the brittleness the interim added); fingerprint/build impact called out.
+- Orchestrator error recorded at Evan's direction: [[work-project-orchestration-postmortem]]
+  Pattern G — executors guessed about his environment (port 10001 misread → duplicate Metro →
+  watchman-rootless restart → stale bundles that invalidated two of his retests; consumed the
+  only bookable DEXA action then navigation-hunted, creating stray intake leads) ≈ 60–90 min
+  of waste whose causes had 30-second answers. Also a recurrence of the existing "never start
+  Metro" gotcha.
+- Wiki/os pages touched: [[work-project-orchestration-postmortem]] (Pattern G),
+  [[thrive-patient-architecture]] (gorhom target-gated keyboard path, Metro/watchman
+  staleness). New auto-memories: `feedback-adoption-tickets-are-sweeps`,
+  `feedback-environment-questions-go-to-human`, `mwl-intake-web-only-today`.
+- Learnings: (1) environment/navigation blockers go to Evan immediately — autonomy bounds
+  code, never his machine, servers, or clinical test data; (2) an adoption ticket's named
+  sites are examples — the contract is zero remaining derivations, done-when is a repo-wide
+  grep; (3) a Metro started before its watchman root exists serves frozen bundles through
+  every reload — register `watchman watch-project` first, prove freshness on-device; (4)
+  gorhom's keyboard path is target-gated (wiki'd with the mechanism and the
+  `BottomSheetTextInput` blur-revocation trap).
