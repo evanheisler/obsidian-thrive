@@ -16,6 +16,7 @@ last_updated: 2026-08-12
 - Git worktree creation writes to the main repository's Git common directory. A session without write access to that directory cannot create the branch lock file.
 - `workspace-write` network access is separate from filesystem write roots. Without `network_access = true`, `pnpm install` fails at DNS resolution even when the repository is writable.
 - A running session keeps the sandbox map it was launched with. Editing `~/.codex/config.toml` only affects newly launched sessions.
+- Static Git allowlists are not a general solution: the active repository's Git common directory must be resolved at launch. `claude-os` installs a local `codex` Zsh wrapper that calls Codex with `--add-dir "$(git rev-parse --git-common-dir)"`; it works for a main checkout and for Git worktrees without naming either repository.
 - The first successful post-change run created `codex-test-3` and installed all 2,374 packages. Its environment setup did not run because the agent interrupted a long Storybook Playwright post-install hook.
 
 ## Failures
@@ -30,7 +31,7 @@ last_updated: 2026-08-12
 
 - For Codex harness failures, establish and run one end-to-end loop: command discovery → `git worktree add` → dependency install → repository setup hook → required runtime prerequisite.
 - Inspect the active session policy before attributing a failure to the host. Distinguish configuration persisted for future sessions from the sandbox granted to the current one.
-- Keep the narrowest workable policy: `workspace-write`, the repository's Git common directory writable, and `network_access = true`. Do not recommend unrestricted sandboxing unless the task specifically requires it and the user accepts that risk.
+- Keep the narrowest workable policy: `workspace-write`, `network_access = true`, and a launcher that adds the active repository's Git common directory dynamically. Do not maintain a repository-specific Git allowlist or recommend unrestricted sandboxing unless the task specifically requires it and the user accepts that risk.
 - Keep local shell commands, aliases, cache locations, and worktree roots out of `claude-os` unless they are intentionally portable, machine-independent OS behavior.
 - Continue an explicitly authorized debugging/fixing loop until the red-capable signal passes or a real external blocker remains. A user question during that loop does not reset authorization.
 

@@ -703,3 +703,12 @@ repo: evanheisler/claude-os; this vault
 - Fixed the minimal persistent network policy: `sandbox_mode = "workspace-write"` with `[sandbox_workspace_write] network_access = true`. Fresh-session evidence: npm DNS resolved, `nwt codex-test-3` created the worktree, and pnpm downloaded/installed all 2,374 packages.
 - Added [[codex-harness-debugging-postmortem]] and updated [[claude-os]].
 - Learnings: persisted Codex config and launch-time sandbox policy are distinct; an explicitly authorized debugging loop remains active through direct diagnostic questions and until end-to-end verification passes.
+
+## 2026-08-12 — Generic Codex Git permission launcher
+
+repo: evanheisler/claude-os; this vault
+
+- Replaced repository-specific `.git` writable roots with a generic local Zsh launcher installed by `setup.sh`. It resolves the active checkout's `git rev-parse --git-common-dir` and passes it to Codex as an additional writable directory; the configuration also keeps workspace-write network access enabled.
+- Committed the adapter as `348a931 fix(codex): derive Git permission from workspace`.
+- Wiki/os pages touched: [[codex-harness-debugging-postmortem]], [[claude-os]]
+- Learnings: Git metadata permissions must be derived from the active repository at launch; static repository allowlists do not satisfy multi-repository worktree workflows.

@@ -83,6 +83,7 @@ last_updated: 2026-08-11
 - Codex's `workspace-write` configuration has a separate `network_access` policy. Keep it
   enabled for normal development so package managers can resolve and download dependencies;
   Git worktree creation additionally requires the active repository's Git common directory to
-  be writable in the launched session. Both changes apply only to newly launched Codex sessions.
-  Local aliases, worktree roots, and shell startup behavior remain machine-local—not
-  `claude-os` configuration. See [[codex-harness-debugging-postmortem]]. `log: 2026-08-12`
+  be writable in the launched session. `setup.sh` installs a generic local Zsh wrapper that
+  derives that directory at launch; do not replace it with repository-specific roots. Both
+  changes apply only to newly launched Codex sessions. See
+  [[codex-harness-debugging-postmortem]]. `log: 2026-08-12`
