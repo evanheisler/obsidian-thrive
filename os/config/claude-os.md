@@ -1,7 +1,7 @@
 ---
 title: Claude OS on this machine
 summary: Local claude-os install facts — repo path, drift check, memory symlink, vault remote, permission rules, model ownership
-last_updated: 2026-08-07
+last_updated: 2026-08-11
 ---
 
 # Claude OS — machine facts
@@ -72,3 +72,11 @@ last_updated: 2026-08-07
   dev-langgraph-assistants (plus the vault itself, which setup.sh owns). New work repos get
   the same symlink manually. Pre-migration memories archived at
   `~/.claude/backups/memory-migration-2026-07-06/`. `log: 2026-07-06`
+- Codex uses the same source-of-truth split as Claude OS: `~/.codex/AGENTS.md` is a symlink to
+  `~/claude-os/global/codex/AGENTS.md`, but that file is only a bridge to canonical behavior in
+  `~/claude-os/global/CLAUDE.md`, `~/claude-os/global/core-rules.md`, and this vault's `index.md`
+  / `os/` pages. Do not fork hard-fought vault behavior into Codex AGENTS; update the source
+  where the decision fires. `setup.sh` also merges non-secret Codex defaults into
+  `~/.codex/config.toml`, adds writable roots for `~/obsidian-thrive`, `~/claude-os`, and
+  `~/worktrees`, and symlinks claude-os/vault skills into `~/.agents/skills`. Codex auth, logs,
+  SQLite state, and secrets stay runtime-local. `log: 2026-08-11`

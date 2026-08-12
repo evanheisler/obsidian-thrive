@@ -685,3 +685,11 @@ repo: Bionic-Health/thrive
   origin-qualified — fetch first, never bare `main`; (3) when a design simplifies, re-price
   every downstream enforcement clause against the shipped model before building it — and
   check repo precedent before any first-of-its-kind artifact.
+
+## 2026-08-11 — Codex source-of-truth wiring
+repo: evanheisler/claude-os; this vault
+
+- Reconfigured Codex setup to source durable behavior from `~/claude-os` and context/work facts from this vault instead of duplicating rules into local Codex files.
+- Added a Codex bridge in claude-os and recorded the Codex source-of-truth split in [[claude-os]].
+- Wiki/os pages touched: [[claude-os]]
+- Learnings: Codex AGENTS must be a thin bridge to canonical OS/vault files, not a forked copy of hard-fought behavior.

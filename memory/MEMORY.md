@@ -150,3 +150,4 @@
 - [Audit the premise, not just defects](feedback-audit-the-premise-not-just-defects.md) — unasked-for mechanism in returned work = design fork for Evan, before iterating
 - [Stated consequence is a work item](feedback-stated-consequence-is-a-work-item.md) — a named side effect gets driven to terminal state; stranded artifacts outrank new asks
 - [Findings need current evidence and harm](feedback-findings-need-current-evidence-and-harm.md) — compaction resets verification; smells without action never get raised
+- [Audit covers the PR's artifacts](feedback-audit-covers-the-prs-artifacts.md) — docs/skills the PR ships are audit surface, not just code
