@@ -1,5 +1,8 @@
 # Memory index
 
+- [Price the vendor-run-once path](feedback-price-the-vendor-run-once-path.md) — spec must name its rejected alternative; sameness = commit one run's output
+- [Plain steps, not abstractions](feedback-plain-steps-not-abstractions.md) — numbered actor-steps; jargon only after the plain sentence
+
 - [Design-handoff changeset = app code only](design-handoff-changeset-app-code-only.md) — tooling/bundles never ride the branch; goes into BH-3728 skill + BH-3726 brief
 
 - [Enforcement scales with the model](feedback-enforcement-scales-with-model.md) — design simplifies → re-price every downstream guardrail spec clause by clause
