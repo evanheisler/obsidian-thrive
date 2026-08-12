@@ -693,3 +693,13 @@ repo: evanheisler/claude-os; this vault
 - Added a Codex bridge in claude-os and recorded the Codex source-of-truth split in [[claude-os]].
 - Wiki/os pages touched: [[claude-os]]
 - Learnings: Codex AGENTS must be a thin bridge to canonical OS/vault files, not a forked copy of hard-fought behavior.
+
+## 2026-08-12 — Codex worktree and network sandbox debugging failure
+
+repo: evanheisler/claude-os; this vault
+
+- A Codex session could not create a Thrive worktree because its launch-time sandbox lacked write access to the repository Git common directory; it could not complete `pnpm install` because workspace-write network access was disabled.
+- The agent wrongly put local `nwt` behavior in `claude-os`, proposed the over-broad `danger-full-access` mode, repeatedly stopped a user-authorized debugging loop after direct questions, and interrupted the first successful dependency installation before `setup:environment` created the patient environment file.
+- Fixed the minimal persistent network policy: `sandbox_mode = "workspace-write"` with `[sandbox_workspace_write] network_access = true`. Fresh-session evidence: npm DNS resolved, `nwt codex-test-3` created the worktree, and pnpm downloaded/installed all 2,374 packages.
+- Added [[codex-harness-debugging-postmortem]] and updated [[claude-os]].
+- Learnings: persisted Codex config and launch-time sandbox policy are distinct; an explicitly authorized debugging loop remains active through direct diagnostic questions and until end-to-end verification passes.

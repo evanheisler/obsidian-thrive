@@ -25,6 +25,7 @@ Map over `wiki/` and `os/`. Updated whenever a page is added or a category chang
 - [[research-first-endstate-postmortem]] — read PR reviews shallowly, then recommended the low-churn option to dodge work before doing the research that proved a full sweep was right. **Read before making a recommendation off a code review.**
 - [[published-text-discipline]] — what a loop may write into a PR or Linear comment: future work only as a link to an approved Linear issue, no tags, nothing unverified, no action items buried in prose. Why "decision"-shaped bans never caught it, and why the dispatch prompt binds where skill text doesn't. **Read before any /work-project or review-handling run.**
 - [[design-iteration-postmortem-bh3680]] — a five-line declared map became three crashing generations of runtime derivation because every audit reviewed implementations, never the premise; complexity ratcheted, an agent's choice was laundered as "already decided," and green tests fabricated the invariant. **Read before iterating on any mechanism a subagent introduced, and before the second fix to the same mechanism.**
+- [[codex-harness-debugging-postmortem]] — Codex worktree/network sandbox failure: session policy vs persisted config, local shell ownership, and sustained debugging responsibility. **Read before diagnosing Codex shell, sandbox, network, or worktree failures.**
 
 ## OS
 

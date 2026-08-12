@@ -80,3 +80,9 @@ last_updated: 2026-08-11
   `~/.codex/config.toml`, adds writable roots for `~/obsidian-thrive`, `~/claude-os`, and
   `~/worktrees`, and symlinks claude-os/vault skills into `~/.agents/skills`. Codex auth, logs,
   SQLite state, and secrets stay runtime-local. `log: 2026-08-11`
+- Codex's `workspace-write` configuration has a separate `network_access` policy. Keep it
+  enabled for normal development so package managers can resolve and download dependencies;
+  Git worktree creation additionally requires the active repository's Git common directory to
+  be writable in the launched session. Both changes apply only to newly launched Codex sessions.
+  Local aliases, worktree roots, and shell startup behavior remain machine-local—not
+  `claude-os` configuration. See [[codex-harness-debugging-postmortem]]. `log: 2026-08-12`
