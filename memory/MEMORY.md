@@ -120,6 +120,7 @@
 - [Current shape is not a requirement](feedback-current-shape-is-not-a-requirement.md) — consolidation deletes a copy
 - [Ticket text is not Evans decision](feedback-ticket-text-is-not-evans-decision.md) — surface the shape before executing
 - [Issue text is a starting point](feedback-issue-text-is-a-starting-point.md) — repo evidence overrides ticket lines; decide and report, never escalate what code settles
+- [Inquiry about running work gets a status answer](feedback-inquiry-about-running-work-gets-status-answer.md) — "why is X running" = one-line status, never a kill-or-keep fork
 - [Never run the app to verify](feedback-never-run-the-app-to-verify.md) — no sim/Metro boots; never drive Evans UI
 - [Build for the base case](feedback-build-for-the-base-case.md) — .native/.web splits must be earned
 - [RN-web Modal portals escape CSS-var scope](rn-web-modal-portals-escape-css-var-scope.md) — re-wrap inside the portal
@@ -151,3 +152,4 @@
 - [Stated consequence is a work item](feedback-stated-consequence-is-a-work-item.md) — a named side effect gets driven to terminal state; stranded artifacts outrank new asks
 - [Findings need current evidence and harm](feedback-findings-need-current-evidence-and-harm.md) — compaction resets verification; smells without action never get raised
 - [Audit covers the PR's artifacts](feedback-audit-covers-the-prs-artifacts.md) — docs/skills the PR ships are audit surface, not just code
+- [Canary edit proves freshness](feedback-canary-edit-proves-freshness.md) — one unmissable edit settles bundle delivery; never pixel forensics

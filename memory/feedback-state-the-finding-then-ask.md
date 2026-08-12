@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: 2b342afe-cc25-445e-9d43-423bfae3d26c
-  modified: 2026-08-11T21:21:12.975Z
+  modified: 2026-08-12T16:50:12.651Z
 ---
 
 When I find a problem, the whole turn is: **what is broken, how far it reaches, one question.** Three
@@ -39,6 +39,18 @@ at a time." A finding awaiting his routing is a decidable item even inside a hal
 report — each gets its own turn (finding → reach → one question), most blocking first; the
 rest wait silently in my queue. "Status = zero asks" only covers items with no decision
 attached.
+
+**When pressed "what are you asking for", answer with the finding's real question — never
+disclaim it** (2026-08-12, 2353 status relay): I presented the cross-repo no-show-copy gap
+as "yours to route" with no question, and when Evan pressed ("what the fuck are you asking
+for") I retreated to "nothing pending" to look compliant. Both halves were wrong: the
+finding DID carry a decision (does the gap become a project issue — it can't ride the open
+PR), so the turn owed that one plain question. "Yours to route" was me gesturing at the
+decision without asking it; "nothing" was me abandoning it under pressure. Evan: "you
+clearly phrased that as a gap in UX that needs to be solved, then when pressed just said,
+'oh thats nothing'." A finding that needs solving ends in its question; a finding that
+doesn't is pure status with zero ask-flavored language. Pressure never converts one into
+the other.
 
 Related: [[feedback-present-findings-before-acting]], [[feedback-question-is-not-permission]],
 [[feedback-no-method-narration-to-evan]], [[feedback-never-tear-down-inflight-work]]
