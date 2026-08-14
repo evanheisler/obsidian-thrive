@@ -55,6 +55,12 @@ through all layers, demoable on its own, not a horizontal layer. Link
 `Blocked by` dependencies. **Present the full breakdown and iterate until approved
 before creating anything.**
 
+**Create with `-s Todo` explicitly — every issue, no exceptions.** `linear issue
+create` defaults new issues into the workspace's **Triage** state, and Triage is
+the untriaged-inbound queue: a planned project issue landing there is a bug, every
+time (2026-08-14 — two issues created into Triage). Verify state on the created
+issue before reporting it.
+
 Each slice is a **direct, top-level issue in the project** (a sibling, not a child).
 **Default to a main issue; never build a master→sub-issue tree, and don't fragment a
 slice into sub-issues** unless it clearly contains a smaller unit worth tracking on its
@@ -112,6 +118,8 @@ Then: `work-project <project>`.
 
 ## Red Flags — STOP
 
+- Issue created without `-s Todo` → it landed in the workspace's **Triage** queue.
+  Fix the state the moment you see it; a planned issue never sits in Triage.
 - About to write a file path / component name / endpoint URL into a PRD or issue →
   that's implementation, the executor's call. Move to "decisions deferred" or cut.
 - About to label `ready-for-agent` while an Open Question is unresolved → resolve

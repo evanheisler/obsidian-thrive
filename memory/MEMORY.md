@@ -103,6 +103,7 @@
 - [Parallelize, don't serialize](feedback-parallelize-dont-serialize.md) — concurrent subagents; never slow inline work
 - [ready-for-human = AI-cannot-do only](feedback-ready-for-human-means-ai-cannot.md) — decisions → Backlog
 - [BH Linear project status gotcha](bh-linear-project-status-gotcha.md) — `-s started` = "To Release"; omit -s
+- [Never create into Triage](feedback-never-create-into-triage.md) — `linear issue create` needs `-s Todo`; verify state after create
 - [Feedback is not a halt order](feedback-feedback-is-not-a-halt-order.md) — fix the plan; don't stop without a stop directive
 - [Present findings before acting](feedback-present-findings-before-acting.md) — Evan decides how a found bug is handled
 - [Never tear down in-flight work](feedback-never-tear-down-inflight-work.md) — a question never kills a running agent
@@ -154,5 +155,6 @@
 - [Audit the premise, not just defects](feedback-audit-the-premise-not-just-defects.md) — unasked-for mechanism in returned work = design fork for Evan, before iterating
 - [Stated consequence is a work item](feedback-stated-consequence-is-a-work-item.md) — a named side effect gets driven to terminal state; stranded artifacts outrank new asks
 - [Findings need current evidence and harm](feedback-findings-need-current-evidence-and-harm.md) — compaction resets verification; smells without action never get raised
+- [Proposals clear the binding constraint](feedback-proposals-clear-the-binding-constraint.md) — verify mechanism from primary sources same-turn; pitch leads with the mechanism
 - [Audit covers the PR's artifacts](feedback-audit-covers-the-prs-artifacts.md) — docs/skills the PR ships are audit surface, not just code
 - [Canary edit proves freshness](feedback-canary-edit-proves-freshness.md) — one unmissable edit settles bundle delivery; never pixel forensics
