@@ -86,6 +86,13 @@ For the chosen set, run steps 2–5 for **each** project **one at a time**: deri
 reality-check, draft, get approval, post — then the next. A single project is a set
 of one. Never batch-post; every project earns its own reality-check and its own go.
 
+**Never-started projects default to skip.** A project with zero started/completed
+issues gets a one-line reality-check ("skip?"), recommending skip — an update saying
+"not started" adds nothing the board doesn't show. Exception: a target date or an
+announced start plan makes a first update informative; draft it then
+(`log: 2026-08-14` — four unstarted projects skipped, one posted because a Play
+compliance deadline was 17 days out).
+
 ### 2. Re-derive state (one call — Linear is the source of truth)
 
 ```bash

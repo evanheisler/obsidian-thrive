@@ -712,3 +712,11 @@ repo: evanheisler/claude-os; this vault
 - Committed the adapter as `348a931 fix(codex): derive Git permission from workspace`.
 - Wiki/os pages touched: [[codex-harness-debugging-postmortem]], [[claude-os]]
 - Learnings: Git metadata permissions must be derived from the active repository at launch; static repository allowlists do not satisfy multi-repository worktree workflows.
+
+## 2026-08-14 — Linear project status updates (all led projects)
+
+repo: this vault (Linear only, no code)
+
+- Ran /project-status-update across all 7 led projects: posted 3 (Android SDK Upgrade onTrack — starts next week, Expo SDK 56 first and it inherits the Android API target; Claude Design workflow onTrack; Configurable Theme mode closing update, clearing the standing atRisk), skipped 4 never-started projects (2.3.0 Improvements, Stream video debt sweep, App version gate, Releases as deploy artifacts).
+- Wiki/os pages touched: `.claude/skills/project-status-update/SKILL.md`
+- Learnings: never-started projects default to skip — an update saying "not started" restates the board; exception is a real deadline or start plan. Encoded in the skill's step-1 loop. AskUserQuestion is disabled by user policy in this harness (60s timeout auto-proceeds); ask in plain text and wait.
