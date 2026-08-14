@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: 61575ab0-8374-4109-b5a1-ab2607df5689
-  modified: 2026-08-07T20:21:50.687Z
+  modified: 2026-08-13T21:51:50.672Z
 ---
 
 One command per Bash call. **No `&&`, no `;`, no `|`, no `$(...)`, no `2>&1`, no redirects** — in my own calls and in every subagent dispatch prompt.
@@ -17,5 +17,7 @@ One command per Bash call. **No `&&`, no `;`, no `|`, no `$(...)`, no `2>&1`, no
 - Use the tool's own filtering: `git log -1 --format=…`, `gh api … --jq '…'`, `gh pr view --json …`. Never pipe to `head`/`grep`/`jq`.
 - Anything not expressible as one command → use Read/Grep/Glob instead of a shell.
 - Put this verbatim in every subagent prompt that will touch git or gh; the subagent's prompts land on Evan, not me.
+- The `ship-issue` skill text says `cd "$WT" && cmd` — a dispatch prompt that copies that phrasing reproduces the failure (2026-08-13: three executors in one session told to "prefix every command with `cd <wt> && `"; the `git commit` prompt landed on Evan). Dispatch prompts must instruct `git -C <wt>` / absolute paths instead, explicitly.
+- `Bash(pnpm *)` is in the allow list as of claude-os `1da335e` — pnpm prompts mean the compound-command failure, not a missing allow entry.
 
 Related: [[feedback-instrument-dont-use-evan-as-sensor]], [[feedback-report-outcomes-not-plumbing]].
