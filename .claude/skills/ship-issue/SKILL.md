@@ -140,19 +140,27 @@ preflight waits until the human signs off — then runs once, in full.
 
 ### 6. Draft PR (`write-pr`)
 
-Open a **draft** PR via `write-pr`, body trimmed to standing conventions:
+**Compose the body by RUNNING the repo's `write-pr` skill — never from a body
+spec restated here, in a dispatch prompt, or from memory.** Its rules are
+binding, including formatting: **one paragraph per line, never hard-wrap** — a
+paragraph spanning more than one source line is wrong (GitHub renders single
+newlines in PR bodies literally, so wrapped prose lands ragged). This rule has
+been violated four times by executors composing bodies from restated specs; the
+skill is the only source.
 
-- **Why + Behavior**, terse, **end-state not journey**.
-- **No orchestration scaffolding** — no Linear ids, PRD refs, "part of series",
-  propagation notes.
-- **Visual changes described in words** ("promo-code row now sits above the total,
-  red error on invalid code"). **No screenshots** — a wrong screenshot misleads
-  the human at merge; words don't.
+Deltas this loop adds on top of `write-pr` (these override it where they
+conflict):
+
+- Terse, **end-state not journey**; **no orchestration scaffolding** — no
+  Linear ids, PRD refs, "part of series", propagation notes.
+- **Visual changes described in words**; **no screenshots** — a wrong
+  screenshot misleads the human at merge; words don't. (Overrides `write-pr`'s
+  Screenshots placeholder.)
 - **`Merge order` callout** when this PR must land after another (name the
-  companion PR for cross-repo). This is genuine merge-safety, allowed despite the
-  scaffolding ban.
-- **Test plan = human-actionable manual steps only**, or omitted. Never a list of
-  `pnpm` commands (CI's job).
+  companion PR for cross-repo). This is genuine merge-safety, allowed despite
+  the scaffolding ban.
+- **Test plan = human-actionable manual steps only**, or omitted. Never a list
+  of `pnpm` commands (CI's job).
 
 ### 7. External review loop (bots)
 

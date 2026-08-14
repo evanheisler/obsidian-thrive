@@ -39,9 +39,12 @@ worktree. Invoke the **`ship-issue`** skill and follow it exactly.
   orchestrator already claimed the issue (In Progress + assigned via `linear issue
   update`) — don't re-claim, and never use `linear issue start` (its git
   integration would hijack the root checkout).
-- Open a **draft** PR and add the `claude-review` label **once** to trigger bot
-  review — **never `codex-review`; that label is dead** (Codex fires on its own when
-  the human opens the PR; do not wait for it). Run the bounded review loop — address
+- Open a **draft** PR with the body composed by **running the repo's `write-pr`
+  skill** — never from a spec in this prompt or from memory; its formatting is
+  binding (one paragraph per line, never hard-wrap). Add the `claude-review`
+  label **once** to trigger bot review — **never `codex-review`; that label is
+  dead** (Codex fires on its own when the human opens the PR; do not wait for
+  it). Run the bounded review loop — address
   findings by **push + reply in-thread**; **NEVER re-toggle the review label after
   the initial add** (the bot reviews a PR once; re-firing on each push burns tokens
   + CI). Then **assign the human** as PR assignee and do the Linear writeback.
