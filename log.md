@@ -720,3 +720,14 @@ repo: this vault (Linear only, no code)
 - Ran /project-status-update across all 7 led projects: posted 3 (Android SDK Upgrade onTrack — starts next week, Expo SDK 56 first and it inherits the Android API target; Claude Design workflow onTrack; Configurable Theme mode closing update, clearing the standing atRisk), skipped 4 never-started projects (2.3.0 Improvements, Stream video debt sweep, App version gate, Releases as deploy artifacts).
 - Wiki/os pages touched: `.claude/skills/project-status-update/SKILL.md`
 - Learnings: never-started projects default to skip — an update saying "not started" restates the board; exception is a real deadline or start plan. Encoded in the skill's step-1 loop. AskUserQuestion is disabled by user policy in this harness (60s timeout auto-proceeds); ask in plain text and wait.
+
+## 2026-08-14 — Claude Design workflow: dogfood failures → correction issues
+
+repo: Bionic-Health/thrive
+
+- First dogfood generation failed (wrong palette, font banner, scoped custom props). Root-caused against the published `design-sync-v1` bundle; wrote BH-3858 (build emits patient palette / clean CSS), BH-3859 (manifest enumerates fonts + tokens), BH-3860 (guidance stops surfacing as a README doc), BH-3861 (docs prescribe local CLI, not web) — all `ready-for-agent`, Todo.
+- Corrected mid-flight: my fabricated "light mode" contract line in BH-3858 (app default is dark — `apps/patient/theme/theme-mode.ts:9`); EHR palette rode in via `tokensPkg: "@repo/tokens"` whose only stylesheet is EHR-legacy `brand.css`.
+- Settled by web-run evidence: CLI is the workflow requirement — DesignSync cannot authorize in a web session, and Claude Design GUI upload is generative (reinterprets assets; not a bundle mirror), so no manual workaround exists.
+- Session shut down with BH-3858 + BH-3861 executors mid-flight, no PRs open — both issues sit In Progress with no branch; next /work-project run's orphan rule resets them to Todo and re-dispatches.
+- Wiki/os pages touched: [[ungrounded-proposals-postmortem]] (new), [[index]], vault `plan-project` skill (`-s Todo` rule + Red Flag).
+- Learnings: proposals must clear the binding constraint, mechanisms verified from primary sources in the same turn ([[ungrounded-proposals-postmortem]]); `linear issue create` defaults into Triage — every create passes `-s Todo` (plan-project skill + auto-memory).
