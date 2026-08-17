@@ -1,40 +1,36 @@
 # Memory index
 
-- [Price the vendor-run-once path](feedback-price-the-vendor-run-once-path.md) — spec must name its rejected alternative; sameness = commit one run's output
+- [Price the vendor-run-once path](feedback-price-the-vendor-run-once-path.md) — spec names its rejected alternative; design simplifies → re-price every guardrail clause (also feedback-enforcement-scales-with-model.md)
 - [Plain steps, not abstractions](feedback-plain-steps-not-abstractions.md) — numbered actor-steps; jargon only after the plain sentence
-
 - [Design-handoff changeset = app code only](design-handoff-changeset-app-code-only.md) — tooling/bundles never ride the branch; goes into BH-3728 skill + BH-3726 brief
-
-- [Enforcement scales with the model](feedback-enforcement-scales-with-model.md) — design simplifies → re-price every downstream guardrail spec clause by clause
-
 - [Adoption tickets are sweeps](feedback-adoption-tickets-are-sweeps.md) — named sites are examples; done-when = repo-wide grep
 - [Environment questions go to Evan](feedback-environment-questions-go-to-human.md) — ports/servers/test-data blockers = ask, never assume
 - [MWL intake is web-only today](mwl-intake-web-only-today.md) — native intake defects are interim-acceptable
 - [Backtick scoped package names](feedback-backtick-scoped-package-names.md) — bare `@scope/pkg` in PR text tags the real account
 - [Serve the rule's purpose](feedback-serve-the-rules-purpose.md) — literal compliance leaving dead code isn't an option
-- [Measure the fingerprint, don't infer](patient-fingerprint-measure-dont-infer.md) — generate it and grep `sources[]`
+- [Measure the fingerprint, don't infer](patient-fingerprint-measure-dont-infer.md) — generate it and grep `sources[]`; release-branch mismatch is inherited/accepted (also thrive-fingerprint-release-branch-false-positive.md)
 - [Bionic Health context](bionic-health-context.md) — vault = context brain for Evan's Bionic Health work
 - [Invoked skill defines the deliverable](feedback-invoked-skill-defines-deliverable.md) — don't re-ask what the skill settles
 - [Anecdotal notes don't descope](feedback-anecdotal-notes-dont-descope.md) — an aside doesn't remove a named item
 - [Explicit directive overrides stale copy](feedback-explicit-directive-overrides-stale-copy.md) — named approach is settled
-- [No fabricated evidence](feedback-no-fabricated-evidence.md) — never invent empirical claims
+- [No fabricated evidence](feedback-no-fabricated-evidence.md) — never invent empirical claims; no negative claims from bounded queries (also feedback-no-negative-claims-from-bounded-queries.md)
 - [Vault retention wiring](vault-retention-wiring.md) — auto-memory dir IS the vault (symlink); SessionEnd auto-commits
 - [Skill placement by coupling](feedback-skill-placement-by-coupling.md) — skill home = coupling scope; never vendor upstream
 - [Don't repave deliberate wiring](feedback-dont-repave-deliberate-wiring.md) — existing wiring is the design
 - [Fresh start means fresh](feedback-fresh-start-means-fresh.md) — legacy memories stay archived
 - [claude-os owns nothing work-related](feedback-claude-os-owns-nothing-work-related.md) — work config lives in the thrive vault
-- [Repo edits need nwt worktree](feedback-repo-edits-need-nwt-worktree.md) — never edit ~/dev repos directly; `nwt <branch>`
+- [Repo edits need nwt worktree](feedback-repo-edits-need-nwt-worktree.md) — never edit ~/dev repos directly; branch off fresh origin/<base> (also feedback-worktree-base-must-be-fresh-origin.md)
 - [Shared docs stay machine-agnostic](feedback-shared-docs-stay-machine-agnostic.md) — no personal wiring in shared repos
 - [PR descriptions stay short](feedback-pr-descriptions-short.md) — one-line subject; body only for what the diff can't show
 - [No abbreviated decision prompts](feedback-no-abbreviated-decision-prompts.md) — expand acronyms, state the full proposal
 - [Delete + migrate, never alias](theme-v2-deprecate-non-figma-tokens.md) — theme-v2 tokens and typography lockstep alike: zero legacy, no support code (also typography-lockstep-end-state-zero-legacy.md)
 - [EHR color system never backported](ehr-color-system-never-backported.md) — EHR keeps legacy brand.css vars
-- [Correction is not a go signal](feedback-correction-is-not-a-go-signal.md) — re-derive, report, await explicit go
+- [Correction is not a go signal](feedback-correction-is-not-a-go-signal.md) — re-derive, report, await explicit go; "might as well" isn't a dispatch either (also feedback-agreement-is-not-a-directive.md)
 - [Gate covers publication, not CI fixups](feedback-gate-covers-publication-not-ci-fixups.md) — mechanical CI fixes are free
 - [Don't reframe asks as my choices](feedback-dont-reframe-asks-as-my-choices.md) — report as "you asked X; done via Y"
 - [Cross-check measurements](feedback-cross-check-measurements.md) — validate pixel scale against a platform constant
 - [Kyzatrex logo, web-only + themed](kyzatrex-logo-fixed-colors-web-only.md) — currentColor; Kyzatrex has no iOS app
-- [Refetch before asserting state](feedback-refetch-before-asserting-state.md) — re-read PR/CI/file state this turn first
+- [Refetch before asserting state](feedback-refetch-before-asserting-state.md) — re-read PR/CI/file state this turn; review the current head SHA (also feedback-review-current-head-not-bot-comment.md)
 - [Metro stale bundle via watchman](metro-stale-bundle-watchman.md) — empty watchman roots freeze the bundle
 - [Figma access is Evan's](feedback-figma-access-is-evans.md) — Thrive UI file `ryPqmQAK11eXVh2rhTJuwG`
 - [Docs are task-first for humans](feedback-docs-task-first-for-humans.md) — recipes + error tables, not spec restatements
@@ -42,20 +38,17 @@
 - [Mirror the user's model verbatim](feedback-mirror-users-model-verbatim.md) — echo Evan's words; never re-abstract
 - [Resolve framing, don't confirm it](feedback-resolve-framing-dont-confirm-it.md) — never ask Evan to validate my model
 - [Map tokens by color not role](token-map-by-color-not-role.md) — primitive → same-color token; never add tokens
-- [Worktree base must be fresh origin](feedback-worktree-base-must-be-fresh-origin.md) — branch off origin/<base>
-- [Spec invariants, not just deltas](feedback-spec-invariants-not-just-deltas.md) — state what MUST NOT change
-- [Invariants protect deliberate, not accidental](feedback-invariants-protect-deliberate-not-accidental.md) — no blanket freezes; converge unjustified divergence
+- [Spec invariants, not just deltas](feedback-spec-invariants-not-just-deltas.md) — state what MUST NOT change; protect deliberate, converge unjustified divergence (also feedback-invariants-protect-deliberate-not-accidental.md)
 - [Proposals cover the named surface only](feedback-proposals-cover-named-surface-only.md) — adjacent improvements = scope invention
 - [Shared primitives need approval](feedback-shared-primitives-need-approval.md) — new `ui/` prop/variant = design decision
-- [Visual changes need a design](feedback-visual-changes-need-a-design.md) — prose isn't direction; park for Figma
-- [Mock must show chrome relationships](feedback-mock-must-show-chrome-relationships.md) — position ALL adjacent chrome
+- [Visual changes need a design](feedback-visual-changes-need-a-design.md) — prose isn't direction; mocks position ALL adjacent chrome (also feedback-mock-must-show-chrome-relationships.md)
 - [Home revamp toggle model](home-revamp-toggle-user-opt-in.md) — access-control gates dev; FTS gates release
-- [No single-use abstractions](feedback-no-single-use-abstractions.md) — inline what a `ui/` primitive covers
+- [No single-use abstractions](feedback-no-single-use-abstractions.md) — inline what a `ui/` primitive covers; DRY = functional identity, never UI similarity (also feedback-dry-targets-functional-identity-not-ui.md)
 - [Domain = concern, not screen](feedback-domain-by-concern-not-screen.md) — components/{domain}/ by subject
 - [Layout files are wiring only](feedback-layout-files-are-wiring-only.md) — visual UI → components/ + story
 - [Copy names feature, not plumbing](feedback-copy-names-feature-not-plumbing.md) — never describe toggle mechanics
 - [Access-control is agent work](feedback-access-control-is-agent-work.md) — toggle add/remove → ready-for-agent
-- [Don't guess an issue's project](feedback-dont-guess-issue-project.md) — standalone bug → no project + current cycle
+- [Linear create gotchas](feedback-dont-guess-issue-project.md) — standalone bug → no project + current cycle; `-s Todo` never Triage, verify after create; `-s started` = "To Release", omit -s (also feedback-never-create-into-triage.md, bh-linear-project-status-gotcha.md)
 - [Locate the referent first](feedback-locate-the-referent-first.md) — find the artifact Evan critiques before interpreting
 - [Verifiable source is a Figma export](feedback-verifiable-source-is-figma-export.md) — check in the raw export; accept exporter filenames drop-in (also feedback-ingest-matches-raw-artifact.md)
 - [Patient storybook conventions](feedback-patient-storybook-conventions.md) — `Components/` namespace; rework the existing story, single docs story, no parallel .stories files (also feedback-rework-existing-story-single-docs.md)
@@ -79,79 +72,62 @@
 - [Top-level PR comments blocked](thrive-top-level-pr-comments-blocked.md) — hook blocks `gh pr comment`; use review-COMMENT
 - [Verify branch protection before blocker](feedback-verify-branch-protection-before-blocker.md) — can't-read ≠ is-a-blocker
 - [thrive node_modules cache no payoff](thrive-node-modules-cache-no-payoff.md) — measured net-negative; don't re-propose
-- [Review current head, not the bot's comment](feedback-review-current-head-not-bot-comment.md) — pin to head SHA
 - [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — `claude-review` only at PR creation; `codex-review` is dead, Codex fires itself on PR open
 - [Theme Tailwind axes, not custom utilities](feedback-theme-tailwind-axes-not-custom-utilities.md) — native scales; no addUtilities
 - ["Codebase patterns" = whole repo](feedback-patterns-mean-whole-codebase.md) — grep all apps/ + packages/; use captureError
 - [Systemic failure needs repo guidance](feedback-systemic-failure-needs-repo-guidance.md) — skill/lint in-repo; RED tests tempt the failure
 - [No unverified capability gaps](feedback-no-unverified-capability-gaps.md) — grep for the sibling utility first
-- [Patient dev test account](patient-dev-test-account.md) — evan.heisler+202602@bionichealth.com only
-- [Never invent an account](feedback-never-invent-an-account.md) — ask for a login before driving the app
+- [Patient dev test account](patient-dev-test-account.md) — evan.heisler+202602@bionichealth.com only; never invent an account, ask for a login (also feedback-never-invent-an-account.md)
 - [No shared infra for second-class surfaces](feedback-no-shared-infra-for-second-class-surfaces.md) — contain or park Storybook-only bugs
 - [Emulator Play images self-fill disk](android-emulator-play-store-disk-fill.md) — use Google APIs images
 - [Instrument, don't use Evan as sensor](feedback-instrument-dont-use-evan-as-sensor.md) — collect evidence myself
 - [Dev-client stale URL → not-found](dev-client-stale-url-not-found.md) — pm clear + encoded patient://
 - [Validate the instrument first](feedback-validate-the-instrument-first.md) — test the harness on a known-good control
 - [Agent PRs need team approval](feedback-agent-prs-need-team-approval.md) — Evan never reviews his own agent PRs
-- [Surface visual deltas directly](feedback-surface-visual-deltas-directly.md) — screen + before→after to Evan
+- [Surface visual deltas directly](feedback-surface-visual-deltas-directly.md) — screen + before→after to Evan; render swatches, never contrast numbers (also feedback-render-color-never-ask-about-numbers.md)
 - [Sign-off bar = real risk only](feedback-signoff-bar-real-risk-only.md) — flagged risks + brand-visible changes only
-- [Updates written for stakeholders](feedback-updates-written-for-stakeholders.md) — success/timeline/health, not state dumps
+- [Updates written for stakeholders](feedback-updates-written-for-stakeholders.md) — success/timeline/health, not state dumps; action items = numbered list by owner (also feedback-action-items-explicit-list.md)
 - [Mid-turn question headlines the reply](feedback-midturn-question-headlines-reply.md) — answer first; pause publication
-- [Action items are an explicit list](feedback-action-items-explicit-list.md) — numbered by owner; re-ask unresolved
 - [End-state tracks the server contract](feedback-endstate-tracks-server-contract.md) — patient-scoping goes server-side
 - [Reuse existing systems; prove divergence](feedback-reuse-existing-system-prove-divergence.md) — deviate only where forced
 - [Parallelize, don't serialize](feedback-parallelize-dont-serialize.md) — concurrent subagents; never slow inline work
 - [ready-for-human = AI-cannot-do only](feedback-ready-for-human-means-ai-cannot.md) — decisions → Backlog
-- [BH Linear project status gotcha](bh-linear-project-status-gotcha.md) — `-s started` = "To Release"; omit -s
-- [Never create into Triage](feedback-never-create-into-triage.md) — `linear issue create` needs `-s Todo`; verify state after create
 - [Feedback is not a halt order](feedback-feedback-is-not-a-halt-order.md) — fix the plan; don't stop without a stop directive
-- [Present findings before acting](feedback-present-findings-before-acting.md) — Evan decides how a found bug is handled
+- [Present findings before acting](feedback-present-findings-before-acting.md) — what's broken, how far it reaches, one question; Evan decides handling (also feedback-state-the-finding-then-ask.md)
 - [Never tear down in-flight work](feedback-never-tear-down-inflight-work.md) — a question never kills a running agent
 - [Dups mid-review = follow-up, not rewrite](feedback-dups-are-followups-not-rewrites.md) — never refactor under an open PR
-- [DRY targets functional identity, not UI](feedback-dry-targets-functional-identity-not-ui.md) — label injection = over-abstraction
 - [Draft status never gates review handling](feedback-draft-status-is-a-gate.md) — fix/push/reply/resolve runs unheld; gate = merge + new decisions
 - [Blocked-by is not a stack](feedback-blocked-by-is-not-a-stack.md) — stack only for real code dependency
 - [Red check is not green](feedback-red-check-is-not-green.md) — never green while any check fails
 - [Don't dodge the end-state to avoid churn](feedback-dont-dodge-endstate-to-avoid-churn.md) — research + full-sweep it
-- [Found bug gets fixed, not filed](feedback-found-bug-gets-fixed-not-filed.md) — rebase first; fix in that PR
+- [Found bug gets fixed, not filed](feedback-found-bug-gets-fixed-not-filed.md) — rebase + fix in that PR; touching it makes it yours; "deserves a ticket" is deferral (also feedback-touching-it-makes-it-yours.md, feedback-reviewer-finding-lands-in-that-pr.md)
 - [Ask what a punchlist line means](feedback-ask-what-a-punchlist-line-means.md) — one-line outcome is not a spec
 - [Bespoke neighbor is not a pattern](feedback-bespoke-neighbor-is-not-a-pattern.md) — a copied dimension is not a requirement
 - [Design system ≠ base primitives](feedback-design-system-is-not-base-primitives.md) — never swap the interaction model
 - [Verify the rationale holds at each site](feedback-verify-the-rationale-holds-at-each-site.md) — same shape ≠ same problem
 - [House rule ≠ vendor match](feedback-house-rule-doesnt-override-vendor-match.md) — take the behavior, leave the paint
-- [Touching it makes it yours](feedback-touching-it-makes-it-yours.md) — "not in the ticket" is never the answer
-- [Reviewer finding lands in that PR](feedback-reviewer-finding-lands-in-that-pr.md) — "deserves a ticket" is deferral
 - [Current shape is not a requirement](feedback-current-shape-is-not-a-requirement.md) — consolidation deletes a copy
-- [Ticket text is not Evans decision](feedback-ticket-text-is-not-evans-decision.md) — surface the shape before executing
-- [Issue text is a starting point](feedback-issue-text-is-a-starting-point.md) — repo evidence overrides ticket lines; decide and report, never escalate what code settles
-- [Inquiry about running work gets a status answer](feedback-inquiry-about-running-work-gets-status-answer.md) — "why is X running" = one-line status, never a kill-or-keep fork
-- [Questions never carry loop chores](feedback-questions-never-carry-loop-chores.md) — turn ends at the answer; cleanup/status ride background turns
+- [Ticket text is not Evans decision](feedback-ticket-text-is-not-evans-decision.md) — surface the shape before executing; repo evidence overrides issue lines, decide and report (also feedback-issue-text-is-a-starting-point.md)
+- [Inquiry about running work gets a status answer](feedback-inquiry-about-running-work-gets-status-answer.md) — one-line status, never a kill-or-keep fork; turn ends at the answer, chores ride background turns (also feedback-questions-never-carry-loop-chores.md)
 - [Never run the app to verify](feedback-never-run-the-app-to-verify.md) — no sim/Metro boots; never drive Evans UI
 - [Build for the base case](feedback-build-for-the-base-case.md) — .native/.web splits must be earned
 - [RN-web Modal portals escape CSS-var scope](rn-web-modal-portals-escape-css-var-scope.md) — re-wrap inside the portal
 - [Testing loop = edits only](feedback-testing-loop-edits-only.md) — required edits + "retest"; pipeline once at sign-off
 - [Config derives from repos](feedback-config-derives-from-repos.md) — no local overrides; cleanups don't touch repos
 - [Blocked work drops out of status](feedback-blocked-work-drops-out-of-status.md) — "can't merge until X" = stop reporting it
-- [Render color, never ask about numbers](feedback-render-color-never-ask-about-numbers.md) — swatches, not contrast ratios
-- [State the finding, then ask](feedback-state-the-finding-then-ask.md) — what's broken, how far it reaches, one question
 - [A fix must pay for itself](feedback-fix-must-pay-for-itself.md) — price the repair against the harm it removes
-- [Fingerprint false positive on release branches](thrive-fingerprint-release-branch-false-positive.md) — inherited from base; accepted, don't re-propose
-- [Decisions never live in PR text](feedback-never-tag-evan-in-pr-comments.md) — surfaced in session; tagging is the loud version of the same failure
+- [Decisions never live in PR text](feedback-never-tag-evan-in-pr-comments.md) — surfaced in session, tagging is the loud version; PR prose states decisions with authority; "can't fix here" = stop, publish nothing (also feedback-pr-prose-speaks-with-evans-authority.md, feedback-cant-fix-here-is-a-stop-signal.md)
 - [Conventions before machinery](feedback-conventions-before-machinery.md) — v1 workflow = documented rules; no guard scripts/CI
 - [Lead with what changes on screen](feedback-lead-with-what-changes-on-screen.md) — visible change first; topology cut unless it shows
 - [Never author issues in the loop](feedback-never-author-issues-in-the-loop.md) — surface findings in session; no create/claim/staff
-- [PR prose speaks with your authority](feedback-pr-prose-speaks-with-evans-authority.md) — states decisions; never "isn't mine to make"
-- ["Can't fix here" is a stop signal](feedback-cant-fix-here-is-a-stop-signal.md) — loop Evan in; publish nothing off that finding
 - [Name things as they appear on screen](feedback-name-things-as-they-appear-on-screen.md) — never a vendor's or ticket's internal noun
 - [Rebase on merge, not on commit](feedback-rebase-on-merge-not-on-commit.md) — parent merging is the trigger; stale descendants are fine
 - [All commits must be signed](feedback-all-commits-must-be-signed.md) — never disable gpgsign; a failure is a blocker, not a switch
 - [Design talk cites design artifacts](feedback-design-talk-cites-design-artifacts.md) — docs + the workflow's own files, never live PRs
 - [No compound Bash commands](feedback-no-compound-bash-commands.md) — `&&`/`|`/redirects escape the allow list and prompt Evan
-- [No negative claims from bounded queries](feedback-no-negative-claims-from-bounded-queries.md) — targeted query + reconcile contradicting signals before any outage-shaped finding
 - [Loop posts human-review replies](feedback-loop-posts-human-review-replies.md) — bot and human threads alike, resolve fixed+replied; only @-tags and unapproved-work commitments are blocked (also feedback-resolve-addressed-threads.md)
 - [Storybook entries are earned, not migrated](feedback-storybook-entries-are-earned-not-migrated.md) — wrappers fold or die; file list ≠ subject inventory
 - [Rules encode the test, not verdicts](feedback-rules-encode-the-test-not-verdicts.md) — settled-case lists are brittle; write the generative question
-- [Agreement is not a directive](feedback-agreement-is-not-a-directive.md) — "might as well" is Evan deciding, not dispatching; execution needs an imperative naming the action
 - [Scope limits goal, not blast radius](feedback-scope-limits-goal-not-blast-radius.md) — "only care about X" never authorizes breaking Y; invariants need explicit "let it break"
 - [Audit the premise, not just defects](feedback-audit-the-premise-not-just-defects.md) — unasked-for mechanism in returned work = design fork for Evan, before iterating
 - [Stated consequence is a work item](feedback-stated-consequence-is-a-work-item.md) — a named side effect gets driven to terminal state; stranded artifacts outrank new asks
