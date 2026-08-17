@@ -125,6 +125,7 @@
 - [Ticket text is not Evans decision](feedback-ticket-text-is-not-evans-decision.md) — surface the shape before executing
 - [Issue text is a starting point](feedback-issue-text-is-a-starting-point.md) — repo evidence overrides ticket lines; decide and report, never escalate what code settles
 - [Inquiry about running work gets a status answer](feedback-inquiry-about-running-work-gets-status-answer.md) — "why is X running" = one-line status, never a kill-or-keep fork
+- [Questions never carry loop chores](feedback-questions-never-carry-loop-chores.md) — turn ends at the answer; cleanup/status ride background turns
 - [Never run the app to verify](feedback-never-run-the-app-to-verify.md) — no sim/Metro boots; never drive Evans UI
 - [Build for the base case](feedback-build-for-the-base-case.md) — .native/.web splits must be earned
 - [RN-web Modal portals escape CSS-var scope](rn-web-modal-portals-escape-css-var-scope.md) — re-wrap inside the portal
