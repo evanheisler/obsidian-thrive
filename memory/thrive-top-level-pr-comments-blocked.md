@@ -1,11 +1,11 @@
 ---
 name: thrive-top-level-pr-comments-blocked
-description: "In BOTH thrive and bionic-health-app, a hook blocks top-level PR/issue *comments* (gh pr comment) to force feedback inline — but a PR *review* body (pulls/N/reviews event=COMMENT) IS allowed for PR-level summaries"
+description: "In BOTH thrive and bionic-health-app, a hook blocks top-level PR/issue comments AND whole review submissions (pulls/N/reviews) — every finding must be its own inline POST to pulls/N/comments; there is no PR-level summary path left"
 metadata: 
   node_type: memory
   type: reference
   originSessionId: 0329d59a-995f-46d0-9472-854332698a8f
-  modified: 2026-07-31T22:02:15.206Z
+  modified: 2026-08-17T22:27:20.699Z
 ---
 
 A PreToolUse hook blocks top-level PR/issue **comments** in **both** `thrive` and
@@ -25,13 +25,21 @@ session** — subagents reported posting review-COMMENTs successfully in the sam
 hook may not apply to them. Do not plan around the review-body path from the main session
 without testing it; the inline form always works.
 
-Previously-working mechanism, keep trying it first for a genuinely PR-wide note:
+**2026-08-17 update — the review-body path is now blocked from the main session too.**
+On bionic-health-app PR #2401, `gh api .../pulls/2401/reviews --method POST` (event=COMMENT,
+with a `comments[]` array) was refused with "Submitting a pull-request review is blocked.
+Top-level PR comments are blocked," and the hook named the per-comment inline form as the
+replacement. **Submitting a whole review is blocked, not just its body** — so the batched
+`comments[]` array does not post either; every finding must go as its own
+`POST /pulls/N/comments` call. Budget one call per finding.
+
+Formerly-working mechanism, now refused from the main session — do not build a review flow on it:
 
 ```
 gh api repos/OWNER/REPO/pulls/N/reviews -X POST -f event=COMMENT -F body=@file
 ```
 
-(It renders as a top-level review — `#pullrequestreview-...`.) When it is refused, anchor the
+(It rendered as a top-level review — `#pullrequestreview-...`.) When it is refused, anchor the
 PR-wide note inline to the most representative changed line rather than dropping it — a
 sign-off or summary that stays in chat instead of landing on the PR is worse than an imperfect
 anchor. Pick a line the note is actually about.
