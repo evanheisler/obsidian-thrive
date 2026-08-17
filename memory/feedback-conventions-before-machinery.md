@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: 27fe36a4-04d9-4189-9b61-f6e0d736e04c
-  modified: 2026-08-11T16:54:56.230Z
+  modified: 2026-08-17T21:13:06.293Z
 ---
 
 Planning the Claude Design workflow (2026-08-05), I layered guard machinery into v1: a CI
@@ -25,6 +25,15 @@ existing gates (review requirement, the skill's own instructions). Add a script/
 after the failure it prevents has actually occurred, recurs, and demonstrably outruns human
 correction. Rules live in docs; enforcement lives in reviewers. Don't propose branch-protection
 or new required checks for non-nuclear PRs.
+
+Recurred 2026-08-17 (releases-as-deploy-artifacts): while extending release-tag protections I
+pitched a new `release/v*` branch ruleset (block deletion + force-push) for branches the design
+treats as ephemeral scaffolding. Two repo facts falsified it in sequence — branches auto-delete
+on merge, and the team force-pushes feature branches routinely under squash-merge. Evan: "this
+whole recommendation is stupid… causing more problems than solutions." Before proposing any
+protection rule, enumerate the daily operations it would fire on (merge hygiene, force-push
+habits, bot flows) against the repo's actual settings; a guard that fights routine workflow is
+a defect even if the threat it addresses is real.
 
 Recurred 2026-08-11 (BH-3769/#1037): the issue text I drafted at planning said "a check that
 fails on a violation," and I dispatched an executor to build exactly that — an audit script
