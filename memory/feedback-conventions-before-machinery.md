@@ -5,7 +5,7 @@ metadata:
   node_type: memory
   type: feedback
   originSessionId: 27fe36a4-04d9-4189-9b61-f6e0d736e04c
-  modified: 2026-08-17T21:13:06.293Z
+  modified: 2026-08-17T21:51:04.212Z
 ---
 
 Planning the Claude Design workflow (2026-08-05), I layered guard machinery into v1: a CI
@@ -33,7 +33,10 @@ on merge, and the team force-pushes feature branches routinely under squash-merg
 whole recommendation is stupid… causing more problems than solutions." Before proposing any
 protection rule, enumerate the daily operations it would fire on (merge hygiene, force-push
 habits, bot flows) against the repo's actual settings; a guard that fights routine workflow is
-a defect even if the threat it addresses is real.
+a defect even if the threat it addresses is real. Same session, second strike: proposed moving
+`EXPO_TOKEN` to an approval-gated Environment secret; Evan: "There is NO RISK in letting my team
+execute releases." The threat model is external actors and accidents — never the trusted team.
+Insider-threat guards on team workflows are unwanted; don't pitch them.
 
 Recurred 2026-08-11 (BH-3769/#1037): the issue text I drafted at planning said "a check that
 fails on a violation," and I dispatched an executor to build exactly that — an audit script

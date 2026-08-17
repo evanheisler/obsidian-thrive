@@ -1,5 +1,8 @@
 # Memory index
 
+- [PR split threshold is ~1000 lines](feedback-pr-split-threshold-1000.md) — coherent slice = one PR; never relay a skill heuristic's split prompt
+- [Action items are Linear issues](feedback-action-items-are-linear-issues.md) — docs = reference; must-happen steps get an issue with owner + blocked-by
+
 - [Price the vendor-run-once path](feedback-price-the-vendor-run-once-path.md) — spec names its rejected alternative; design simplifies → re-price every guardrail clause (also feedback-enforcement-scales-with-model.md)
 - [Plain steps, not abstractions](feedback-plain-steps-not-abstractions.md) — numbered actor-steps; jargon only after the plain sentence
 - [Design-handoff changeset = app code only](design-handoff-changeset-app-code-only.md) — tooling/bundles never ride the branch; goes into BH-3728 skill + BH-3726 brief
@@ -116,6 +119,7 @@
 - [Config derives from repos](feedback-config-derives-from-repos.md) — no local overrides; cleanups don't touch repos
 - [Blocked work drops out of status](feedback-blocked-work-drops-out-of-status.md) — "can't merge until X" = stop reporting it
 - [A fix must pay for itself](feedback-fix-must-pay-for-itself.md) — price the repair against the harm it removes
+- [Machinery priced against the manual baseline](feedback-machinery-priced-against-manual-baseline.md) — re-price the running total every round; only the end-to-end run proves a workflow
 - [Decisions never live in PR text](feedback-never-tag-evan-in-pr-comments.md) — surfaced in session, tagging is the loud version; PR prose states decisions with authority; "can't fix here" = stop, publish nothing (also feedback-pr-prose-speaks-with-evans-authority.md, feedback-cant-fix-here-is-a-stop-signal.md)
 - [Conventions before machinery](feedback-conventions-before-machinery.md) — v1 workflow = documented rules; no guard scripts/CI
 - [Lead with what changes on screen](feedback-lead-with-what-changes-on-screen.md) — visible change first; topology cut unless it shows
