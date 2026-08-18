@@ -731,3 +731,34 @@ repo: Bionic-Health/thrive
 - Session shut down with BH-3858 + BH-3861 executors mid-flight, no PRs open — both issues sit In Progress with no branch; next /work-project run's orphan rule resets them to Todo and re-dispatches.
 - Wiki/os pages touched: [[ungrounded-proposals-postmortem]] (new), [[index]], vault `plan-project` skill (`-s Todo` rule + Red Flag).
 - Learnings: proposals must clear the binding constraint, mechanisms verified from primary sources in the same turn ([[ungrounded-proposals-postmortem]]); `linear issue create` defaults into Triage — every create passes `-s Todo` (plan-project skill + auto-memory).
+
+## 2026-08-18 — Log-pattern analysis → core-rules re-architecture (output style, §8 receipts, memory prune)
+repo: evanheisler/claude-os + this vault
+
+- Analyzed all 29 log entries + 184 memories for failure patterns. Dominant class: claims
+  asserted without primary-source verification (6 sessions); root cause: rules delivered
+  probabilistically (memory recall, mid-context prose) fail under long-context load, while
+  deterministic delivery (deny hooks, dispatch prompts) has held every time.
+- Wrote a `receipts` skill, then killed it on evidence: 6-agent RED/GREEN test (3 skill-
+  suppressed, 3 skill-reachable, over convention/capability-gap/live-state claims) went 6/6
+  green in BOTH arms — one-shot agents asked direct factual questions verify as the task
+  itself; the instrument can't reproduce long-context incidental-claim failures. Evan also
+  ruled out per-failure Stop/output hooks as brittle.
+- Shipped instead (claude-os `52a95c3`, `fbef3f7`): core rules now load as the "Core Rules"
+  output style (system prompt, generated from canonical `global/core-rules.md`,
+  `outputStyle` claude-os-owned + drift-checked); `inject-core-rules.sh` re-injects only
+  rules 1–3 per prompt (inject-cutoff marker); new §8 "No claim without a receipt" (four
+  claim classes → receipts, not-a-receipt list incl. pre-compaction context, dispatch-prompt
+  clause) subsumes the deleted skill.
+- Memory prune: 30 files deleted, each grep-verified encoded in core-rules/skills/hooks
+  first; MEMORY.md 144 → 124 lines (cap 200). Kept despite partial encoding:
+  patient-dev-test-account, never-tear-down-inflight-work, environment-questions-go-to-human,
+  dont-guess-issue-project. One deleted file carried another session's same-day edit whose
+  own text confirmed the rule now lives in the handoff-design skill (thrive #1081).
+- `claude plugin eval`: exists in 2.1.234 (full `--help`), but runs refuse — "currently in
+  early access", org-gated. Eval suites from real failure transcripts are the planned
+  regression harness; blocked on Evan requesting enablement. Smoke case was scratchpad-only.
+- Wiki/os pages touched: [[claude-os]], [[skills]] (receipts row added then removed)
+- Learnings: enforcement architecture + instrument lesson + eval gate distilled to
+  [[claude-os]]; a behavior test whose baseline can't fail measures nothing — validate the
+  instrument on a scenario that reproduces the failure condition before spending agents.
