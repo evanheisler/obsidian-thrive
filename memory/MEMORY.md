@@ -1,5 +1,7 @@
 # Memory index
 
+- [Close the review loop to re-request](feedback-close-the-review-loop-to-rerequest.md) — every review gets a visible fix/no-change response, then tell Evan the PR is re-reviewable
+
 - [PR split threshold is ~1000 lines](feedback-pr-split-threshold-1000.md) — coherent slice = one PR; never relay a skill heuristic's split prompt
 - [Action items are Linear issues](feedback-action-items-are-linear-issues.md) — docs = reference; must-happen steps get an issue with owner + blocked-by
 
@@ -120,6 +122,7 @@
 - [Blocked work drops out of status](feedback-blocked-work-drops-out-of-status.md) — "can't merge until X" = stop reporting it
 - [A fix must pay for itself](feedback-fix-must-pay-for-itself.md) — price the repair against the harm it removes
 - [Machinery priced against the manual baseline](feedback-machinery-priced-against-manual-baseline.md) — re-price the running total every round; only the end-to-end run proves a workflow
+- [Tests must cross the runtime boundary](feedback-tests-must-cross-the-runtime-boundary.md) — staged-input suites prove nothing about vendor validation; read the consuming tool's loader first
 - [Decisions never live in PR text](feedback-never-tag-evan-in-pr-comments.md) — surfaced in session, tagging is the loud version; PR prose states decisions with authority; "can't fix here" = stop, publish nothing (also feedback-pr-prose-speaks-with-evans-authority.md, feedback-cant-fix-here-is-a-stop-signal.md)
 - [Conventions before machinery](feedback-conventions-before-machinery.md) — v1 workflow = documented rules; no guard scripts/CI
 - [Lead with what changes on screen](feedback-lead-with-what-changes-on-screen.md) — visible change first; topology cut unless it shows
