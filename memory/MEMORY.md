@@ -74,7 +74,8 @@
 - [Theme Tailwind axes, not custom utilities](feedback-theme-tailwind-axes-not-custom-utilities.md) — native scales; no addUtilities
 - [Patient dev test account](patient-dev-test-account.md) — evan.heisler+202602@bionichealth.com only; never invent an account, ask for a login (also feedback-never-invent-an-account.md)
 - [No shared infra for second-class surfaces](feedback-no-shared-infra-for-second-class-surfaces.md) — contain or park Storybook-only bugs
-- [Emulator Play images self-fill disk](android-emulator-play-store-disk-fill.md) — use Google APIs images
+- [Emulator Play images self-fill disk](android-emulator-play-store-disk-fill.md) — caution not ban; Pixel_10 (Play image) is the sanctioned AVD
+- [Verify subagent blockers before relaying](feedback-verify-subagent-blockers-before-relaying.md) — cross-check against known state; a blocker my dispatch manufactured is mine to fix, not Evan's
 - [Instrument, don't use Evan as sensor](feedback-instrument-dont-use-evan-as-sensor.md) — collect evidence myself
 - [Dev-client stale URL → not-found](dev-client-stale-url-not-found.md) — pm clear + encoded patient://
 - [Validate the instrument first](feedback-validate-the-instrument-first.md) — test the harness on a known-good control

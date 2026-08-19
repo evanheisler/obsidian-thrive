@@ -1,7 +1,7 @@
 ---
 title: Vault Index
 summary: Navigation map for this context vault
-last_updated: 2026-07-06
+last_updated: 2026-08-19
 ---
 
 # Vault Index
@@ -18,6 +18,11 @@ Map over `wiki/` and `os/`. Updated whenever a page is added or a category chang
 - [[thrive-deployments]] — EHR ArgoCD/AKS pipeline; patient EAS builds + OTA channels + SWA web
 - [[thrive-medplum-fhir]] — Medplum access paths, medplum-tanstack layer, document/presigned-URL rules
 - [[thrive-telemetry-phi]] — PostHog-only telemetry, BAA/PHI policy, error-triage routing
+
+### Agent systems research
+
+- [[karpathy-llm-wiki]] — the pattern this vault implements: Karpathy's actual statements, three layers / three operations, where this vault matches or extends it
+- [[codex-config-surface]] — Codex projection surface: Claude-compatible skills, full hook parity (11 events), AGENTS.md precedence, MCP, memories
 
 ### Process retrospectives
 

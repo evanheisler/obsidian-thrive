@@ -5,6 +5,7 @@ metadata:
   node_type: memory
   type: project
   originSessionId: 85ffd638-d8e1-4430-900f-20f173f9cc9d
+  modified: 2026-08-19T20:30:02.283Z
 ---
 
 Android "Google Play" system images auto-update ~25 stock Google apps into the AVD's /data partition (default 6 GB), eventually failing `adb install` with "Requested internal only, but not enough space" (hit 2026-07-16 with the 143 MB patient debug APK). `pm trim-caches` does NOT help — the space is installed APKs + dexopt, not cache.
@@ -13,4 +14,6 @@ Android "Google Play" system images auto-update ~25 stock Google apps into the A
 
 **Prevention:** use a "Google APIs" (non-Play-Store) system image for dev AVDs — has Google Play services (FCM/Google Pay work) but no Play Store, so nothing auto-updates. Set internal storage ≥16 GB when creating. On Play-image AVDs, disable Play Store → Settings → Network preferences → Auto-update apps (resets on data wipe).
 
-Evan's machine (as of 2026-07-16): only `google_apis_playstore` images installed; no cmdline-tools/sdkmanager CLI (Android Studio manages the SDK); AVDs: Pixel_10 (in use), Pixel_9a. Evan declined a headless cmdline-tools download — AVD changes go through Android Studio UI.
+**This is a caution, not a ban (2026-08-19).** Pixel_10 (Play image) is Evan's in-use, sanctioned AVD — agents USE it; the disk-fill mode is gradual, preventable (auto-update off), and recoverable (uninstall updated Google apps). Encoding "prefer Google APIs" as "never Play Store" in a dispatch manufactured a false environment blocker on a machine whose only AVD is the one Evan uses daily. Dispatch prompts carry the preference + the fallback, never the prohibition.
+
+Evan's machine (as of 2026-07-16): only `google_apis_playstore` images installed; no cmdline-tools/sdkmanager CLI (Android Studio manages the SDK); AVDs: Pixel_10 (in use), Pixel_9a (orphaned husk as of 2026-08-19 — no config.ini). Evan declined a headless cmdline-tools download — AVD changes go through Android Studio UI.
