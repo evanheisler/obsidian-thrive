@@ -122,3 +122,6 @@
 - [Proposals clear the binding constraint](feedback-proposals-clear-the-binding-constraint.md) — verify mechanism from primary sources same-turn; pitch leads with the mechanism
 - [Audit covers the PR's artifacts](feedback-audit-covers-the-prs-artifacts.md) — docs/skills the PR ships are audit surface, not just code
 - [Canary edit proves freshness](feedback-canary-edit-proves-freshness.md) — one unmissable edit settles bundle delivery; never pixel forensics
+- [Comment, never review](feedback-comment-never-review.md) — inline per finding + top-level summary; a hook denial means re-route, not "review blocked"
+- [Verify a field's meaning before asserting](feedback-verify-field-meaning-before-asserting.md) — `line: null` = outdated, not mis-anchored; re-check before repeating
+- [claude-os lists drift across machines](claude-os-hand-maintained-lists-drift.md) — derive setup.sh lists from the fragment; a hook rename has four references

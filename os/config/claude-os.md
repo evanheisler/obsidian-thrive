@@ -1,7 +1,7 @@
 ---
 title: Claude OS on this machine
 summary: Local claude-os install facts — repo path, drift check, memory symlink, vault remote, permission rules, model ownership
-last_updated: 2026-08-11
+last_updated: 2026-08-19
 ---
 
 # Claude OS — machine facts
@@ -27,7 +27,9 @@ last_updated: 2026-08-11
   win on collision), and `--check` flags a missing link as drift. New vault skills publish by
   re-running `setup.sh`. `log: 2026-07-06 — vault-skill symlinks`
 - `settings.json` is **partially** claude-os-managed, and the split matters: `hooks` merges by
-  script name (other keys preserved), `permissions` is overwritten wholesale from
+  namespace — every entry whose command runs from `~/.claude/os/hooks/` is claude-os's, all
+  other keys and the user's own hooks preserved (`log: 2026-08-19`; before that it keyed on a
+  hand-listed set of script names) — `permissions` is overwritten wholesale from
   `global/settings-permissions.json`, and everything else (`enabledPlugins`, `effortLevel`,
   `tui`, model/theme) is machine-local and untouched. An "always allow → user settings" choice
   is therefore reverted on the next `setup.sh` run — re-add it to the repo fragment instead.
@@ -72,11 +74,29 @@ last_updated: 2026-08-11
   key on unprompted self-modification, not the path. Procedure: with an explicit order, Edit
   the fragment directly; if denied, draft + hand-`cp` is the fallback. `setup.sh`, install
   verification, commit, push remain unblocked. `log: 2026-07-15, 2026-08-07`
-- **Vault commits are SSH-signed and `git log --show-signature` cannot verify them locally** —
-  `gpg.ssh.allowedSignersFile` is unset, so verification errors out and `%G?` reports `N`. That
-  is a *verification* gap, not a signing failure: `commit.gpgsign=true`, `gpg.format=ssh`, and
-  every commit carries a `gpgsig` header (check with `git cat-file commit <sha> | grep gpgsig`).
-  Never "fix" an `N` by touching `gpgsign`. `log: 2026-08-07`
+- **Local signature verification works as of `log: 2026-08-19`** — `~/.ssh/allowed_signers`
+  now pairs both registered signing keys (this machine's and the MacBook Air's) with the three
+  in-use addresses, so either machine's commits verify here. It had been unset for months
+  (`log: 2026-08-07`), and that gap is worth remembering because of how it presents: signing and
+  verifying are separate, so `%G?` reports `N` on a commit that **is** signed. Never "fix" an
+  `N` by touching `gpgsign` — confirm with `git cat-file commit <sha> | grep gpgsig` first.
+  Two permanent non-failures: `E` means a GPG-signed GitHub web-UI merge commit (or any
+  pre-Feb-2025 commit, which used GPG not SSH — no `allowed_signers` entry can ever verify
+  those), and commits predating the signing setup stay `N`. `setup.sh --check` now asserts the
+  whole chain from `git config`, so this cannot silently regress.
+- **Changing claude-os itself has a discipline, canonical in `global/CLAUDE.md` § "Changing the
+  OS itself"** (`log: 2026-08-19`). The structural insight behind it: claude-os is correct
+  wherever it owns a *whole* file — `cmp` verifies it and nothing can drift — and fragile
+  wherever it owns *part* of a user's file, because that needs an ownership predicate. Both
+  predicates were once hand-written name lists, both drifted from the config they mirrored, and
+  the merge silently re-appended two unpruned hooks once per install until one had 29
+  registrations while `--check` reported clean throughout. So: never enumerate what can be
+  derived (namespace predicates, directory listings, parses of the config being mirrored), and
+  close a defect with an *invariant* proved by injecting the fault — not with a fix. `--check`
+  now derives its hook properties (every file registered, every registration resolves, declared
+  count == installed count, the last being idempotence) and asserts the signing chain. The
+  companion habit no property test can replace: a gate that blocks legitimate work is a design
+  signal that the gate and the intent disagree — say which is wrong, never route around it.
 - **`rm -rf` is denied**, including on gitignored build output. Use `git clean -xfd <path>`
   (dry-run `-xfdn` first) to drop artifacts inside a repo. Compound commands are denied as a
   unit — a single denied clause blocks the whole invocation, so keep destructive steps in their

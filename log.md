@@ -762,3 +762,48 @@ repo: evanheisler/claude-os + this vault
 - Learnings: enforcement architecture + instrument lesson + eval gate distilled to
   [[claude-os]]; a behavior test whose baseline can't fail measures nothing — validate the
   instrument on a scenario that reproduces the failure condition before spending agents.
+
+## 2026-08-19 — PR review publishing conflict → claude-os ownership + invariant redesign
+repo: Bionic-Health/bionic-health-app (review only) + evanheisler/claude-os
+
+- `/review-pr 2411` (BH-3873, commerce catalog notification subscriber): 7 reviewer subagents
+  over a pinned snapshot, 11 findings published as inline comments. Top two, both in
+  `src/commerce/subscribers.py`: `require_success` re-raises terminal failures
+  (`TenantNotFound`, `VaultResolutionError`) identically to transient ones, so a poison event
+  burns ~60 invocations and feeds `inboundCB` — bound at *component* scope in
+  `resiliency-config.yaml`, shared with the Medplum/chat/vital topics; and the first blocking,
+  untimed `pg_advisory_lock` on a consumer path, with no `timeouts:` policy defined at all.
+  Refuted one reviewer's headline claim (health-probe starvation): Django 4.2 opens a
+  per-request `ThreadSensitiveContext` (`django/core/handlers/asgi.py:163`), so sync views
+  don't share one executor thread.
+- Root conflict: `review-pr/SKILL.md` (shared repo skill, not editable for this) mandates one
+  review object and forbids standalone inline comments; the local hook denies exactly that.
+  I read the denial as a failed review and reported findings to chat — twice. Fix landed as a
+  *rule* (`global/CLAUDE.md` § "Code review publishing", overrides the skill) plus a narrowed
+  hook: `block-toplevel-pr-comments.sh` → `block-pr-review-submission.sh`, top-level summaries
+  allowed again, review submission still denied. The rename had four references including
+  `global/codex/hooks.json`, symlinked live into `~/.codex`.
+- Found `block-loop-publication.sh` registered 29× and `require-signed-commits.sh` 26× in
+  `settings.json`. Root cause was structural, not a typo: claude-os is correct wherever it owns
+  a whole file (`cmp` can't drift) and fragile wherever it owns part of one, because that needs
+  an ownership predicate — and the predicate was hand-written twice (`OWNED`, the `--check`
+  list), both drifted, both silently. Redesigned rather than patched: ownership is now the
+  `~/.claude/os/hooks/` namespace, and `--check` asserts derived properties (every file
+  registered, every registration resolves, declared count == installed count = idempotence).
+- Signing: `gpg.ssh.allowedSignersFile` was unset, so `%G?` printed `N` on signed commits.
+  Built `~/.ssh/allowed_signers` from both registered keys, added `signing_drift_check`, and
+  corrected `docs/machine-setup.md` — which had caused the state by hardcoding a key filename
+  this machine doesn't use and listing only the local key.
+- Three of my own error-class repeats, all the same shape — asserting from an indicator without
+  checking what produces it: `line: null` read as "mis-anchored" (it means *outdated*),
+  `%G? = N` nearly reported as unsigned, and `git log` emails treated as current identities
+  (shipped a retired `automated.co` address, omitted in-use `evan@heisler.studio`). Testing the
+  retired entry then disproved my own stated rationale for it — those commits are GPG-signed, so
+  no SSH `allowed_signers` entry could ever verify them.
+- claude-os `edbb117`, `29ff21d`, `f0c8a59`. Wiki/os pages touched: [[claude-os]]
+- Learnings: ownership/invariant architecture + the resolved signing state distilled to
+  [[claude-os]]; behavioral rules went to `global/CLAUDE.md` (deterministic delivery, per
+  2026-08-18) with auto-memories as recall backstop. An indicator's *semantics* are themselves
+  a claim needing a receipt — §8 covers claim classes but not "I know what this field means",
+  which is where all three failures sat. Every fix this session was proved by injecting the
+  fault first; that, not the fix, is what closes an OS defect.
