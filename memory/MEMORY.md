@@ -1,5 +1,8 @@
 # Memory index
 
+- [No rejected-alternative comments](feedback-no-rejected-alternative-comments.md) — "why not X" narration is banned; dispatch prompts carry the comment allowlist
+- [Coverage pills both primary](product-card-coverage-pills-both-primary.md) — med-selection coverage pill: same primary Badge for both states, label-only difference
+
 - [Loop handlers preempt the approval gate](work-project-handlers-preempt-approval-gate.md) — dispatch prompts state approval-gated-code-review doesn't bind, or handlers stall staged work
 
 - [Agents never drive the emulator](feedback-agents-never-drive-the-emulator.md) — on-device verification is Evan's; agents derive the matrix from source and check reachability (auth walls) before any device dispatch

@@ -180,6 +180,8 @@
   },
   "active": "55b4d234e94a195f",
   "lastOpenFiles": [
+    "memory/product-card-coverage-pills-both-primary.md",
+    "memory/feedback-no-rejected-alternative-comments.md",
     "memory/feedback-review-means-the-full-diff.md",
     "memory/feedback-human-answerable-tbd-gets-asked.md",
     "memory/feedback-kill-means-stop-not-delete.md",
@@ -203,8 +205,6 @@
     "wiki/thrive-medplum-fhir.md",
     "wiki/thrive-deployments.md",
     "wiki/thrive-patient-architecture.md",
-    "wiki/thrive-ehr-architecture.md",
-    "wiki/thrive-repo-map.md",
-    "os/workflows/session-close.md"
+    "wiki/thrive-ehr-architecture.md"
   ]
 }
