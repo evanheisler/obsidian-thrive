@@ -180,6 +180,8 @@
   },
   "active": "55b4d234e94a195f",
   "lastOpenFiles": [
+    "memory/feedback-review-means-the-full-diff.md",
+    "memory/feedback-human-answerable-tbd-gets-asked.md",
     "memory/feedback-kill-means-stop-not-delete.md",
     "memory/feedback-pin-executors-to-opus.md",
     "memory/work-project-handlers-preempt-approval-gate.md",
@@ -203,8 +205,6 @@
     "wiki/thrive-patient-architecture.md",
     "wiki/thrive-ehr-architecture.md",
     "wiki/thrive-repo-map.md",
-    "os/workflows/session-close.md",
-    "memory/feedback-fresh-start-means-fresh.md",
-    "memory/feedback-dont-repave-deliberate-wiring.md"
+    "os/workflows/session-close.md"
   ]
 }
