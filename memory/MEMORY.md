@@ -1,5 +1,6 @@
 # Memory index
 
+- [Agents never drive the emulator](feedback-agents-never-drive-the-emulator.md) — on-device verification is Evan's; agents derive the matrix from source and check reachability (auth walls) before any device dispatch
 - [Close the review loop to re-request](feedback-close-the-review-loop-to-rerequest.md) — every review gets a visible fix/no-change response, then tell Evan the PR is re-reviewable
 
 - [PR split threshold is ~1000 lines](feedback-pr-split-threshold-1000.md) — coherent slice = one PR; never relay a skill heuristic's split prompt
@@ -47,7 +48,7 @@
 - [Layout files are wiring only](feedback-layout-files-are-wiring-only.md) — visual UI → components/ + story
 - [Copy names feature, not plumbing](feedback-copy-names-feature-not-plumbing.md) — never describe toggle mechanics
 - [Access-control is agent work](feedback-access-control-is-agent-work.md) — toggle add/remove → ready-for-agent
-- [Linear create gotchas](feedback-dont-guess-issue-project.md) — standalone bug → no project + current cycle; `-s Todo` never Triage, verify after create; `-s started` = "To Release", omit -s (also feedback-never-create-into-triage.md, bh-linear-project-status-gotcha.md)
+- [Linear create gotchas](feedback-dont-guess-issue-project.md) — project by provenance: spawned-by-a-project → that project; only truly unrelated → no project + current cycle; `-s Todo` never Triage, verify after create; `-s started` = "To Release", omit -s (also feedback-never-create-into-triage.md, bh-linear-project-status-gotcha.md)
 - [Locate the referent first](feedback-locate-the-referent-first.md) — find the artifact Evan critiques before interpreting
 - [Verifiable source is a Figma export](feedback-verifiable-source-is-figma-export.md) — check in the raw export; accept exporter filenames drop-in (also feedback-ingest-matches-raw-artifact.md)
 - [Patient storybook conventions](feedback-patient-storybook-conventions.md) — `Components/` namespace; rework the existing story, single docs story, no parallel .stories files (also feedback-rework-existing-story-single-docs.md)
@@ -92,6 +93,7 @@
 - [Draft status never gates review handling](feedback-draft-status-is-a-gate.md) — fix/push/reply/resolve runs unheld; gate = merge + new decisions
 - [Blocked-by is not a stack](feedback-blocked-by-is-not-a-stack.md) — stack only for real code dependency
 - [Red check is not green](feedback-red-check-is-not-green.md) — never green while any check fails
+- [Unresolved threads block merge](feedback-unresolved-threads-block-merge.md) — open thread = not mergeable; GitHub's `mergeable` field is conflicts-only
 - [Don't dodge the end-state to avoid churn](feedback-dont-dodge-endstate-to-avoid-churn.md) — research + full-sweep it
 - [Found bug gets fixed, not filed](feedback-found-bug-gets-fixed-not-filed.md) — rebase + fix in that PR; touching it makes it yours; "deserves a ticket" is deferral (also feedback-touching-it-makes-it-yours.md, feedback-reviewer-finding-lands-in-that-pr.md)
 - [Ask what a punchlist line means](feedback-ask-what-a-punchlist-line-means.md) — one-line outcome is not a spec

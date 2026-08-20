@@ -21,6 +21,7 @@ Map over `wiki/` and `os/`. Updated whenever a page is added or a category chang
 
 ### Agent systems research
 
+- [[agent-os-redesign]] — approved design for claude-os → agent-os + merged vault: 13 confirmed decisions, engine mechanisms, migration stages. **Read before touching claude-os, either vault, or any migration work.**
 - [[karpathy-llm-wiki]] — the pattern this vault implements: Karpathy's actual statements, three layers / three operations, where this vault matches or extends it
 - [[codex-config-surface]] — Codex projection surface: Claude-compatible skills, full hook parity (11 events), AGENTS.md precedence, MCP, memories
 

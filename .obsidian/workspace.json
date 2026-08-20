@@ -37,7 +37,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -178,6 +180,9 @@
   },
   "active": "55b4d234e94a195f",
   "lastOpenFiles": [
+    "wiki/agent-os-redesign.md",
+    "memory/feedback-unresolved-threads-block-merge.md",
+    "index.md",
     "memory/feedback-correction-is-not-a-go-signal.md",
     "memory/ehr-color-system-never-backported.md",
     "memory/feedback-designer-docs-speak-design.md",
@@ -200,7 +205,6 @@
     "os/skills.md",
     "memory/feedback-skill-placement-by-coupling.md",
     "os/config/claude-os.md",
-    "memory/MEMORY.md",
-    "memory/bionic-health-context.md"
+    "memory/MEMORY.md"
   ]
 }
