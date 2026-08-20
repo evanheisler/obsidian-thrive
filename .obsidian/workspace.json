@@ -180,6 +180,9 @@
   },
   "active": "55b4d234e94a195f",
   "lastOpenFiles": [
+    "memory/feedback-kill-means-stop-not-delete.md",
+    "memory/feedback-pin-executors-to-opus.md",
+    "memory/work-project-handlers-preempt-approval-gate.md",
     "memory/feedback-no-workflow-comments-in-app-source.md",
     "wiki/agent-os-redesign.md",
     "memory/feedback-unresolved-threads-block-merge.md",
@@ -202,9 +205,6 @@
     "wiki/thrive-repo-map.md",
     "os/workflows/session-close.md",
     "memory/feedback-fresh-start-means-fresh.md",
-    "memory/feedback-dont-repave-deliberate-wiring.md",
-    "os/skills.md",
-    "memory/feedback-skill-placement-by-coupling.md",
-    "os/config/claude-os.md"
+    "memory/feedback-dont-repave-deliberate-wiring.md"
   ]
 }

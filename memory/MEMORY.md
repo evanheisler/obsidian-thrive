@@ -1,5 +1,7 @@
 # Memory index
 
+- [Loop handlers preempt the approval gate](work-project-handlers-preempt-approval-gate.md) — dispatch prompts state approval-gated-code-review doesn't bind, or handlers stall staged work
+
 - [Agents never drive the emulator](feedback-agents-never-drive-the-emulator.md) — on-device verification is Evan's; agents derive the matrix from source and check reachability (auth walls) before any device dispatch
 - [Close the review loop to re-request](feedback-close-the-review-loop-to-rerequest.md) — every review gets a visible fix/no-change response, then tell Evan the PR is re-reviewable
 
@@ -62,6 +64,7 @@
 - [Figma node outranks blanket ruling](feedback-figma-node-outranks-blanket-ruling.md) — a node spec IS the answer
 - [Stabilize-first, no churn](feedback-stabilize-first-no-churn.md) — dispatch N+1 after N's PR is green
 - [Run prescribed skills, not hand-rolled](feedback-run-prescribed-skills-not-handrolled.md) — invoke sub-skills verbatim
+- [Pin executors to Opus](feedback-pin-executors-to-opus.md) — every executor dispatch gets `model: "opus"`; bypassing an orchestrator still carries its dispatch rules
 - [Pillars not member-visible](pillars-not-member-visible.md) — check feature visibility before flagging risk
 - [HubSpot BAA intake telemetry stance](hubspot-baa-intake-telemetry-stance.md) — surface conflicts, don't park
 - [foreground-muted is placeholder-tier](foreground-muted-is-placeholder-tier.md) — placeholder text only
@@ -90,6 +93,7 @@
 - [Parallelize, don't serialize](feedback-parallelize-dont-serialize.md) — concurrent subagents; never slow inline work
 - [ready-for-human = AI-cannot-do only](feedback-ready-for-human-means-ai-cannot.md) — decisions → Backlog
 - [Never tear down in-flight work](feedback-never-tear-down-inflight-work.md) — a question never kills a running agent
+- [Kill means stop, not delete](feedback-kill-means-stop-not-delete.md) — stopped agents' worktrees/branches stay untouched; destructive cleanup only on explicit direction
 - [Dups mid-review = follow-up, not rewrite](feedback-dups-are-followups-not-rewrites.md) — never refactor under an open PR
 - [Draft status never gates review handling](feedback-draft-status-is-a-gate.md) — fix/push/reply/resolve runs unheld; gate = merge + new decisions
 - [Blocked-by is not a stack](feedback-blocked-by-is-not-a-stack.md) — stack only for real code dependency
