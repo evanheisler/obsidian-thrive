@@ -161,6 +161,15 @@ genuinely addressed at one person — templating for its own sake is machinery a
 
 ### Migration stages (tracked in studio Linear — touches code)
 
+**Cross-cutting constraint (Evan's correction `log: 2026-08-20`): no stage before a cutover
+mutates any live machine's installed state.** All engine proofs run in a sandbox HOME (the
+installer targets a temp dir; drift checks and injected-fault proofs run there). Migration
+code — settings rewrite, hook re-namespace, credential materialization — ships dormant and
+executes only during a cutover. Each cutover ends with a **delta sync**: everything the old
+vaults accumulated after vault assembly (log entries, memories, wiki edits) is re-merged, so
+nothing written during the build window is lost. Rollback at any point = re-run claude-os
+`setup.sh`.
+
 1. Spec approval (this page) → create `Heisler-Studio/vault`; rename `evanheisler/claude-os`
    → `agent-os` and transfer it to the `Heisler-Studio` org (rename + transfer keep history
    and redirects; D2's fresh-start applies to the vault, not the engine).

@@ -180,6 +180,7 @@
   },
   "active": "55b4d234e94a195f",
   "lastOpenFiles": [
+    "memory/feedback-no-workflow-comments-in-app-source.md",
     "wiki/agent-os-redesign.md",
     "memory/feedback-unresolved-threads-block-merge.md",
     "index.md",
@@ -204,7 +205,6 @@
     "memory/feedback-dont-repave-deliberate-wiring.md",
     "os/skills.md",
     "memory/feedback-skill-placement-by-coupling.md",
-    "os/config/claude-os.md",
-    "memory/MEMORY.md"
+    "os/config/claude-os.md"
   ]
 }

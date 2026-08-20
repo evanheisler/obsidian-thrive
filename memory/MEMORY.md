@@ -69,6 +69,7 @@
 - [No dead code for test churn](feedback-no-dead-code-for-test-churn.md) — orphaned code dies in the same PR
 - [Pushback owns the decision](feedback-pushback-owns-the-decision.md) — declining feedback = own it
 - [gh api body file gotcha](feedback-gh-api-body-file.md) — `-f body=@file` posts literal text; use `-F`
+- [No workflow comments in app source](feedback-no-workflow-comments-in-app-source.md) — plumbing notes live in the consuming script, never the parsed file
 - [Verify branch protection before blocker](feedback-verify-branch-protection-before-blocker.md) — can't-read ≠ is-a-blocker
 - [thrive node_modules cache no payoff](thrive-node-modules-cache-no-payoff.md) — measured net-negative; don't re-propose
 - [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — `claude-review` only at PR creation; `codex-review` is dead, Codex fires itself on PR open
@@ -92,7 +93,7 @@
 - [Dups mid-review = follow-up, not rewrite](feedback-dups-are-followups-not-rewrites.md) — never refactor under an open PR
 - [Draft status never gates review handling](feedback-draft-status-is-a-gate.md) — fix/push/reply/resolve runs unheld; gate = merge + new decisions
 - [Blocked-by is not a stack](feedback-blocked-by-is-not-a-stack.md) — stack only for real code dependency
-- [Red check is not green](feedback-red-check-is-not-green.md) — never green while any check fails
+- [Red check is not green](feedback-red-check-is-not-green.md) — never green while any check fails; "ready for merge" = checks + approvals + threads + `mergeable`, and a moved base sweeps every open PR on it
 - [Unresolved threads block merge](feedback-unresolved-threads-block-merge.md) — open thread = not mergeable; GitHub's `mergeable` field is conflicts-only
 - [Don't dodge the end-state to avoid churn](feedback-dont-dodge-endstate-to-avoid-churn.md) — research + full-sweep it
 - [Found bug gets fixed, not filed](feedback-found-bug-gets-fixed-not-filed.md) — rebase + fix in that PR; touching it makes it yours; "deserves a ticket" is deferral (also feedback-touching-it-makes-it-yours.md, feedback-reviewer-finding-lands-in-that-pr.md)
