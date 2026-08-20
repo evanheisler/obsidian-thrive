@@ -180,6 +180,7 @@
   },
   "active": "55b4d234e94a195f",
   "lastOpenFiles": [
+    "memory/onepassword-agents-vault-only.md",
     "memory/product-card-coverage-pills-both-primary.md",
     "memory/feedback-no-rejected-alternative-comments.md",
     "memory/feedback-review-means-the-full-diff.md",
@@ -204,7 +205,6 @@
     "wiki/thrive-telemetry-phi.md",
     "wiki/thrive-medplum-fhir.md",
     "wiki/thrive-deployments.md",
-    "wiki/thrive-patient-architecture.md",
-    "wiki/thrive-ehr-architecture.md"
+    "wiki/thrive-patient-architecture.md"
   ]
 }

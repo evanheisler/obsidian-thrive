@@ -17,6 +17,7 @@
 - [Environment questions go to Evan](feedback-environment-questions-go-to-human.md) — ports/servers/test-data blockers = ask, never assume
 - [Human-answerable TBD gets asked](feedback-human-answerable-tbd-gets-asked.md) — personal facts (emails, accounts) are one question, never "undeterminable"
 - [Review means the full diff](feedback-review-means-the-full-diff.md) — never report a subset pass as "reviewed"; name what got depth
+- [1Password Agents vault only](onepassword-agents-vault-only.md) — op:// refs outside `Agents` are hard failures; enforce in mechanism, never prose
 - [MWL intake is web-only today](mwl-intake-web-only-today.md) — native intake defects are interim-acceptable
 - [Backtick scoped package names](feedback-backtick-scoped-package-names.md) — bare `@scope/pkg` in PR text tags the real account
 - [Serve the rule's purpose](feedback-serve-the-rules-purpose.md) — literal compliance leaving dead code isn't an option
