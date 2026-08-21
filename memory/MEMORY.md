@@ -5,6 +5,7 @@
 - [HubDB select columns are objects](hubdb-select-columns-are-objects.md) — medication_coverage = option column; read .label, fetch a real row before writing a transform
 
 - [No rejected-alternative comments](feedback-no-rejected-alternative-comments.md) — "why not X" narration is banned; dispatch prompts carry the comment allowlist
+- [No narration code comments](feedback-no-narration-code-comments.md) — diff comments narrating styling/layout rationale die before commit; prose bans don't cover the diff
 - [Coverage pills both primary](product-card-coverage-pills-both-primary.md) — med-selection coverage pill: same primary Badge for both states, label-only difference
 
 - [Loop handlers preempt the approval gate](work-project-handlers-preempt-approval-gate.md) — dispatch prompts state approval-gated-code-review doesn't bind, or handlers stall staged work

@@ -180,6 +180,8 @@
   },
   "active": "55b4d234e94a195f",
   "lastOpenFiles": [
+    "memory/feedback-no-narration-code-comments.md",
+    "memory/subagents-no-background-shells.md",
     "memory/work-project-loop-resume-rearms-the-skill.md",
     "memory/vault-skills-are-the-base-layer.md",
     "memory/pr-description-spec-hackerone.md",
@@ -203,8 +205,6 @@
     "memory/feedback-no-abbreviated-decision-prompts.md",
     "memory/feedback-pr-descriptions-short.md",
     "memory/feedback-shared-docs-stay-machine-agnostic.md",
-    "memory/feedback-repo-edits-need-nwt-worktree.md",
-    "memory/feedback-claude-os-owns-nothing-work-related.md",
-    "os/config/mcp-servers.md"
+    "memory/feedback-repo-edits-need-nwt-worktree.md"
   ]
 }
