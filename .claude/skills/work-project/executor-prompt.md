@@ -64,6 +64,15 @@ worktree. Invoke the **`ship-issue`** skill and follow it exactly.
   you pushed back on, and threads whose answer depends on a decision still open
   with the human — those stay silent (no "pending your call" replies) until he
   decides.
+- **Code comments in the diff follow the repo allowlist strictly — narration dies
+  before commit.** A comment explaining *why a styling/layout/naming choice was
+  made*, what the change accomplishes, or what a neighboring value already provides
+  is narration for the reviewer, not a constraint the code can't show — delete it
+  before committing. The allowlist is API contracts, workarounds with rationale,
+  and non-obvious reasoning the next reader needs; "this compresses X so Y fits"
+  fails it. This ban is diff-shaped, not prose-shaped: the published-text rules
+  below do not cover code comments, which is exactly where narration slips through
+  (an AlertBanner rationale block survived a stage-1 review trim and shipped).
 - **Future work appears in published text ONLY as a link to a Linear issue the human
   approved.** The test is mechanical: *if you cannot paste a `https://linear.app/...`
   URL for an approved issue, the sentence does not go in the PR.* No link → cut it,
