@@ -1,13 +1,9 @@
 # Memory index
 
-- [Loop resume re-arms the skill](work-project-loop-resume-rearms-the-skill.md) — on work-project resume: re-read SKILL, arm the 3-surface PR monitor, dispatch handlers; orchestrator never touches feedback inline
-
 - [HubDB select columns are objects](hubdb-select-columns-are-objects.md) — medication_coverage = option column; read .label, fetch a real row before writing a transform
 
 - [No rejected-alternative comments](feedback-no-rejected-alternative-comments.md) — "why not X" narration is banned; dispatch prompts carry the comment allowlist
 - [Coverage pills both primary](product-card-coverage-pills-both-primary.md) — med-selection coverage pill: same primary Badge for both states, label-only difference
-
-- [Loop handlers preempt the approval gate](work-project-handlers-preempt-approval-gate.md) — dispatch prompts state approval-gated-code-review doesn't bind, or handlers stall staged work
 
 - [Agents never drive the emulator](feedback-agents-never-drive-the-emulator.md) — on-device verification is Evan's; agents derive the matrix from source and check reachability (auth walls) before any device dispatch
 - [Close the review loop to re-request](feedback-close-the-review-loop-to-rerequest.md) — every review gets a visible fix/no-change response, then tell Evan the PR is re-reviewable

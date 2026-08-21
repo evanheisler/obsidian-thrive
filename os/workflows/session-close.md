@@ -9,9 +9,12 @@ last_updated: 2026-07-06
 Run at the end of every session that touched this context (from any repo).
 
 1. Append the log entry per the schema in `CLAUDE.md` (`repo:` field, `Learnings:` line).
-2. **Distillation gate:** for each thing this session taught — durable knowledge → `wiki/`
-   page citing `log: YYYY-MM-DD`; behavioral rule / procedure / config fact → the matching
-   `os/` page. Corrections and discovered constraints always count as learnings.
+2. **Distillation gate:** for each thing this session taught, run the routing test in
+   `~/.claude/rules/instruction-surfaces.md` and name the surface it chose; then land it in the
+   tier that surface implies — durable knowledge → `wiki/` page citing `log: YYYY-MM-DD`;
+   behavioral rule / procedure / config fact → the matching `os/` page, or the skill section
+   whose decision point it fires at. Corrections and discovered constraints always count as
+   learnings.
 3. New wiki pages → update [[index]].
 4. Structural lint: broken wikilinks, pages missing from index, workflow files missing
    `summary:`.

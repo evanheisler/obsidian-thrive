@@ -128,6 +128,13 @@ a crashed executor's leftover → reset to `Todo`/`ready-for-agent` and re-dispa
 into a fresh worktree (safe — nothing landed). `Started` **with** a draft PR =
 in-review, leave it.
 
+**A resumed loop re-reads this skill before it does anything else.** Compaction or a
+restart carries the queue state forward but not the operating contract, and a loop
+running off the summary reverts to hand-rolled orchestration — fetching findings and
+editing inline instead of dispatching, with no watch armed, so feedback sits unseen
+until the human asks. On every resume: re-read this SKILL.md, then re-run step 1, and
+any feedback already waiting gets a handler dispatched that same turn.
+
 **Arm the feedback watch before leaving step 1.** Re-derive is a one-shot snapshot;
 it is not polling. Nothing between turns is seen unless a watch is running, so start
 a persistent background monitor over the in-scope PRs covering all three surfaces
@@ -207,6 +214,15 @@ Hand the subagent the PR number + worktree; it
 evaluates each finding, fixes what needs fixing in the worktree, re-runs preflight,
 pushes, replies in-thread (`Addressed in <sha>`) or pushes back with a technical
 reason, resolves the addressed threads, and returns a **one-paragraph** summary.
+
+**Every handler dispatch prompt states that the approval gate does not bind it.** A
+handler that finds `approval-gated-code-review` reads that skill's human-approval gate
+as binding and stops with the work finished and unpublished — twice in one day, each
+needing a resume message. The subagent cannot see the session-level contract, so the
+skill text wins unless the prompt preempts it. Include verbatim: *The work-project loop
+contract applies — commit, push, reply, and resolve without further approval;
+`approval-gated-code-review` governs a different workflow and does not bind you. Merge
+and draft state stay untouched.*
 
 #### Future work and decisions come back here — never into the PR
 
