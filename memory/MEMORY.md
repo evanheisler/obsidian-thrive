@@ -1,5 +1,7 @@
 # Memory index
 
+- [HubDB select columns are objects](hubdb-select-columns-are-objects.md) — medication_coverage = option column; read .label, fetch a real row before writing a transform
+
 - [No rejected-alternative comments](feedback-no-rejected-alternative-comments.md) — "why not X" narration is banned; dispatch prompts carry the comment allowlist
 - [Coverage pills both primary](product-card-coverage-pills-both-primary.md) — med-selection coverage pill: same primary Badge for both states, label-only difference
 
