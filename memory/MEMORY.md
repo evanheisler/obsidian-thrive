@@ -1,46 +1,40 @@
 # Memory index
-
-- [Loop resume re-arms the skill](work-project-loop-resume-rearms-the-skill.md) — on work-project resume: re-read SKILL, arm the 3-surface PR monitor, dispatch handlers; orchestrator never touches feedback inline
-
-- [HubDB select columns are objects](hubdb-select-columns-are-objects.md) — medication_coverage = option column; read .label, fetch a real row before writing a transform
-
-- [No rejected-alternative comments](feedback-no-rejected-alternative-comments.md) — "why not X" narration is banned; dispatch prompts carry the comment allowlist
-- [No narration code comments](feedback-no-narration-code-comments.md) — diff comments narrating styling/layout rationale die before commit; prose bans don't cover the diff
+- [Loop resume re-arms the skill](work-project-loop-resume-rearms-the-skill.md) — on work-project resume: re-read SKILL, arm the 3-surface PR monitor, dispatch handlers
+- [HubDB select columns are objects](hubdb-select-columns-are-objects.md) — medication_coverage = option column
+- [No rejected-alternative comments](feedback-no-rejected-alternative-comments.md) — "why not X" narration is banned
+- [No narration code comments](feedback-no-narration-code-comments.md) — diff comments narrating styling/layout rationale die before commit
 - [Coverage pills both primary](product-card-coverage-pills-both-primary.md) — med-selection coverage pill: same primary Badge for both states, label-only difference
-
 - [Loop handlers preempt the approval gate](work-project-handlers-preempt-approval-gate.md) — dispatch prompts state approval-gated-code-review doesn't bind, or handlers stall staged work
-
-- [Agents never drive the emulator](feedback-agents-never-drive-the-emulator.md) — on-device verification is Evan's; agents derive the matrix from source and check reachability (auth walls) before any device dispatch
+- [Agents never drive the emulator](feedback-agents-never-drive-the-emulator.md) — on-device verification is Evan's
 - [Close the review loop to re-request](feedback-close-the-review-loop-to-rerequest.md) — every review gets a visible fix/no-change response, then tell Evan the PR is re-reviewable
-
-- [PR split threshold is ~1000 lines](feedback-pr-split-threshold-1000.md) — coherent slice = one PR; never relay a skill heuristic's split prompt
-- [Action items are Linear issues](feedback-action-items-are-linear-issues.md) — docs = reference; must-happen steps get an issue with owner + blocked-by
-
-- [Price the vendor-run-once path](feedback-price-the-vendor-run-once-path.md) — spec names its rejected alternative; design simplifies → re-price every guardrail clause (also feedback-enforcement-scales-with-model.md)
-- [Plain steps, not abstractions](feedback-plain-steps-not-abstractions.md) — numbered actor-steps; jargon only after the plain sentence
-- [Adoption tickets are sweeps](feedback-adoption-tickets-are-sweeps.md) — named sites are examples; done-when = repo-wide grep
+- [PR split threshold is ~1000 lines](feedback-pr-split-threshold-1000.md) — coherent slice = one PR
+- [Action items are Linear issues](feedback-action-items-are-linear-issues.md) — docs = reference
+- [Price the vendor-run-once path](feedback-price-the-vendor-run-once-path.md) — spec names its rejected alternative
+- [Plain steps, not abstractions](feedback-plain-steps-not-abstractions.md) — numbered actor-steps
+- [Adoption tickets are sweeps](feedback-adoption-tickets-are-sweeps.md) — named sites are examples
 - [Environment questions go to Evan](feedback-environment-questions-go-to-human.md) — ports/servers/test-data blockers = ask, never assume
 - [Human-answerable TBD gets asked](feedback-human-answerable-tbd-gets-asked.md) — personal facts (emails, accounts) are one question, never "undeterminable"
-- [Review means the full diff](feedback-review-means-the-full-diff.md) — never report a subset pass as "reviewed"; name what got depth
-- [1Password Agents vault only](onepassword-agents-vault-only.md) — op:// refs outside `Agents` are hard failures; enforce in mechanism, never prose
-- [PR description spec is HackerOne's](pr-description-spec-hackerone.md) — What/Why/How/Testing + literal wait-what pass; named templates get fetched and applied verbatim
-- [Vault is the base layer](vault-skills-are-the-base-layer.md) — core philosophy: OS → context → repo, specificity wins for ALL vault content; never-submit-reviews is the sole carve-out
+- [Review means the full diff](feedback-review-means-the-full-diff.md) — never report a subset pass as "reviewed"
+- [1Password Agents vault only](onepassword-agents-vault-only.md) — op:// refs outside `Agents` are hard failures
+- [PR description spec is HackerOne's](pr-description-spec-hackerone.md) — What/Why/How/Testing + literal wait-what pass
+- [Vault is the base layer](vault-skills-are-the-base-layer.md) — core philosophy: OS → context → repo, specificity wins for ALL vault content
 - [MWL intake is web-only today](mwl-intake-web-only-today.md) — native intake defects are interim-acceptable
 - [Backtick scoped package names](feedback-backtick-scoped-package-names.md) — bare `@scope/pkg` in PR text tags the real account
 - [Serve the rule's purpose](feedback-serve-the-rules-purpose.md) — literal compliance leaving dead code isn't an option
-- [Measure the fingerprint, don't infer](patient-fingerprint-measure-dont-infer.md) — generate it and grep `sources[]`; release-branch mismatch is inherited/accepted (also thrive-fingerprint-release-branch-false-positive.md)
+- [Measure the fingerprint, don't infer](patient-fingerprint-measure-dont-infer.md) — generate it and grep `sources[]`
 - [Bionic Health context](bionic-health-context.md) — vault = context brain for Evan's Bionic Health work
 - [Invoked skill defines the deliverable](feedback-invoked-skill-defines-deliverable.md) — don't re-ask what the skill settles
 - [Anecdotal notes don't descope](feedback-anecdotal-notes-dont-descope.md) — an aside doesn't remove a named item
 - [Explicit directive overrides stale copy](feedback-explicit-directive-overrides-stale-copy.md) — named approach is settled
 - [Vault retention wiring](vault-retention-wiring.md) — auto-memory dir IS the vault (symlink); SessionEnd auto-commits
-- [Skill placement by coupling](feedback-skill-placement-by-coupling.md) — skill home = coupling scope; never vendor upstream
+- [Skill placement by coupling](feedback-skill-placement-by-coupling.md) — skill home = coupling scope
 - [Don't repave deliberate wiring](feedback-dont-repave-deliberate-wiring.md) — existing wiring is the design
 - [Fresh start means fresh](feedback-fresh-start-means-fresh.md) — legacy memories stay archived
 - [claude-os owns nothing work-related](feedback-claude-os-owns-nothing-work-related.md) — work config lives in the thrive vault
 - [Shared docs stay machine-agnostic](feedback-shared-docs-stay-machine-agnostic.md) — no personal wiring in shared repos
-- [PR descriptions stay short](feedback-pr-descriptions-short.md) — one-line subject; body only for what the diff can't show
-- [Delete + migrate, never alias](theme-v2-deprecate-non-figma-tokens.md) — theme-v2 tokens and typography lockstep alike: zero legacy, no support code (also typography-lockstep-end-state-zero-legacy.md)
+- [PR descriptions stay short](feedback-pr-descriptions-short.md) — one-line subject
+- [PR description = outward-facing preface](feedback-pr-description-is-outward-facing-preface.md) — reader hasn't seen the diff; cut diff-shown decisions, bullets/links over prose
+- [Delete + migrate, never alias](theme-v2-deprecate-non-figma-tokens.md) — theme-v2 tokens and typography lockstep alike: zero legacy, no support code
 - [EHR color system never backported](ehr-color-system-never-backported.md) — EHR keeps legacy brand.css vars
 - [Gate covers publication, not CI fixups](feedback-gate-covers-publication-not-ci-fixups.md) — mechanical CI fixes are free
 - [Don't reframe asks as my choices](feedback-dont-reframe-asks-as-my-choices.md) — report as "you asked X; done via Y"
@@ -53,20 +47,20 @@
 - [Mirror the user's model verbatim](feedback-mirror-users-model-verbatim.md) — echo Evan's words; never re-abstract
 - [Resolve framing, don't confirm it](feedback-resolve-framing-dont-confirm-it.md) — never ask Evan to validate my model
 - [Map tokens by color not role](token-map-by-color-not-role.md) — primitive → same-color token; never add tokens
-- [Spec invariants, not just deltas](feedback-spec-invariants-not-just-deltas.md) — state what MUST NOT change; protect deliberate, converge unjustified divergence (also feedback-invariants-protect-deliberate-not-accidental.md)
+- [Spec invariants, not just deltas](feedback-spec-invariants-not-just-deltas.md) — state what MUST NOT change
 - [Proposals cover the named surface only](feedback-proposals-cover-named-surface-only.md) — adjacent improvements = scope invention
 - [Shared primitives need approval](feedback-shared-primitives-need-approval.md) — new `ui/` prop/variant = design decision
-- [Visual changes need a design](feedback-visual-changes-need-a-design.md) — prose isn't direction; mocks position ALL adjacent chrome (also feedback-mock-must-show-chrome-relationships.md)
+- [Visual changes need a design](feedback-visual-changes-need-a-design.md) — prose isn't direction
 - [Home revamp toggle model](home-revamp-toggle-user-opt-in.md) — access-control gates dev; FTS gates release
-- [No single-use abstractions](feedback-no-single-use-abstractions.md) — inline what a `ui/` primitive covers; DRY = functional identity, never UI similarity (also feedback-dry-targets-functional-identity-not-ui.md)
+- [No single-use abstractions](feedback-no-single-use-abstractions.md) — inline what a `ui/` primitive covers
 - [Domain = concern, not screen](feedback-domain-by-concern-not-screen.md) — components/{domain}/ by subject
 - [Layout files are wiring only](feedback-layout-files-are-wiring-only.md) — visual UI → components/ + story
 - [Copy names feature, not plumbing](feedback-copy-names-feature-not-plumbing.md) — never describe toggle mechanics
 - [Access-control is agent work](feedback-access-control-is-agent-work.md) — toggle add/remove → ready-for-agent
-- [Linear create gotchas](feedback-dont-guess-issue-project.md) — project by provenance: spawned-by-a-project → that project; only truly unrelated → no project + current cycle; `-s Todo` never Triage, verify after create; `-s started` = "To Release", omit -s (also feedback-never-create-into-triage.md, bh-linear-project-status-gotcha.md)
+- [Linear create gotchas](feedback-dont-guess-issue-project.md) — project by provenance: spawned-by-a-project → that project
 - [Locate the referent first](feedback-locate-the-referent-first.md) — find the artifact Evan critiques before interpreting
-- [Verifiable source is a Figma export](feedback-verifiable-source-is-figma-export.md) — check in the raw export; accept exporter filenames drop-in (also feedback-ingest-matches-raw-artifact.md)
-- [Patient storybook conventions](feedback-patient-storybook-conventions.md) — `Components/` namespace; rework the existing story, single docs story, no parallel .stories files (also feedback-rework-existing-story-single-docs.md)
+- [Verifiable source is a Figma export](feedback-verifiable-source-is-figma-export.md) — check in the raw export
+- [Patient storybook conventions](feedback-patient-storybook-conventions.md) — `Components/` namespace
 - [Designer docs speak design](feedback-designer-docs-speak-design.md) — rendered proposals, not token names
 - [Theme identity = brand/accent](theme-identity-is-brand-accent.md) — never system-* status colors
 - [Reference means spirit, not spec](feedback-critiqued-decoration-gets-deleted.md) — fix the failure, not copy-vs-delete
@@ -77,7 +71,8 @@
 - [Figma node outranks blanket ruling](feedback-figma-node-outranks-blanket-ruling.md) — a node spec IS the answer
 - [Stabilize-first, no churn](feedback-stabilize-first-no-churn.md) — dispatch N+1 after N's PR is green
 - [Run prescribed skills, not hand-rolled](feedback-run-prescribed-skills-not-handrolled.md) — invoke sub-skills verbatim
-- [Pin executors to Opus](feedback-pin-executors-to-opus.md) — every executor dispatch gets `model: "opus"`; bypassing an orchestrator still carries its dispatch rules
+- [Dispatch names skills, never paraphrases](feedback-dispatch-names-skills-never-paraphrases.md) — prompts carry skill file paths to read-and-run + deltas only
+- [Pin executors to Opus](feedback-pin-executors-to-opus.md) — every executor dispatch gets `model: "opus"`
 - [Pillars not member-visible](pillars-not-member-visible.md) — check feature visibility before flagging risk
 - [HubSpot BAA intake telemetry stance](hubspot-baa-intake-telemetry-stance.md) — surface conflicts, don't park
 - [foreground-muted is placeholder-tier](foreground-muted-is-placeholder-tier.md) — placeholder text only
@@ -87,18 +82,18 @@
 - [gh api body file gotcha](feedback-gh-api-body-file.md) — `-f body=@file` posts literal text; use `-F`
 - [No workflow comments in app source](feedback-no-workflow-comments-in-app-source.md) — plumbing notes live in the consuming script, never the parsed file
 - [Verify branch protection before blocker](feedback-verify-branch-protection-before-blocker.md) — can't-read ≠ is-a-blocker
-- [thrive node_modules cache no payoff](thrive-node-modules-cache-no-payoff.md) — measured net-negative; don't re-propose
-- [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — `claude-review` only at PR creation; `codex-review` is dead, Codex fires itself on PR open
-- [Theme Tailwind axes, not custom utilities](feedback-theme-tailwind-axes-not-custom-utilities.md) — native scales; no addUtilities
-- [Patient dev test account](patient-dev-test-account.md) — evan.heisler+202602@bionichealth.com only; never invent an account, ask for a login (also feedback-never-invent-an-account.md)
+- [thrive node_modules cache no payoff](thrive-node-modules-cache-no-payoff.md) — measured net-negative
+- [thrive bot reviews are label-triggered](thrive-bot-reviews-label-triggered.md) — `claude-review` only at PR creation
+- [Theme Tailwind axes, not custom utilities](feedback-theme-tailwind-axes-not-custom-utilities.md) — native scales
+- [Patient dev test account](patient-dev-test-account.md) — evan.heisler+202602@bionichealth.com only
 - [No shared infra for second-class surfaces](feedback-no-shared-infra-for-second-class-surfaces.md) — contain or park Storybook-only bugs
-- [Emulator Play images self-fill disk](android-emulator-play-store-disk-fill.md) — caution not ban; Pixel_10 (Play image) is the sanctioned AVD
-- [Verify subagent blockers before relaying](feedback-verify-subagent-blockers-before-relaying.md) — cross-check against known state; a blocker my dispatch manufactured is mine to fix, not Evan's
+- [Emulator Play images self-fill disk](android-emulator-play-store-disk-fill.md) — caution not ban
+- [Verify subagent blockers before relaying](feedback-verify-subagent-blockers-before-relaying.md) — cross-check against known state
 - [Instrument, don't use Evan as sensor](feedback-instrument-dont-use-evan-as-sensor.md) — collect evidence myself
 - [Dev-client stale URL → not-found](dev-client-stale-url-not-found.md) — pm clear + encoded patient://
 - [Validate the instrument first](feedback-validate-the-instrument-first.md) — test the harness on a known-good control
 - [Agent PRs need team approval](feedback-agent-prs-need-team-approval.md) — Evan never reviews his own agent PRs
-- [Surface visual deltas directly](feedback-surface-visual-deltas-directly.md) — screen + before→after to Evan; render swatches, never contrast numbers (also feedback-render-color-never-ask-about-numbers.md)
+- [Surface visual deltas directly](feedback-surface-visual-deltas-directly.md) — screen + before→after to Evan
 - [Sign-off bar = real risk only](feedback-signoff-bar-real-risk-only.md) — flagged risks + brand-visible changes only
 - [Action items are explicit lists](feedback-action-items-explicit-list.md) — numbered list by owner
 - [End-state tracks the server contract](feedback-endstate-tracks-server-contract.md) — patient-scoping goes server-side
@@ -106,43 +101,43 @@
 - [Parallelize, don't serialize](feedback-parallelize-dont-serialize.md) — concurrent subagents; never slow inline work
 - [ready-for-human = AI-cannot-do only](feedback-ready-for-human-means-ai-cannot.md) — decisions → Backlog
 - [Never tear down in-flight work](feedback-never-tear-down-inflight-work.md) — a question never kills a running agent
-- [Kill means stop, not delete](feedback-kill-means-stop-not-delete.md) — stopped agents' worktrees/branches stay untouched; destructive cleanup only on explicit direction
+- [Kill means stop, not delete](feedback-kill-means-stop-not-delete.md) — stopped agents' worktrees/branches stay untouched
 - [Dups mid-review = follow-up, not rewrite](feedback-dups-are-followups-not-rewrites.md) — never refactor under an open PR
-- [Draft status never gates review handling](feedback-draft-status-is-a-gate.md) — fix/push/reply/resolve runs unheld; gate = merge + new decisions
+- [Draft status never gates review handling](feedback-draft-status-is-a-gate.md) — fix/push/reply/resolve runs unheld
 - [Blocked-by is not a stack](feedback-blocked-by-is-not-a-stack.md) — stack only for real code dependency
-- [Red check is not green](feedback-red-check-is-not-green.md) — never green while any check fails; "ready for merge" = checks + approvals + threads + `mergeable`, and a moved base sweeps every open PR on it
-- [Unresolved threads block merge](feedback-unresolved-threads-block-merge.md) — open thread = not mergeable; GitHub's `mergeable` field is conflicts-only
+- [Red check is not green](feedback-red-check-is-not-green.md) — never green while any check fails
+- [Unresolved threads block merge](feedback-unresolved-threads-block-merge.md) — open thread = not mergeable
 - [Don't dodge the end-state to avoid churn](feedback-dont-dodge-endstate-to-avoid-churn.md) — research + full-sweep it
-- [Found bug gets fixed, not filed](feedback-found-bug-gets-fixed-not-filed.md) — rebase + fix in that PR; touching it makes it yours; "deserves a ticket" is deferral (also feedback-touching-it-makes-it-yours.md, feedback-reviewer-finding-lands-in-that-pr.md)
+- [Found bug gets fixed, not filed](feedback-found-bug-gets-fixed-not-filed.md) — rebase + fix in that PR
 - [Ask what a punchlist line means](feedback-ask-what-a-punchlist-line-means.md) — one-line outcome is not a spec
 - [Bespoke neighbor is not a pattern](feedback-bespoke-neighbor-is-not-a-pattern.md) — a copied dimension is not a requirement
 - [Design system ≠ base primitives](feedback-design-system-is-not-base-primitives.md) — never swap the interaction model
 - [Verify the rationale holds at each site](feedback-verify-the-rationale-holds-at-each-site.md) — same shape ≠ same problem
 - [House rule ≠ vendor match](feedback-house-rule-doesnt-override-vendor-match.md) — take the behavior, leave the paint
 - [Current shape is not a requirement](feedback-current-shape-is-not-a-requirement.md) — consolidation deletes a copy
-- [Ticket text is not Evans decision](feedback-ticket-text-is-not-evans-decision.md) — surface the shape before executing; repo evidence overrides issue lines, decide and report (also feedback-issue-text-is-a-starting-point.md)
+- [Ticket text is not Evans decision](feedback-ticket-text-is-not-evans-decision.md) — surface the shape before executing
 - [Build for the base case](feedback-build-for-the-base-case.md) — .native/.web splits must be earned
 - [RN-web Modal portals escape CSS-var scope](rn-web-modal-portals-escape-css-var-scope.md) — re-wrap inside the portal
 - [Config derives from repos](feedback-config-derives-from-repos.md) — no local overrides; cleanups don't touch repos
 - [Blocked work drops out of status](feedback-blocked-work-drops-out-of-status.md) — "can't merge until X" = stop reporting it
 - [A fix must pay for itself](feedback-fix-must-pay-for-itself.md) — price the repair against the harm it removes
-- [Machinery priced against the manual baseline](feedback-machinery-priced-against-manual-baseline.md) — re-price the running total every round; only the end-to-end run proves a workflow
-- [Tests must cross the runtime boundary](feedback-tests-must-cross-the-runtime-boundary.md) — staged-input suites prove nothing about vendor validation; read the consuming tool's loader first
-- [Conventions before machinery](feedback-conventions-before-machinery.md) — v1 workflow = documented rules; no guard scripts/CI
-- [Lead with what changes on screen](feedback-lead-with-what-changes-on-screen.md) — visible change first; topology cut unless it shows
-- [Never author issues in the loop](feedback-never-author-issues-in-the-loop.md) — surface findings in session; no create/claim/staff
+- [Machinery priced against the manual baseline](feedback-machinery-priced-against-manual-baseline.md) — re-price the running total every round
+- [Tests must cross the runtime boundary](feedback-tests-must-cross-the-runtime-boundary.md) — staged-input suites prove nothing about vendor validation
+- [Conventions before machinery](feedback-conventions-before-machinery.md) — v1 workflow = documented rules
+- [Lead with what changes on screen](feedback-lead-with-what-changes-on-screen.md) — visible change first
+- [Never author issues in the loop](feedback-never-author-issues-in-the-loop.md) — surface findings in session
 - [Name things as they appear on screen](feedback-name-things-as-they-appear-on-screen.md) — never a vendor's or ticket's internal noun
-- [Rebase on merge, not on commit](feedback-rebase-on-merge-not-on-commit.md) — parent merging is the trigger; stale descendants are fine
+- [Rebase on merge, not on commit](feedback-rebase-on-merge-not-on-commit.md) — parent merging is the trigger
 - [Design talk cites design artifacts](feedback-design-talk-cites-design-artifacts.md) — docs + the workflow's own files, never live PRs
 - [No compound Bash commands](feedback-no-compound-bash-commands.md) — `&&`/`|`/redirects escape the allow list and prompt Evan
-- [Storybook entries are earned, not migrated](feedback-storybook-entries-are-earned-not-migrated.md) — wrappers fold or die; file list ≠ subject inventory
-- [Rules encode the test, not verdicts](feedback-rules-encode-the-test-not-verdicts.md) — settled-case lists are brittle; write the generative question
-- [Scope limits goal, not blast radius](feedback-scope-limits-goal-not-blast-radius.md) — "only care about X" never authorizes breaking Y; invariants need explicit "let it break"
+- [Storybook entries are earned, not migrated](feedback-storybook-entries-are-earned-not-migrated.md) — wrappers fold or die
+- [Rules encode the test, not verdicts](feedback-rules-encode-the-test-not-verdicts.md) — settled-case lists are brittle
+- [Scope limits goal, not blast radius](feedback-scope-limits-goal-not-blast-radius.md) — "only care about X" never authorizes breaking Y
 - [Audit the premise, not just defects](feedback-audit-the-premise-not-just-defects.md) — unasked-for mechanism in returned work = design fork for Evan, before iterating
-- [Stated consequence is a work item](feedback-stated-consequence-is-a-work-item.md) — a named side effect gets driven to terminal state; stranded artifacts outrank new asks
-- [Proposals clear the binding constraint](feedback-proposals-clear-the-binding-constraint.md) — verify mechanism from primary sources same-turn; pitch leads with the mechanism
+- [Stated consequence is a work item](feedback-stated-consequence-is-a-work-item.md) — a named side effect gets driven to terminal state
+- [Proposals clear the binding constraint](feedback-proposals-clear-the-binding-constraint.md) — verify mechanism from primary sources same-turn
 - [Audit covers the PR's artifacts](feedback-audit-covers-the-prs-artifacts.md) — docs/skills the PR ships are audit surface, not just code
-- [Canary edit proves freshness](feedback-canary-edit-proves-freshness.md) — one unmissable edit settles bundle delivery; never pixel forensics
-- [Comment, never review](feedback-comment-never-review.md) — inline per finding + top-level summary; a hook denial means re-route, not "review blocked"
-- [Verify a field's meaning before asserting](feedback-verify-field-meaning-before-asserting.md) — `line: null` = outdated, not mis-anchored; re-check before repeating
-- [claude-os lists drift across machines](claude-os-hand-maintained-lists-drift.md) — derive setup.sh lists from the fragment; a hook rename has four references
+- [Canary edit proves freshness](feedback-canary-edit-proves-freshness.md) — one unmissable edit settles bundle delivery
+- [Comment, never review](feedback-comment-never-review.md) — inline per finding + top-level summary
+- [Verify a field's meaning before asserting](feedback-verify-field-meaning-before-asserting.md) — `line: null` = outdated, not mis-anchored
+- [claude-os lists drift across machines](claude-os-hand-maintained-lists-drift.md) — derive setup.sh lists from the fragment
