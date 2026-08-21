@@ -1,9 +1,11 @@
 ---
 name: vault-retention-wiring
-description: How this machine's memory/vault retention is actually wired — read before claiming memory did or didn't reach the vault
-metadata:
+description: "How this machine's memory/vault retention is actually wired — read before claiming memory did or didn't reach the vault"
+metadata: 
   node_type: memory
   type: reference
+  originSessionId: 93243a7a-c384-4551-bca2-527f4b31911f
+  modified: 2026-08-21T17:18:51.657Z
 ---
 
 The per-project auto-memory dir **is** the vault, via symlink:
@@ -11,7 +13,7 @@ The per-project auto-memory dir **is** the vault, via symlink:
 So a Write to the auto-memory path lands in the vault. Never say "I wrote auto-memory, not the vault" — they are the same directory. (2026-07-08: I made exactly that false claim and it cost trust.)
 
 Retention has two halves:
-- **Mechanical (automatic):** a `SessionEnd` hook (`claude-os` `hooks/os-session-end.sh`) commits `git add -A` + pushes the vault on every session end. This is why writes stop piling up uncommitted. It cannot distill — a hook runs a shell command, not the model.
+- **Mechanical (automatic):** a `SessionEnd` hook (agent-os `hooks/commit-vault.sh`, formerly claude-os `hooks/os-session-end.sh`) commits `git add -A` + pushes the vault on every session end. This is why writes stop piling up uncommitted. It cannot distill — a hook runs a shell command, not the model.
 - **Distillation (manual):** `/session-close` is a skill, NOT a hook. Nothing auto-invokes it. It does the model-driven distill + lint + commit + push.
 
 Before Jul 2026 the mechanical half didn't exist, so every session's memory writes reached the vault dir but were never committed/pushed — from git/remote it looked like "nothing happened." That was the actual breakage, not the memory routing.

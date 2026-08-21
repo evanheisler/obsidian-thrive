@@ -1,5 +1,7 @@
 # Memory index
 
+- [Loop resume re-arms the skill](work-project-loop-resume-rearms-the-skill.md) — on work-project resume: re-read SKILL, arm the 3-surface PR monitor, dispatch handlers; orchestrator never touches feedback inline
+
 - [HubDB select columns are objects](hubdb-select-columns-are-objects.md) — medication_coverage = option column; read .label, fetch a real row before writing a transform
 
 - [No rejected-alternative comments](feedback-no-rejected-alternative-comments.md) — "why not X" narration is banned; dispatch prompts carry the comment allowlist
@@ -20,6 +22,8 @@
 - [Human-answerable TBD gets asked](feedback-human-answerable-tbd-gets-asked.md) — personal facts (emails, accounts) are one question, never "undeterminable"
 - [Review means the full diff](feedback-review-means-the-full-diff.md) — never report a subset pass as "reviewed"; name what got depth
 - [1Password Agents vault only](onepassword-agents-vault-only.md) — op:// refs outside `Agents` are hard failures; enforce in mechanism, never prose
+- [PR description spec is HackerOne's](pr-description-spec-hackerone.md) — What/Why/How/Testing + literal wait-what pass; named templates get fetched and applied verbatim
+- [Vault is the base layer](vault-skills-are-the-base-layer.md) — core philosophy: OS → context → repo, specificity wins for ALL vault content; never-submit-reviews is the sole carve-out
 - [MWL intake is web-only today](mwl-intake-web-only-today.md) — native intake defects are interim-acceptable
 - [Backtick scoped package names](feedback-backtick-scoped-package-names.md) — bare `@scope/pkg` in PR text tags the real account
 - [Serve the rule's purpose](feedback-serve-the-rules-purpose.md) — literal compliance leaving dead code isn't an option
